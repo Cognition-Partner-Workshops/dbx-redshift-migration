@@ -113,4 +113,3 @@ See `.env.example` for placeholders.
 | `make validate-all` | validate every unit that has converted `etl.sql` |
 | `make legacy-all` | one-time Redshift setup + build + golden capture (operator only) |
 | `make capture-golden` | re-capture goldens from Redshift |
-

@@ -33,5 +33,3 @@ legacy-all:
 
 capture-golden:
 	python tools/legacy_redshift.py capture
-
-
