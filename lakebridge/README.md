@@ -22,6 +22,6 @@ make lakebridge-transpile UNIT=<name>   # draft transpile -> .migration/lakebrid
 Outputs land under `.migration/lakebridge/` (gitignored working area) plus any
 drafts the orchestrator commits to the run branch.
 
-> **TODO(operator):** confirm the `--source-tech` value in `analyze.sh` from
-> `databricks labs lakebridge analyze --help` on your installed version — do
-> not guess it.
+> `analyze.sh` passes `--source-tech Redshift`, the exact (case-sensitive) name in
+> the analyzer's supported list as of lakebridge 0.15.2. An unrecognised value
+> makes the analyzer fall back to an interactive prompt.
