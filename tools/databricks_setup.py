@@ -13,13 +13,16 @@ Warehouse: DATABRICKS_WAREHOUSE_ID. Never hardcodes host/warehouse/token.
 import argparse
 import os
 import pathlib
+import time
 
 from databricks.sdk import WorkspaceClient
+from databricks.sdk.service.sql import StatementState
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SEED_DIR = ROOT / "data" / "seed" / "csv"
 DEFAULT_CATALOG = "mig_redshift_dev"
 TAGS = {"demo_type": "redshift", "source_repo": "dbx-redshift-migration"}
+_pendingStates = {StatementState.PENDING, StatementState.RUNNING}
 
 
 def warehouseId():
@@ -34,11 +37,21 @@ def catalogName():
 
 
 def runSql(w, sql):
-    w.statement_execution.execute_statement(
+    """Run one statement and wait for a terminal state; raise on failure.
+
+    No catalog context is passed — the catalog may not exist yet.
+    """
+    resp = w.statement_execution.execute_statement(
         statement=sql,
         warehouse_id=warehouseId(),
         wait_timeout="50s",
     )
+    while resp.status.state in _pendingStates:
+        time.sleep(2)
+        resp = w.statement_execution.get_statement(resp.statement_id)
+    if resp.status.state != StatementState.SUCCEEDED:
+        error = resp.status.error.message if resp.status.error else resp.status.state
+        raise RuntimeError(f"Databricks SQL failed: {error}\n{sql[:400]}")
 
 
 def setup(reset=False):
@@ -48,6 +61,8 @@ def setup(reset=False):
     if reset:
         runSql(w, f"DROP SCHEMA IF EXISTS {catalog}.core CASCADE")
         runSql(w, f"DROP SCHEMA IF EXISTS {catalog}.mart CASCADE")
+        runSql(w, f"CREATE SCHEMA IF NOT EXISTS {catalog}.core")
+        runSql(w, f"CREATE SCHEMA IF NOT EXISTS {catalog}.mart")
         print(f"reset {catalog}.core and {catalog}.mart")
         return
 
