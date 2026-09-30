@@ -190,7 +190,7 @@ units:
     reads: [core.customers, core.orders, core.order_items]
     writes: [mart.rfm_segments]
     expected_lakebridge: mismatch
-    constructs: ["NTILE(5)", "NULLS LAST ordering", "DATEDIFF(day)"]
+    constructs: ["NTILE(5)", "implicit NULL ordering (no NULLS LAST)", "DATEDIFF(day)"]
     capture_skip: []
     outputs:
       - {name: rfm_segments, table: mart.rfm_segments, golden: golden/rfm_segments/rfm_segments.csv, keys: [customer_id]}

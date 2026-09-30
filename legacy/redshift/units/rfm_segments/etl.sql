@@ -20,7 +20,7 @@ tiles AS (
            recency_days,
            frequency,
            monetary,
-           NTILE(5) OVER (ORDER BY recency_days ASC NULLS LAST, customer_id)  AS r_tile,
+           NTILE(5) OVER (ORDER BY recency_days ASC, customer_id)             AS r_tile,
            NTILE(5) OVER (ORDER BY frequency   DESC,            customer_id)  AS f_tile,
            NTILE(5) OVER (ORDER BY monetary    DESC,            customer_id)  AS m_tile
     FROM   metrics
