@@ -1,0 +1,6 @@
+databricks-sdk==0.143.0
+pyyaml==5.4.1
+redshift_connector==2.1.17
+pytest==9.1.1
+ruff==0.16.9
+boto3==1.43.106

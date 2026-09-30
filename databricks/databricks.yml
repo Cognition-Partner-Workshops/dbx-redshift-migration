@@ -1,0 +1,26 @@
+bundle:
+  name: dbx-redshift-migration
+
+variables:
+  catalog:
+    description: Target catalog for migration outputs
+    default: mig_redshift_dev
+  warehouse_id:
+    description: SQL warehouse for validation / SQL tasks
+    default: ${DATABRICKS_WAREHOUSE_ID}
+
+# Wave 2 fills resources: the Lakeflow job built from
+# legacy/redshift/99_orchestration/refresh_schedule.yaml plus the migrated
+# unit SQL tasks. Intentionally empty in the "before" estate.
+resources: {}
+
+targets:
+  dev:
+    default: true
+    mode: development
+    variables:
+      catalog: mig_redshift_dev
+  prod:
+    mode: production
+    variables:
+      catalog: mig_redshift
