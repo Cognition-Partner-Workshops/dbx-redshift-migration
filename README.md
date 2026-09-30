@@ -15,8 +15,9 @@ migration sessions. Nothing under `legacy/`, `golden/`, `data/seed/` or
 ## The estate
 
 - `legacy/redshift/00_foundation/` — schemas `core` + `mart`, ten `core.*`
-  tables (DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, CHAR, SUPER) and two SQL
-  UDFs (`f_fiscal_qtr`, `f_clean_phone`).
+  tables (DISTKEY/SORTKEY/DISTSTYLE/ENCODE, CHAR, SUPER) and two SQL
+  UDFs (`f_fiscal_qtr`, `f_clean_phone`). Primary keys are explicit `BIGINT`
+  keys — Redshift `IDENTITY` columns can't take explicit seeded ids on INSERT.
 - `legacy/redshift/units/<unit>/` — 18 migration units, each with `etl.sql`
   (builds `mart.<unit>` using Redshift idioms) and `report.sql` (a BI query
   over the mart). `finance_export` also has `export.sql` (UNLOAD).
@@ -37,6 +38,21 @@ SUPER/PartiQL navigation, plpgsql procedures, TEMP tables and UNLOAD. Each
 unit's *expected* Lakebridge outcome (clean / mismatch / rejected) is a
 hypothesis for the demo narrative, never a fact; actuals are recorded in
 `.migration/coverage.md`.
+
+## Databricks layout
+
+- Catalogs: `mig_redshift_dev` (dev/migration runs, env `MIG_CATALOG`) and
+  `mig_redshift` (accepted/prod, deployed only from merged PRs via the DAB
+  `prod` target). Both tagged `demo_type=redshift`,
+  `source_repo=dbx-redshift-migration`.
+- Schemas inside each catalog: `landing` (managed volume `raw` holding the
+  seed CSVs as the "historical extract"), `core`, `mart`. Converted SQL
+  references unqualified `core.x` / `mart.x`; the harness sets the catalog.
+- Goldens stay in git (`golden/`): validation compares on the VM — no golden
+  tables are created in Databricks.
+- The DAB `warehouse_id` variable has no default: pass
+  `databricks bundle deploy --var warehouse_id=<id>` or set env
+  `BUNDLE_VAR_warehouse_id`.
 
 ## Demo flow
 

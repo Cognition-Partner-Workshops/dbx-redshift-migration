@@ -1,26 +1,30 @@
-# Devin environment for migration sessions.
-initialize:
-  - run: curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sudo sh
-maintenance:
-  - run: pip install -r requirements.txt
-
+# https://docs.devin.ai/onboard-devin/environment-yaml
+# One-time setup (install system tools, global CLIs).
+initialize: |
+  curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sudo sh
+# Install project dependencies (runs during builds, surfaced to agent at session start).
+maintenance: |
+  pip install -r requirements.txt
 knowledge:
-  - title: env vars and secrets
-    body: |
-      Validation needs DATABRICKS_HOST + DATABRICKS_TOKEN (or
-      DATABRICKS_CONFIG_PROFILE), DATABRICKS_WAREHOUSE_ID, and MIG_CATALOG
-      (default mig_redshift_dev). Redshift vars (REDSHIFT_HOST, REDSHIFT_PORT,
-      REDSHIFT_USER, REDSHIFT_PASSWORD, REDSHIFT_DATABASE) exist only on the
-      operator machine that captured goldens — migration sessions never need
-      them and must never run tools/legacy_redshift.py.
-  - title: make targets
-    body: |
-      make check (ruff + pytest + manifest checks, no secrets), make seed,
-      make db-setup / db-reset (Databricks catalog setup), make validate UNIT=x
-      (build converted SQL + compare to goldens), make validate-all,
-      make lakebridge-analyze / lakebridge-transpile UNIT=x.
-  - title: guardrails
-    body: |
-      See AGENTS.md: legacy/, golden/, data/seed/, validation/ are read-only;
-      one unit per child session; write only databricks/units/<unit>/ plus
-      evidence and a coverage.md row; never merge to main.
+  - name: env-vars-and-secrets
+    contents: |
+      # Validation needs DATABRICKS_HOST + DATABRICKS_TOKEN (or
+      # DATABRICKS_CONFIG_PROFILE), DATABRICKS_WAREHOUSE_ID, and MIG_CATALOG
+      # (default mig_redshift_dev). The DAB warehouse_id variable is set with
+      # `databricks bundle deploy --var warehouse_id=<id>` or env
+      # BUNDLE_VAR_warehouse_id.
+      # Redshift vars (REDSHIFT_HOST, REDSHIFT_PORT, REDSHIFT_USER,
+      # REDSHIFT_PASSWORD, REDSHIFT_DATABASE) exist only on the operator
+      # machine that captured goldens — migration sessions never need them and
+      # must never run tools/legacy_redshift.py.
+  - name: make-targets
+    contents: |
+      # make check (ruff + pytest + manifest checks, no secrets), make seed,
+      # make db-setup / db-reset (Databricks catalog setup), make validate
+      # UNIT=x (build converted SQL + compare to goldens), make validate-all,
+      # make lakebridge-analyze / lakebridge-transpile UNIT=x.
+  - name: guardrails
+    contents: |
+      # See AGENTS.md: legacy/, golden/, data/seed/, validation/ are read-only;
+      # one unit per child session; write only databricks/units/<unit>/ plus
+      # evidence and a coverage.md row; never merge to main.

@@ -12,9 +12,8 @@ These rules apply to every Devin session working in this repository.
 - Write only to catalogs listed in `.migration/allowed_targets.json`
   (`mig_redshift_dev` for dev/validation, `mig_redshift` for merged prod
   deployments). Never create or modify objects in any other catalog.
-- Never print, commit, or paste secret values (tokens, passwords, hosts are
-  config, not secrets — but tokens and passwords are) into code, PRs, logs, or
-  chat. Reference env var names only.
+- Never print, commit or paste tokens or passwords; reference env var names
+  only.
 - Never merge to `main`. Child PRs target `migration-run-N`; the orchestrator
   owns the run branch. Devin does not approve or merge its own PRs.
 - Never run `tools/legacy_redshift.py` — Redshift is the operator-only golden
