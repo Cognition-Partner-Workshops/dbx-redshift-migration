@@ -1,7 +1,4 @@
 # https://docs.devin.ai/onboard-devin/environment-yaml
-# One-time setup (install system tools, global CLIs).
-initialize: |
-  curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sudo sh
 # Install project dependencies (runs during builds, surfaced to agent at session start).
 maintenance: |
   pip install -r requirements.txt
