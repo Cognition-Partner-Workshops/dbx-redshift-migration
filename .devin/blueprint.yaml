@@ -21,8 +21,9 @@ knowledge:
     contents: |
       # make check (ruff + pytest + manifest checks, no secrets), make seed,
       # make db-setup / db-reset (Databricks catalog setup), make validate
-      # UNIT=x (build converted SQL + compare to goldens), make validate-all,
-      # make lakebridge-analyze / lakebridge-transpile UNIT=x.
+      # UNIT=x (build converted SQL + compare to goldens), make validate-all.
+      # Lakebridge analyze/transpile commands live in
+      # demo-ops/ORCHESTRATOR_PROMPT.md step 2 (orchestrator runs them inline).
   - name: guardrails
     contents: |
       # See AGENTS.md: legacy/, golden/, data/seed/, validation/ are read-only;

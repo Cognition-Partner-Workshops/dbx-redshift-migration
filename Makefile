@@ -1,5 +1,4 @@
-.PHONY: check seed db-setup db-reset validate validate-all legacy-all capture-golden \
-        lakebridge-analyze lakebridge-transpile
+.PHONY: check seed db-setup db-reset validate validate-all legacy-all capture-golden
 
 check:
 	ruff check . && pytest && python tools/check_manifest.py
@@ -34,9 +33,3 @@ legacy-all:
 
 capture-golden:
 	python tools/legacy_redshift.py capture
-
-lakebridge-analyze:
-	bash lakebridge/analyze.sh
-
-lakebridge-transpile:
-	bash lakebridge/transpile.sh $(UNIT)

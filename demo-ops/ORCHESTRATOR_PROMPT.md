@@ -7,9 +7,32 @@ repository. Read `AGENTS.md`, `.migration/00_context.md` and
 ## Steps
 
 1. Create the run integration branch `migration-run-N` from `main`.
-2. Run `make lakebridge-analyze` and `make lakebridge-transpile UNIT=<u>` for
-   every unit; commit `.migration/lakebridge/` drafts to the run branch.
-   Lakebridge output is a draft, never the merge gate.
+2. Run Lakebridge analyze + per-unit transpile yourself (the repo is a pure
+   "before" estate — run the commands live, no wrappers):
+
+   ```bash
+   databricks labs install lakebridge                 # if `databricks labs lakebridge --help` fails
+   databricks labs lakebridge install-transpile
+   mkdir -p .migration/lakebridge/transpiled .migration/lakebridge/errors
+   databricks labs lakebridge analyze \
+     --source-directory legacy/redshift \
+     --source-tech Redshift \
+     --report-file .migration/lakebridge/analyze.xlsx \
+     --generate-json true
+   # per unit <u> in .migration/units.yaml:
+   databricks labs lakebridge transpile \
+     --input-source legacy/redshift/units/<u> \
+     --output-folder .migration/lakebridge/transpiled/<u> \
+     --source-dialect redshift \
+     --error-file-path .migration/lakebridge/errors/<u>.log \
+     --skip-validation false \
+     --catalog-name "$MIG_CATALOG" \
+     --schema-name mart
+   ```
+
+   `--source-tech` must be exactly `Redshift` (case-sensitive; any other value
+   makes analyze prompt interactively). Then commit `.migration/lakebridge/`
+   to the run branch. Lakebridge output is a draft, never the merge gate.
 3. Run wave 0 (`foundation`) yourself: convert `00_foundation` DDL into
    `databricks/foundation/`, load `core.*` from
    `/Volumes/<catalog>/landing/raw` (seed CSVs uploaded by `make db-setup`),
