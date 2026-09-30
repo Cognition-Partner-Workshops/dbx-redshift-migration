@@ -1,12 +1,10 @@
 {
   "repo_notes": [
     {
-      "content": "Document this repository as what its source is: a retail order-analytics data warehouse built on Amazon Redshift. The core of the codebase is legacy/redshift/ (foundation DDL and UDFs, 18 mart units each with an etl.sql build script and a report.sql BI query, and the nightly orchestration in 99_orchestration/), plus the deterministic seed data in data/seed/ and the captured reference outputs in golden/. The Overview (home) page must be a system briefing: the business domain, the core -> mart -> report architecture, the nightly refresh, and the repository layout. Do NOT describe the repository on the Overview page as a migration project, migration demo, migration framework or kit, and do not mention Databricks, Lakebridge, migration waves, child sessions, Devin, or the files in demo-ops/, .agents/, AGENTS.md or .migration/ on the Overview page. Migration context is provided separately and should not appear in the wiki's framing of the repo.",
-      "author": "Mason"
+      "content": "Document this repository as what its source is: a retail order-analytics data warehouse built on Amazon Redshift. The core of the codebase is legacy/redshift/ (foundation DDL and UDFs, 18 mart units each with an etl.sql build script and a report.sql BI query, and the nightly orchestration in 99_orchestration/), plus the deterministic seed data in data/seed/ and the captured reference outputs in golden/. The Overview (home) page must be a system briefing: the business domain, the core -> mart -> report architecture, the nightly refresh, and the repository layout. Do NOT describe the repository on the Overview page as a migration project, migration demo, migration framework or kit, and do not mention Databricks, Lakebridge, migration waves, child sessions, Devin, or the files in demo-ops/, .agents/, AGENTS.md or .migration/ on the Overview page. Migration context is provided separately and should not appear in the wiki's framing of the repo."
     },
     {
-      "content": "Only the final page, 'Databricks Environment & Reconciliation Tooling', may cover databricks/, validation/, tools/databricks_setup.py, tools/check_manifest.py and .migration/units.yaml. Describe those factually as environment setup and output-reconciliation tooling. Do not document demo-ops/ or .agents/ anywhere in the wiki.",
-      "author": "Mason"
+      "content": "Only the final page, 'Databricks Environment & Reconciliation Tooling', may cover databricks/, validation/, tools/databricks_setup.py, tools/check_manifest.py and .migration/units.yaml. Describe those factually as environment setup and output-reconciliation tooling. Do not document demo-ops/ or .agents/ anywhere in the wiki."
     }
   ],
   "pages": [
