@@ -56,8 +56,9 @@ hypothesis for the demo narrative, never a fact; actuals are recorded in
 
 ## Demo flow
 
-1. An orchestrator session runs `lakebridge-analyze` and per-unit
-   `lakebridge-transpile`, commits the drafts to `migration-run-N`, and runs
+1. An orchestrator session runs Lakebridge analyze and per-unit transpile
+   (commands in `demo-ops/ORCHESTRATOR_PROMPT.md`), commits the drafts to
+   `migration-run-N`, and runs
    wave 0 (`foundation`: convert DDL, load `core.*` from
    `/Volumes/<catalog>/landing/raw`) itself.
 2. Waves 1a (5 units) and 1b (13 units) fan out to parallel child sessions,
@@ -112,4 +113,4 @@ See `.env.example` for placeholders.
 | `make validate-all` | validate every unit that has converted `etl.sql` |
 | `make legacy-all` | one-time Redshift setup + build + golden capture (operator only) |
 | `make capture-golden` | re-capture goldens from Redshift |
-| `make lakebridge-analyze` / `make lakebridge-transpile UNIT=x` | Lakebridge assessment/draft transpile |
+
