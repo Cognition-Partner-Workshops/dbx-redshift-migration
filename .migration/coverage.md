@@ -13,7 +13,7 @@ outcome and the fix that made `make validate` pass.
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
-| store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
+| store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | mismatch: draft kept core/mart names and Databricks DATEDIFF(week) counts whole elapsed weeks (2025-01-01→2025-01-06 = 0; Redshift boundary count = 1); 2/2 outputs PASS | silver/gold refs; Monday week_start via DATE_SUB(d, WEEKDAY(d)) on DATE (timezone-free); DATEDIFF(DAY, Monday-aligned a, b) DIV 7 for week-boundary count; DATE_ADD(week_start, 6) |
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
