@@ -1,19 +1,19 @@
 {
-  "unit": "attribution",
+  "unit": "churn_flags",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:25+00:00",
+  "started_at": "2026-10-01T02:50:21+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/attribution/etl.sql"
+    "file": "databricks/units/churn_flags/etl.sql"
   },
   "outputs": [
     {
-      "output": "attribution",
-      "golden": "golden/attribution/attribution.csv",
-      "target": "gold.attribution",
+      "output": "churn_flags",
+      "golden": "golden/churn_flags/churn_flags.csv",
+      "target": "gold.churn_flags",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,26 +23,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "campaign_id": "STRING",
-            "touch_channel": "STRING",
-            "touches": "LONG",
-            "customers_reached": "LONG"
+            "customer_id": "LONG",
+            "last_order_date": "DATE",
+            "days_since_order": "INT",
+            "churn_flag": "STRING"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 100,
-          "target": 100
+          "golden": 1500,
+          "target": 1500
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "campaign_id",
-            "touch_channel"
+            "customer_id"
           ],
-          "matched_rows": 100,
+          "matched_rows": 1500,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -56,8 +55,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/attribution/report.csv",
-      "target": "databricks/units/attribution/report.sql",
+      "golden": "golden/churn_flags/report.csv",
+      "target": "databricks/units/churn_flags/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -67,24 +66,24 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "campaign_id": "STRING",
-            "touches": "LONG",
-            "customers_reached": "LONG"
+            "churn_flag": "STRING",
+            "customers": "LONG",
+            "avg_days_since_order": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 20,
-          "target": 20
+          "golden": 4,
+          "target": 4
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "campaign_id"
+            "churn_flag"
           ],
-          "matched_rows": 20,
+          "matched_rows": 4,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -98,5 +97,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:29+00:00"
+  "finished_at": "2026-10-01T02:50:25+00:00"
 }

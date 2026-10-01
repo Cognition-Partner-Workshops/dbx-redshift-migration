@@ -1,19 +1,19 @@
 {
-  "unit": "attribution",
+  "unit": "product_perf",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:25+00:00",
+  "started_at": "2026-10-01T02:50:26+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/attribution/etl.sql"
+    "file": "databricks/units/product_perf/etl.sql"
   },
   "outputs": [
     {
-      "output": "attribution",
-      "golden": "golden/attribution/attribution.csv",
-      "target": "gold.attribution",
+      "output": "product_perf",
+      "golden": "golden/product_perf/product_perf.csv",
+      "target": "gold.product_perf",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,26 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "campaign_id": "STRING",
-            "touch_channel": "STRING",
-            "touches": "LONG",
-            "customers_reached": "LONG"
+            "product_id": "INT",
+            "category": "STRING",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL",
+            "top_stores": "STRING"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 100,
-          "target": 100
+          "golden": 300,
+          "target": 300
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "campaign_id",
-            "touch_channel"
+            "product_id"
           ],
-          "matched_rows": 100,
+          "matched_rows": 300,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -56,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/attribution/report.csv",
-      "target": "databricks/units/attribution/report.sql",
+      "golden": "golden/product_perf/report.csv",
+      "target": "databricks/units/product_perf/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -67,24 +67,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "campaign_id": "STRING",
-            "touches": "LONG",
-            "customers_reached": "LONG"
+            "category": "STRING",
+            "products": "LONG",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 20,
-          "target": 20
+          "golden": 6,
+          "target": 6
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "campaign_id"
+            "category"
           ],
-          "matched_rows": 20,
+          "matched_rows": 6,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -98,5 +99,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:29+00:00"
+  "finished_at": "2026-10-01T02:50:31+00:00"
 }
