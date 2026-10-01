@@ -7,7 +7,7 @@ outcome and the fix that made `make validate` pass.
 
 | unit | construct | expected | observed | fix pattern |
 | --- | --- | --- | --- | --- |
-| foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | | |
+| foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | mismatch: CHAR padding and SUPER representation; 10/10 outputs PASS | typed Delta bronze/silver; liquid clustering; explicit RPAD for CHAR(4); parse_json VARIANT in bronze, source JSON text in silver; fiscal UDF uses DIV and source +9 |
 | daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
