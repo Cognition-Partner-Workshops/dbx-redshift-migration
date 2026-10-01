@@ -16,7 +16,7 @@ outcome and the fix that made `make validate` pass.
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
-| sessionization | LAG, 30-min gap, running SUM session id | clean | | |
+| sessionization | LAG, 30-min gap, running SUM session id | clean | mismatch risk: Lakebridge kept DATEDIFF(second) (elapsed-second truncation, not Redshift boundary count) and core->silver/mart->gold unmapped; 2/2 outputs PASS | gap = floored NTZ epoch-second difference (timestampdiff MICROSECOND from TIMESTAMP_NTZ epoch, no tz conversion), `> 1800`; ORDER BY event_ts, event_id ASC NULLS LAST for LAG and ROWS UNBOUNDED PRECEDING running SUM; CREATE OR REPLACE gold.web_sessions CLUSTER BY (customer_id, session_id) |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
