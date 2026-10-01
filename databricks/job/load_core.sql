@@ -1,9 +1,8 @@
--- Job task file for the Lakeflow nightly_mart_refresh job.
--- GENERATED: `USE CATALOG IDENTIFIER(:catalog)` prefix plus the full body of
--- databricks/foundation/etl.sql — keep this file in sync with that source.
--- The job binds :catalog via the sql_task parameters map; IDENTIFIER() keeps
--- the catalog substitution safe (no string interpolation into SQL).
+-- Databricks notebook source
+-- GENERATED from databricks/foundation/etl.sql by tools/sync_job_sql.py.
 USE CATALOG IDENTIFIER(:catalog);
+
+-- COMMAND ----------
 
 BEGIN
 DECLARE csv_sql STRING;

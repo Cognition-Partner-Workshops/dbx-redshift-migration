@@ -31,7 +31,16 @@ def main():
     stale = []
     for name, source in sorted(sources.items()):
         target = ROOT / "databricks/job" / f"{name}.sql"
-        expected = HEADER.format(source=source) + (ROOT / source).read_text()
+        body = (ROOT / source).read_text()
+        if name == "load_core":
+            expected = (
+                "-- Databricks notebook source\n"
+                f"-- GENERATED from {source} by tools/sync_job_sql.py.\n"
+                "USE CATALOG IDENTIFIER(:catalog);\n\n"
+                "-- COMMAND ----------\n\n" + body
+            )
+        else:
+            expected = HEADER.format(source=source) + body
         if args.check:
             if not target.exists() or target.read_text() != expected:
                 stale.append(str(target.relative_to(ROOT)))
