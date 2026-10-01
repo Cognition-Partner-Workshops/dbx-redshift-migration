@@ -1,19 +1,19 @@
 {
-  "unit": "inventory_snapshot",
+  "unit": "promo_lift",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:31+00:00",
+  "started_at": "2026-10-01T02:51:08+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/inventory_snapshot/etl.sql"
+    "file": "databricks/units/promo_lift/etl.sql"
   },
   "outputs": [
     {
-      "output": "inventory_snapshot",
-      "golden": "golden/inventory_snapshot/inventory_snapshot.csv",
-      "target": "gold.inventory_snapshot",
+      "output": "promo_lift",
+      "golden": "golden/promo_lift/promo_lift.csv",
+      "target": "gold.promo_lift",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,25 +23,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "product_id": "INT",
-            "snapshot_date": "DATE",
-            "units_sold": "LONG",
-            "on_hand": "INT"
+            "sales_channel": "STRING",
+            "order_count": "LONG",
+            "median_order_value": "DECIMAL",
+            "p90_order_value": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 300,
-          "target": 300
+          "golden": 4,
+          "target": 4
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "product_id"
+            "sales_channel"
           ],
-          "matched_rows": 300,
+          "matched_rows": 4,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -55,8 +55,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/inventory_snapshot/report.csv",
-      "target": "databricks/units/inventory_snapshot/report.sql",
+      "golden": "golden/promo_lift/report.csv",
+      "target": "databricks/units/promo_lift/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -66,25 +66,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "product_id": "INT",
-            "snapshot_date": "DATE",
-            "units_sold": "LONG",
-            "on_hand": "INT"
+            "sales_channel": "STRING",
+            "order_count": "LONG",
+            "median_order_value": "DECIMAL",
+            "p90_order_value": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 50,
-          "target": 50
+          "golden": 4,
+          "target": 4
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "product_id"
+            "sales_channel"
           ],
-          "matched_rows": 50,
+          "matched_rows": 4,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -98,5 +98,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:37+00:00"
+  "finished_at": "2026-10-01T02:51:13+00:00"
 }

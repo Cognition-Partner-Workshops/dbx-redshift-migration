@@ -22,6 +22,9 @@ validate-all:
 	  if [ -f "$$(python -c "import yaml; m=yaml.safe_load(open('.migration/units.yaml')); \
 	    print(m['units']['$$u']['target_dir'])")/etl.sql" ]; then \
 	    echo "== validating $$u"; \
+	    if command -v devin-oidc >/dev/null 2>&1; then \
+	      export DATABRICKS_OIDC_TOKEN="$$(devin-oidc token --audience databricks)"; \
+	    fi; \
 	    python -m validation.validate_unit --unit $$u || failed="$$failed $$u"; \
 	  fi; \
 	done; \
