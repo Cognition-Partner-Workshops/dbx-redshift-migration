@@ -23,7 +23,7 @@ outcome and the fix that made `make validate` pass.
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
-| inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
+| inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | rejected: procedure/temp table/CALL draft kept mart.*; 2/2 outputs PASS | single Delta MERGE over staging CTE (SUM::BIGINT, LEFT JOIN products, fixed DATE 2025-12-31) with WHEN NOT MATCHED BY SOURCE THEN DELETE for drop/recreate parity; rerun/perturbation idempotent; report ORDER BY ... NULLS LAST |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
 | orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
