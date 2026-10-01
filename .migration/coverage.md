@@ -18,7 +18,7 @@ outcome and the fix that made `make validate` pass.
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
-| rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
+| rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | mismatch: Lakebridge kept NULL ordering but report AVG(BIGINT) became DOUBLE (83/103 segments non-integer); Databricks default ASC NULLS FIRST would shift 730/1500 r_tile (146 NULL-recency customers); 2/2 outputs PASS | explicit Redshift null order (ASC NULLS LAST, DESC NULLS FIRST) with customer_id NTILE tiebreak; SUM DIV COUNT for integer AVG; monetary DECIMAL(38,2); CLUSTER BY customer_id |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
