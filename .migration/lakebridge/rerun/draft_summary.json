@@ -1,0 +1,596 @@
+{
+  "staged_files": 43,
+  "analyze_inventory_entries": 43,
+  "drafts_found": 37,
+  "files": [
+    {
+      "source_path": "legacy/redshift/00_foundation/01_schemas.sql",
+      "unit": "foundation",
+      "draft": null,
+      "source_statements": 2,
+      "draft_statements": null,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": null
+    },
+    {
+      "source_path": "legacy/redshift/00_foundation/02_core_tables.sql",
+      "unit": "foundation",
+      "draft": null,
+      "source_statements": 10,
+      "draft_statements": null,
+      "source_constructs": [
+        "DISTKEY/SORTKEY",
+        "ENCODE"
+      ],
+      "draft_constructs": [],
+      "dropped_constructs": null
+    },
+    {
+      "source_path": "legacy/redshift/00_foundation/03_udfs.sql",
+      "unit": "foundation",
+      "draft": null,
+      "source_statements": 2,
+      "draft_statements": null,
+      "source_constructs": [
+        ":: cast",
+        "UDF f_clean_phone",
+        "UDF f_fiscal_qtr"
+      ],
+      "draft_constructs": [],
+      "dropped_constructs": null
+    },
+    {
+      "source_path": "legacy/redshift/99_orchestration/exec_summary/etl.sql",
+      "unit": "orchestration",
+      "draft": null,
+      "source_statements": 2,
+      "draft_statements": null,
+      "source_constructs": [
+        ":: cast"
+      ],
+      "draft_constructs": [],
+      "dropped_constructs": null
+    },
+    {
+      "source_path": "legacy/redshift/99_orchestration/exec_summary/report.sql",
+      "unit": "orchestration",
+      "draft": null,
+      "source_statements": 1,
+      "draft_statements": null,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": null
+    },
+    {
+      "source_path": "legacy/redshift/99_orchestration/refresh_schedule.yaml",
+      "unit": "orchestration",
+      "draft": null,
+      "source_statements": 1,
+      "draft_statements": null,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": null
+    },
+    {
+      "source_path": "legacy/redshift/units/attribution/etl.sql",
+      "unit": "attribution",
+      "draft": ".migration/lakebridge/transpiled/attribution/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast",
+        "SUPER/PartiQL nav"
+      ],
+      "draft_constructs": [
+        "SUPER/PartiQL nav"
+      ],
+      "dropped_constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/attribution/report.sql",
+      "unit": "attribution",
+      "draft": ".migration/lakebridge/transpiled/attribution/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/basket_affinity/etl.sql",
+      "unit": "basket_affinity",
+      "draft": ".migration/lakebridge/transpiled/basket_affinity/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/basket_affinity/report.sql",
+      "unit": "basket_affinity",
+      "draft": ".migration/lakebridge/transpiled/basket_affinity/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/category_mix/etl.sql",
+      "unit": "category_mix",
+      "draft": ".migration/lakebridge/transpiled/category_mix/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        "RATIO_TO_REPORT"
+      ],
+      "draft_constructs": [],
+      "dropped_constructs": [
+        "RATIO_TO_REPORT"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/category_mix/report.sql",
+      "unit": "category_mix",
+      "draft": ".migration/lakebridge/transpiled/category_mix/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/churn_flags/etl.sql",
+      "unit": "churn_flags",
+      "draft": ".migration/lakebridge/transpiled/churn_flags/etl.sql",
+      "source_statements": 4,
+      "draft_statements": 9,
+      "source_constructs": [
+        ":: cast",
+        "CALL",
+        "CREATE PROCEDURE",
+        "DISTKEY/SORTKEY",
+        "FOR loop",
+        "PL/pgSQL",
+        "TEMP TABLE"
+      ],
+      "draft_constructs": [
+        "CALL",
+        "CREATE PROCEDURE",
+        "DISTKEY/SORTKEY",
+        "TEMP TABLE"
+      ],
+      "dropped_constructs": [
+        ":: cast",
+        "FOR loop",
+        "PL/pgSQL"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/churn_flags/report.sql",
+      "unit": "churn_flags",
+      "draft": ".migration/lakebridge/transpiled/churn_flags/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/cohort_retention/etl.sql",
+      "unit": "cohort_retention",
+      "draft": ".migration/lakebridge/transpiled/cohort_retention/etl.sql",
+      "source_statements": 9,
+      "draft_statements": 9,
+      "source_constructs": [
+        ":: cast",
+        "DATEDIFF",
+        "DISTKEY/SORTKEY",
+        "TEMP TABLE"
+      ],
+      "draft_constructs": [
+        "DATEDIFF",
+        "DISTKEY/SORTKEY",
+        "TEMP TABLE"
+      ],
+      "dropped_constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/cohort_retention/report.sql",
+      "unit": "cohort_retention",
+      "draft": ".migration/lakebridge/transpiled/cohort_retention/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/customer_ltv/etl.sql",
+      "unit": "customer_ltv",
+      "draft": ".migration/lakebridge/transpiled/customer_ltv/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        "DISTKEY/SORTKEY",
+        "UDF f_clean_phone"
+      ],
+      "draft_constructs": [
+        "UDF f_clean_phone"
+      ],
+      "dropped_constructs": [
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/customer_ltv/report.sql",
+      "unit": "customer_ltv",
+      "draft": ".migration/lakebridge/transpiled/customer_ltv/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/daily_revenue/etl.sql",
+      "unit": "daily_revenue",
+      "draft": ".migration/lakebridge/transpiled/daily_revenue/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast",
+        "DISTKEY/SORTKEY"
+      ],
+      "draft_constructs": [],
+      "dropped_constructs": [
+        ":: cast",
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/daily_revenue/report.sql",
+      "unit": "daily_revenue",
+      "draft": ".migration/lakebridge/transpiled/daily_revenue/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [
+        ":: cast"
+      ],
+      "draft_constructs": [],
+      "dropped_constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/finance_export/etl.sql",
+      "unit": "finance_export",
+      "draft": ".migration/lakebridge/transpiled/finance_export/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast",
+        "UDF f_fiscal_qtr"
+      ],
+      "draft_constructs": [
+        "UDF f_fiscal_qtr"
+      ],
+      "dropped_constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/finance_export/export.sql",
+      "unit": "finance_export",
+      "draft": ".migration/lakebridge/transpiled/finance_export/export.sql",
+      "source_statements": 1,
+      "draft_statements": 0,
+      "source_constructs": [
+        "UNLOAD"
+      ],
+      "draft_constructs": [
+        "FIXME/unsupported marker",
+        "UNLOAD"
+      ],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/finance_export/report.sql",
+      "unit": "finance_export",
+      "draft": ".migration/lakebridge/transpiled/finance_export/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/geo_rollup/etl.sql",
+      "unit": "geo_rollup",
+      "draft": ".migration/lakebridge/transpiled/geo_rollup/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/geo_rollup/report.sql",
+      "unit": "geo_rollup",
+      "draft": ".migration/lakebridge/transpiled/geo_rollup/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/inventory_snapshot/etl.sql",
+      "unit": "inventory_snapshot",
+      "draft": ".migration/lakebridge/transpiled/inventory_snapshot/etl.sql",
+      "source_statements": 4,
+      "draft_statements": 9,
+      "source_constructs": [
+        ":: cast",
+        "CALL",
+        "CREATE PROCEDURE",
+        "DELETE",
+        "DISTKEY/SORTKEY",
+        "PL/pgSQL",
+        "TEMP TABLE"
+      ],
+      "draft_constructs": [
+        "CALL",
+        "CREATE PROCEDURE",
+        "DELETE",
+        "DISTKEY/SORTKEY",
+        "TEMP TABLE"
+      ],
+      "dropped_constructs": [
+        ":: cast",
+        "PL/pgSQL"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/inventory_snapshot/report.sql",
+      "unit": "inventory_snapshot",
+      "draft": ".migration/lakebridge/transpiled/inventory_snapshot/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/payment_mix/etl.sql",
+      "unit": "payment_mix",
+      "draft": ".migration/lakebridge/transpiled/payment_mix/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        "DECODE",
+        "NVL",
+        "NVL2"
+      ],
+      "draft_constructs": [
+        "DECODE",
+        "NVL2"
+      ],
+      "dropped_constructs": [
+        "NVL"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/payment_mix/report.sql",
+      "unit": "payment_mix",
+      "draft": ".migration/lakebridge/transpiled/payment_mix/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/product_perf/etl.sql",
+      "unit": "product_perf",
+      "draft": ".migration/lakebridge/transpiled/product_perf/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast",
+        "DISTKEY/SORTKEY",
+        "LISTAGG"
+      ],
+      "draft_constructs": [],
+      "dropped_constructs": [
+        ":: cast",
+        "DISTKEY/SORTKEY",
+        "LISTAGG"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/product_perf/report.sql",
+      "unit": "product_perf",
+      "draft": ".migration/lakebridge/transpiled/product_perf/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/promo_lift/etl.sql",
+      "unit": "promo_lift",
+      "draft": ".migration/lakebridge/transpiled/promo_lift/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        "MEDIAN"
+      ],
+      "draft_constructs": [
+        "MEDIAN"
+      ],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/promo_lift/report.sql",
+      "unit": "promo_lift",
+      "draft": ".migration/lakebridge/transpiled/promo_lift/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/returns_rate/etl.sql",
+      "unit": "returns_rate",
+      "draft": ".migration/lakebridge/transpiled/returns_rate/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast"
+      ],
+      "draft_constructs": [
+        ":: cast"
+      ],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/returns_rate/report.sql",
+      "unit": "returns_rate",
+      "draft": ".migration/lakebridge/transpiled/returns_rate/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/rfm_segments/etl.sql",
+      "unit": "rfm_segments",
+      "draft": ".migration/lakebridge/transpiled/rfm_segments/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast",
+        "DATEDIFF",
+        "DISTKEY/SORTKEY"
+      ],
+      "draft_constructs": [
+        "DATEDIFF"
+      ],
+      "dropped_constructs": [
+        ":: cast",
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/rfm_segments/report.sql",
+      "unit": "rfm_segments",
+      "draft": ".migration/lakebridge/transpiled/rfm_segments/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/sessionization/etl.sql",
+      "unit": "sessionization",
+      "draft": ".migration/lakebridge/transpiled/sessionization/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        "DATEDIFF",
+        "DISTKEY/SORTKEY"
+      ],
+      "draft_constructs": [
+        "DATEDIFF"
+      ],
+      "dropped_constructs": [
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/sessionization/report.sql",
+      "unit": "sessionization",
+      "draft": ".migration/lakebridge/transpiled/sessionization/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/shipping_sla/etl.sql",
+      "unit": "shipping_sla",
+      "draft": ".migration/lakebridge/transpiled/shipping_sla/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast",
+        "CONVERT_TIMEZONE",
+        "DATEDIFF"
+      ],
+      "draft_constructs": [
+        "CONVERT_TIMEZONE",
+        "DATEDIFF"
+      ],
+      "dropped_constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/shipping_sla/report.sql",
+      "unit": "shipping_sla",
+      "draft": ".migration/lakebridge/transpiled/shipping_sla/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [],
+      "draft_constructs": [],
+      "dropped_constructs": []
+    },
+    {
+      "source_path": "legacy/redshift/units/store_weekly/etl.sql",
+      "unit": "store_weekly",
+      "draft": ".migration/lakebridge/transpiled/store_weekly/etl.sql",
+      "source_statements": 2,
+      "draft_statements": 2,
+      "source_constructs": [
+        ":: cast",
+        "DATEADD",
+        "DATEDIFF",
+        "DISTKEY/SORTKEY"
+      ],
+      "draft_constructs": [
+        "DATEDIFF"
+      ],
+      "dropped_constructs": [
+        ":: cast",
+        "DATEADD",
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "source_path": "legacy/redshift/units/store_weekly/report.sql",
+      "unit": "store_weekly",
+      "draft": ".migration/lakebridge/transpiled/store_weekly/report.sql",
+      "source_statements": 1,
+      "draft_statements": 1,
+      "source_constructs": [
+        "DATEDIFF"
+      ],
+      "draft_constructs": [
+        "DATEDIFF"
+      ],
+      "dropped_constructs": []
+    }
+  ]
+}
