@@ -1,0 +1,19 @@
+# Legacy: legacy/redshift/units/attribution/report.sql
+#   SELECT campaign_id, SUM(touches) AS touches, SUM(customers_reached) AS customers_reached
+#   FROM mart.attribution GROUP BY campaign_id
+version: 1.1
+comment: Campaign touches and reach per campaign and channel (gold.attribution).
+source: gold.attribution
+dimensions:
+  - name: campaign_id
+    expr: campaign_id
+  - name: touch_channel
+    expr: touch_channel
+measures:
+  - name: touches
+    expr: SUM(touches)
+  - name: customers_reached
+    expr: SUM(customers_reached)
+    comment: >-
+      Distinct customers per campaign x channel, summed across channels exactly as the
+      legacy report does (a customer reached on two channels counts twice).

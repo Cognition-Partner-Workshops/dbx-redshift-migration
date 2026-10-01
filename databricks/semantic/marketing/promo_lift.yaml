@@ -1,0 +1,19 @@
+# Legacy: legacy/redshift/units/promo_lift/report.sql
+#   SELECT sales_channel, order_count, median_order_value, p90_order_value FROM mart.promo_lift
+version: 1.1
+comment: >-
+  Order value distribution per sales channel (gold.promo_lift, one row per channel).
+  Median/p90 are not additive and are only defined at the sales_channel grain.
+source: gold.promo_lift
+dimensions:
+  - name: sales_channel
+    expr: sales_channel
+measures:
+  - name: order_count
+    expr: SUM(order_count)
+  - name: median_order_value
+    expr: CASE WHEN COUNT(1) = 1 THEN MAX(median_order_value) END
+    comment: PERCENTILE_CONT(0.5) order value per channel - NULL when more than one channel is aggregated.
+  - name: p90_order_value
+    expr: CASE WHEN COUNT(1) = 1 THEN MAX(p90_order_value) END
+    comment: PERCENTILE_CONT(0.9) order value per channel - NULL when more than one channel is aggregated.

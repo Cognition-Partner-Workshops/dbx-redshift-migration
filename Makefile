@@ -1,7 +1,8 @@
-.PHONY: check seed db-setup db-reset validate validate-all legacy-all capture-golden
+.PHONY: check seed db-setup db-reset validate validate-all semantic-deploy validate-semantic legacy-all capture-golden
 
 check:
-	ruff check . && pytest && python tools/check_manifest.py && python tools/sync_job_sql.py --check
+	ruff check . && pytest && python tools/check_manifest.py && python tools/sync_job_sql.py --check \
+	  && python tools/semantic_layer.py generate --check
 
 seed:
 	python data/seed/generate_seed.py
@@ -30,6 +31,18 @@ validate-all:
 	done; \
 	if [ -n "$$failed" ]; then echo "FAILED:$$failed"; exit 1; fi; \
 	echo "all validated units PASS"
+
+semantic-deploy:
+	@if command -v devin-oidc >/dev/null 2>&1; then \
+	  export DATABRICKS_OIDC_TOKEN="$$(devin-oidc token --audience databricks)"; \
+	fi; \
+	python tools/semantic_layer.py deploy
+
+validate-semantic:
+	@if command -v devin-oidc >/dev/null 2>&1; then \
+	  export DATABRICKS_OIDC_TOKEN="$$(devin-oidc token --audience databricks)"; \
+	fi; \
+	python tools/validate_semantic.py $(if $(VIEW),--view $(VIEW))
 
 legacy-all:
 	python tools/legacy_redshift.py all

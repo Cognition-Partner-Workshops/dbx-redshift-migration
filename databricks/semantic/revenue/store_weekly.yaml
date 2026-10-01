@@ -1,0 +1,35 @@
+# Legacy: legacy/redshift/units/store_weekly/report.sql
+#   SELECT w.store_id, s.region,
+#          DATEDIFF(week, MIN(w.week_start), MAX(w.week_start)) + 1 AS active_weeks,
+#          SUM(w.order_count) AS order_count, SUM(w.revenue) AS revenue
+#   FROM mart.store_weekly w JOIN core.stores s ON s.store_id = w.store_id GROUP BY 1, 2
+version: 1.1
+comment: Weekly store orders and revenue (gold.store_weekly) with the store region from silver.stores.
+source: gold.store_weekly
+joins:
+  - name: store
+    source: silver.stores
+    "on": source.store_id = store.store_id
+dimensions:
+  - name: store_id
+    expr: source.store_id
+  - name: region
+    expr: store.region
+    comment: Store region (CHAR(4) in the legacy core.stores - padding preserved).
+  - name: week_start
+    expr: week_start
+    comment: Monday of the order week (DATE_TRUNC('week', order_ts)).
+  - name: week_end
+    expr: week_end
+  - name: week_number
+    expr: week_number
+measures:
+  - name: active_weeks
+    expr: CAST(DATEDIFF(DAY, MIN(week_start), MAX(week_start)) DIV 7 + 1 AS BIGINT)
+    comment: >-
+      Weeks between the first and last active week, inclusive. Redshift DATEDIFF(week, ...)
+      on Monday-aligned week_start values equals the whole-day difference DIV 7.
+  - name: order_count
+    expr: SUM(order_count)
+  - name: revenue
+    expr: SUM(revenue)

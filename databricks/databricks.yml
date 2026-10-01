@@ -2,6 +2,8 @@ bundle:
   name: dbx-redshift-migration
 
 include:
+  # resources/semantic_layer.job.yml: Unity Catalog metric views (${var.catalog}.semantic.*)
+  # generated from semantic/ by tools/semantic_layer.py.
   - resources/*.yml
 
 variables:

@@ -1,0 +1,27 @@
+# Legacy: legacy/redshift/units/finance_export/report.sql
+#   SELECT fiscal_year, fiscal_qtr, SUM(order_count) AS order_count, SUM(revenue) AS revenue
+#   FROM mart.finance_monthly GROUP BY 1, 2
+# fiscal_year / fiscal_qtr are computed by the legacy ETL with core.f_fiscal_qtr
+# (silver.f_fiscal_qtr on Databricks): fiscal year starts Feb 1,
+# Feb-Apr = Q1, May-Jul = Q2, Aug-Oct = Q3, Nov-Jan = Q4.
+version: 1.1
+comment: Monthly finance orders and revenue on the Feb-start fiscal calendar (gold.finance_monthly).
+source: gold.finance_monthly
+dimensions:
+  - name: month
+    expr: month
+    comment: Calendar month (first day).
+  - name: fiscal_year
+    expr: fiscal_year
+    comment: Fiscal year (Feb 1 start) from the legacy ETL.
+  - name: fiscal_qtr
+    expr: fiscal_qtr
+    comment: Fiscal quarter Q1-Q4 from f_fiscal_qtr (Feb-Apr = Q1 ... Nov-Jan = Q4).
+  - name: fiscal_period
+    expr: CONCAT(CAST(fiscal_year AS STRING), '-', fiscal_qtr)
+    comment: Fiscal year and quarter label, e.g. 2025-Q3.
+measures:
+  - name: order_count
+    expr: SUM(order_count)
+  - name: revenue
+    expr: SUM(revenue)

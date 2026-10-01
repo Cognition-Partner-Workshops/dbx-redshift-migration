@@ -1,0 +1,144 @@
+# Semantic layer manifest: one Unity Catalog metric view per business subject.
+#
+# Each view is registered as ${catalog}.semantic.<view> from <definition>.
+# `unit` points at the .migration/units.yaml unit whose legacy report.sql the
+# view reproduces; `report` is how tools/validate_semantic.py rebuilds that
+# report through the metric view (dimensions + MEASURE() of measures, with the
+# legacy ORDER BY / LIMIT) for comparison with golden/<unit>/report.csv.
+#
+# After editing, regenerate the DDL and job SQL:
+#   python tools/semantic_layer.py generate && python tools/sync_job_sql.py
+schema: semantic
+views:
+  # --- revenue -------------------------------------------------------------
+  daily_revenue_metrics:
+    definition: revenue/daily_revenue.yaml
+    unit: daily_revenue
+    report:
+      dimensions: [order_month, sales_channel]
+      measures: [order_count, revenue]
+      order_by: [order_month, sales_channel]
+  store_weekly_metrics:
+    definition: revenue/store_weekly.yaml
+    unit: store_weekly
+    report:
+      dimensions: [store_id, region]
+      measures: [active_weeks, order_count, revenue]
+      order_by: [store_id]
+  category_mix_metrics:
+    definition: revenue/category_mix.yaml
+    unit: category_mix
+    report:
+      dimensions: [category]
+      measures: [units_sold, revenue, revenue_share]
+      order_by: [revenue DESC NULLS FIRST, category]
+  product_perf_metrics:
+    definition: revenue/product_perf.yaml
+    unit: product_perf
+    report:
+      dimensions: [category]
+      measures: [products, units_sold, revenue]
+      order_by: [category]
+  geo_rollup_metrics:
+    definition: revenue/geo_rollup.yaml
+    unit: geo_rollup
+    report:
+      dimensions: [grouping_id, region, state]
+      measures: [order_count, revenue]
+      order_by: [grouping_id, region, state]
+  payment_mix_metrics:
+    definition: revenue/payment_mix.yaml
+    unit: payment_mix
+    report:
+      dimensions: [method_family]
+      measures: [payment_count, amount_total]
+      order_by: [method_family]
+  finance_monthly_metrics:
+    definition: revenue/finance_monthly.yaml
+    unit: finance_export
+    report:
+      dimensions: [fiscal_year, fiscal_qtr]
+      measures: [order_count, revenue]
+      order_by: [fiscal_year, fiscal_qtr]
+  # --- customer ------------------------------------------------------------
+  customer_ltv_metrics:
+    definition: customer/customer_ltv.yaml
+    unit: customer_ltv
+    report:
+      dimensions: [region]
+      measures: [customers, orders, total_ltv, avg_ltv]
+      order_by: [region]
+  churn_flags_metrics:
+    definition: customer/churn_flags.yaml
+    unit: churn_flags
+    report:
+      dimensions: [churn_flag]
+      measures: [customers, avg_days_since_order]
+      order_by: [churn_flag]
+  rfm_segments_metrics:
+    definition: customer/rfm_segments.yaml
+    unit: rfm_segments
+    report:
+      dimensions: [rfm_segment]
+      measures: [customers, total_monetary, avg_frequency]
+      order_by: [rfm_segment]
+  cohort_retention_metrics:
+    definition: customer/cohort_retention.yaml
+    unit: cohort_retention
+    report:
+      dimensions: [cohort_month, month_offset]
+      measures: [cohort_size, active_buyers, retention_pct]
+      order_by: [cohort_month, month_offset]
+  # --- marketing / digital -------------------------------------------------
+  attribution_metrics:
+    definition: marketing/attribution.yaml
+    unit: attribution
+    report:
+      dimensions: [campaign_id]
+      measures: [touches, customers_reached]
+      order_by: [campaign_id]
+  promo_lift_metrics:
+    definition: marketing/promo_lift.yaml
+    unit: promo_lift
+    report:
+      dimensions: [sales_channel]
+      measures: [order_count, median_order_value, p90_order_value]
+      order_by: [sales_channel]
+  web_sessions_metrics:
+    definition: marketing/web_sessions.yaml
+    unit: sessionization
+    report:
+      dimensions: [customer_id]
+      measures: [sessions, events, checkout_sessions]
+      order_by: [customer_id]
+  basket_affinity_metrics:
+    definition: marketing/basket_affinity.yaml
+    unit: basket_affinity
+    report:
+      dimensions: [product_id_a, product_id_b, pair]
+      measures: [pair_orders]
+      order_by: [pair_orders DESC NULLS FIRST, product_id_a, product_id_b]
+      limit: 50
+  # --- operations ----------------------------------------------------------
+  shipping_sla_metrics:
+    definition: operations/shipping_sla.yaml
+    unit: shipping_sla
+    report:
+      dimensions: [carrier]
+      measures: [shipments, delivered, in_flight, avg_hours_to_deliver, max_hours_to_deliver, on_time_96h]
+      order_by: [carrier]
+  returns_rate_metrics:
+    definition: operations/returns_rate.yaml
+    unit: returns_rate
+    report:
+      dimensions: [category]
+      measures: [sold_qty, returned_qty, return_rate_int, return_pct]
+      order_by: [return_pct DESC NULLS FIRST, category]
+  inventory_snapshot_metrics:
+    definition: operations/inventory_snapshot.yaml
+    unit: inventory_snapshot
+    report:
+      dimensions: [product_id, snapshot_date]
+      measures: [units_sold, on_hand]
+      order_by: [on_hand ASC NULLS LAST, product_id]
+      limit: 50

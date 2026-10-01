@@ -1,0 +1,60 @@
+{
+  "unit": "semantic.rfm_segments_metrics",
+  "legacy_unit": "rfm_segments",
+  "definition": "databricks/semantic/customer/rfm_segments.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:53+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.rfm_segments_metrics",
+      "golden": "golden/rfm_segments/report.csv",
+      "target": "SELECT `rfm_segment`, MEASURE(`customers`) AS `customers`, MEASURE(`total_monetary`) AS `total_monetary`, MEASURE(`avg_frequency`) AS `avg_frequency`\nFROM semantic.rfm_segments_metrics\nGROUP BY ALL\nORDER BY rfm_segment",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "rfm_segment": "STRING",
+            "customers": "LONG",
+            "total_monetary": "DECIMAL",
+            "avg_frequency": "LONG"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 103,
+          "target": 103
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "rfm_segment"
+          ],
+          "matched_rows": 103,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:54+00:00"
+}

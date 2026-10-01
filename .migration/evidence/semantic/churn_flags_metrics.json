@@ -1,0 +1,59 @@
+{
+  "unit": "semantic.churn_flags_metrics",
+  "legacy_unit": "churn_flags",
+  "definition": "databricks/semantic/customer/churn_flags.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:52+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.churn_flags_metrics",
+      "golden": "golden/churn_flags/report.csv",
+      "target": "SELECT `churn_flag`, MEASURE(`customers`) AS `customers`, MEASURE(`avg_days_since_order`) AS `avg_days_since_order`\nFROM semantic.churn_flags_metrics\nGROUP BY ALL\nORDER BY churn_flag",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "churn_flag": "STRING",
+            "customers": "LONG",
+            "avg_days_since_order": "LONG"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 4,
+          "target": 4
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "churn_flag"
+          ],
+          "matched_rows": 4,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:53+00:00"
+}

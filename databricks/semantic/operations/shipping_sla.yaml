@@ -1,0 +1,27 @@
+# Legacy: legacy/redshift/units/shipping_sla/report.sql
+#   SELECT carrier, shipments, delivered, in_flight, avg_hours_to_deliver,
+#          max_hours_to_deliver, on_time_96h FROM mart.shipping_sla
+version: 1.1
+comment: >-
+  Shipping SLA per carrier (gold.shipping_sla, one row per carrier). Hours use Redshift
+  DATEDIFF(hour) boundary semantics from the ETL - on-time = delivered within 96 hours.
+source: gold.shipping_sla
+dimensions:
+  - name: carrier
+    expr: carrier
+measures:
+  - name: shipments
+    expr: SUM(shipments)
+  - name: delivered
+    expr: SUM(delivered)
+  - name: in_flight
+    expr: SUM(in_flight)
+  - name: avg_hours_to_deliver
+    expr: CASE WHEN COUNT(1) = 1 THEN MAX(avg_hours_to_deliver) END
+    comment: Integer average hours per carrier - NULL when more than one carrier is aggregated.
+  - name: max_hours_to_deliver
+    expr: MAX(max_hours_to_deliver)
+  - name: on_time_96h
+    expr: SUM(on_time_96h)
+  - name: earliest_local_delivery_hour
+    expr: MIN(earliest_local_delivery_hour)

@@ -1,0 +1,60 @@
+{
+  "unit": "semantic.product_perf_metrics",
+  "legacy_unit": "product_perf",
+  "definition": "databricks/semantic/revenue/product_perf.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:46+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.product_perf_metrics",
+      "golden": "golden/product_perf/report.csv",
+      "target": "SELECT `category`, MEASURE(`products`) AS `products`, MEASURE(`units_sold`) AS `units_sold`, MEASURE(`revenue`) AS `revenue`\nFROM semantic.product_perf_metrics\nGROUP BY ALL\nORDER BY category",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "category": "STRING",
+            "products": "LONG",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 6,
+          "target": 6
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "category"
+          ],
+          "matched_rows": 6,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:47+00:00"
+}

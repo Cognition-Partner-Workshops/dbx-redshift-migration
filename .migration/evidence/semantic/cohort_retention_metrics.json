@@ -1,0 +1,62 @@
+{
+  "unit": "semantic.cohort_retention_metrics",
+  "legacy_unit": "cohort_retention",
+  "definition": "databricks/semantic/customer/cohort_retention.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:54+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.cohort_retention_metrics",
+      "golden": "golden/cohort_retention/report.csv",
+      "target": "SELECT `cohort_month`, `month_offset`, MEASURE(`cohort_size`) AS `cohort_size`, MEASURE(`active_buyers`) AS `active_buyers`, MEASURE(`retention_pct`) AS `retention_pct`\nFROM semantic.cohort_retention_metrics\nGROUP BY ALL\nORDER BY cohort_month, month_offset",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "cohort_month": "DATE",
+            "month_offset": "INT",
+            "cohort_size": "LONG",
+            "active_buyers": "LONG",
+            "retention_pct": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 65,
+          "target": 65
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "cohort_month",
+            "month_offset"
+          ],
+          "matched_rows": 65,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:56+00:00"
+}

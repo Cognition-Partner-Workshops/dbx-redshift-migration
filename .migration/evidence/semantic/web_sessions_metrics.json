@@ -1,0 +1,60 @@
+{
+  "unit": "semantic.web_sessions_metrics",
+  "legacy_unit": "sessionization",
+  "definition": "databricks/semantic/marketing/web_sessions.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:58+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.web_sessions_metrics",
+      "golden": "golden/sessionization/report.csv",
+      "target": "SELECT `customer_id`, MEASURE(`sessions`) AS `sessions`, MEASURE(`events`) AS `events`, MEASURE(`checkout_sessions`) AS `checkout_sessions`\nFROM semantic.web_sessions_metrics\nGROUP BY ALL\nORDER BY customer_id",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "customer_id": "LONG",
+            "sessions": "LONG",
+            "events": "LONG",
+            "checkout_sessions": "LONG"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 1500,
+          "target": 1500
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "customer_id"
+          ],
+          "matched_rows": 1500,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:59+00:00"
+}
