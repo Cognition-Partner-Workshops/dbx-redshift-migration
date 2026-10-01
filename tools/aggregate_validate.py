@@ -32,6 +32,8 @@ import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+from validation.dbsql import DbSql
+
 MANIFEST = ROOT / ".migration" / "units.yaml"
 NULL_TOKEN = "\\N"
 NUMERIC = {"int", "decimal"}
@@ -130,8 +132,6 @@ def offline(manifest):
 
 
 def live(manifest):
-    from validation.dbsql import DbSql
-
     db = DbSql()
     failed = []
     checked = 0
