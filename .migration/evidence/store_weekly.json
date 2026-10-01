@@ -1,19 +1,19 @@
 {
-  "unit": "daily_revenue",
+  "unit": "store_weekly",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:01+00:00",
+  "started_at": "2026-10-01T02:50:32+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/daily_revenue/etl.sql"
+    "file": "databricks/units/store_weekly/etl.sql"
   },
   "outputs": [
     {
-      "output": "daily_revenue",
-      "golden": "golden/daily_revenue/daily_revenue.csv",
-      "target": "gold.daily_revenue",
+      "output": "store_weekly",
+      "golden": "golden/store_weekly/store_weekly.csv",
+      "target": "gold.store_weekly",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,8 +23,10 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "order_date": "DATE",
-            "sales_channel": "STRING",
+            "store_id": "INT",
+            "week_start": "DATE",
+            "week_end": "DATE",
+            "week_number": "LONG",
             "order_count": "LONG",
             "revenue": "DECIMAL"
           }
@@ -32,17 +34,17 @@
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 1460,
-          "target": 1460
+          "golden": 2120,
+          "target": 2120
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "order_date",
-            "sales_channel"
+            "store_id",
+            "week_start"
           ],
-          "matched_rows": 1460,
+          "matched_rows": 2120,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -56,8 +58,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/daily_revenue/report.csv",
-      "target": "databricks/units/daily_revenue/report.sql",
+      "golden": "golden/store_weekly/report.csv",
+      "target": "databricks/units/store_weekly/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -67,8 +69,9 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "order_month": "DATE",
-            "sales_channel": "STRING",
+            "store_id": "INT",
+            "region": "STRING",
+            "active_weeks": "LONG",
             "order_count": "LONG",
             "revenue": "DECIMAL"
           }
@@ -76,17 +79,16 @@
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 48,
-          "target": 48
+          "golden": 40,
+          "target": 40
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "order_month",
-            "sales_channel"
+            "store_id"
           ],
-          "matched_rows": 48,
+          "matched_rows": 40,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -100,5 +102,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:07+00:00"
+  "finished_at": "2026-10-01T02:50:38+00:00"
 }

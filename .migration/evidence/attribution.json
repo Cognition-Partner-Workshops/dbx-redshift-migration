@@ -1,19 +1,19 @@
 {
-  "unit": "daily_revenue",
+  "unit": "attribution",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:01+00:00",
+  "started_at": "2026-10-01T02:51:25+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/daily_revenue/etl.sql"
+    "file": "databricks/units/attribution/etl.sql"
   },
   "outputs": [
     {
-      "output": "daily_revenue",
-      "golden": "golden/daily_revenue/daily_revenue.csv",
-      "target": "gold.daily_revenue",
+      "output": "attribution",
+      "golden": "golden/attribution/attribution.csv",
+      "target": "gold.attribution",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,26 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "order_date": "DATE",
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "campaign_id": "STRING",
+            "touch_channel": "STRING",
+            "touches": "LONG",
+            "customers_reached": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 1460,
-          "target": 1460
+          "golden": 100,
+          "target": 100
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "order_date",
-            "sales_channel"
+            "campaign_id",
+            "touch_channel"
           ],
-          "matched_rows": 1460,
+          "matched_rows": 100,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -56,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/daily_revenue/report.csv",
-      "target": "databricks/units/daily_revenue/report.sql",
+      "golden": "golden/attribution/report.csv",
+      "target": "databricks/units/attribution/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -67,26 +67,24 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "order_month": "DATE",
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "campaign_id": "STRING",
+            "touches": "LONG",
+            "customers_reached": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 48,
-          "target": 48
+          "golden": 20,
+          "target": 20
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "order_month",
-            "sales_channel"
+            "campaign_id"
           ],
-          "matched_rows": 48,
+          "matched_rows": 20,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -100,5 +98,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:07+00:00"
+  "finished_at": "2026-10-01T02:51:29+00:00"
 }

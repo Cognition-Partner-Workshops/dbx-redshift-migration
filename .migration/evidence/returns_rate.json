@@ -1,19 +1,19 @@
 {
-  "unit": "daily_revenue",
+  "unit": "returns_rate",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:01+00:00",
+  "started_at": "2026-10-01T02:51:20+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/daily_revenue/etl.sql"
+    "file": "databricks/units/returns_rate/etl.sql"
   },
   "outputs": [
     {
-      "output": "daily_revenue",
-      "golden": "golden/daily_revenue/daily_revenue.csv",
-      "target": "gold.daily_revenue",
+      "output": "returns_rate",
+      "golden": "golden/returns_rate/returns_rate.csv",
+      "target": "gold.returns_rate",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,26 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "order_date": "DATE",
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "category": "STRING",
+            "sold_qty": "LONG",
+            "returned_qty": "LONG",
+            "return_rate_int": "LONG",
+            "return_pct": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 1460,
-          "target": 1460
+          "golden": 6,
+          "target": 6
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "order_date",
-            "sales_channel"
+            "category"
           ],
-          "matched_rows": 1460,
+          "matched_rows": 6,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -56,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/daily_revenue/report.csv",
-      "target": "databricks/units/daily_revenue/report.sql",
+      "golden": "golden/returns_rate/report.csv",
+      "target": "databricks/units/returns_rate/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -67,26 +67,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "order_month": "DATE",
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "category": "STRING",
+            "sold_qty": "LONG",
+            "returned_qty": "LONG",
+            "return_rate_int": "LONG",
+            "return_pct": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 48,
-          "target": 48
+          "golden": 6,
+          "target": 6
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "order_month",
-            "sales_channel"
+            "category"
           ],
-          "matched_rows": 48,
+          "matched_rows": 6,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -100,5 +100,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:07+00:00"
+  "finished_at": "2026-10-01T02:51:24+00:00"
 }
