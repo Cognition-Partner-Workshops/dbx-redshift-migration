@@ -12,7 +12,7 @@ make validate UNIT=<name>
 
 `validation/validate_unit.py` reads `.migration/units.yaml`, runs the unit's
 `databricks/units/<name>/etl.sql` on the dev catalog (`--skip-build` to skip),
-fetches each declared output (a `mart.*` table or the converted `report.sql`),
+fetches each declared output (a `gold.*` table or the converted `report.sql`),
 and compares it row-by-row on keys against `golden/<unit>/<output>.csv` using
 `validation/tolerances.yaml`. Evidence lands in
 `.migration/evidence/<name>.json`; exit code is non-zero on FAIL.

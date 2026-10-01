@@ -1,11 +1,11 @@
 """Idempotent dev-catalog setup for migration runs (Databricks SDK).
 
     python tools/databricks_setup.py            # create catalog/schemas/volume + seed upload
-    python tools/databricks_setup.py --reset    # drop + recreate core and mart only
+    python tools/databricks_setup.py --reset    # drop all schemas, then run the full setup
 
 Creates catalog $MIG_CATALOG (default mig_redshift_dev) with the demo tags,
-schemas landing/core/mart, managed volume landing.raw, and uploads
-data/seed/csv/*.csv to /Volumes/<catalog>/landing/raw/.
+medallion schemas bronze/silver/gold, managed volume bronze.raw, and uploads
+data/seed/csv/*.csv to /Volumes/<catalog>/bronze/raw/.
 
 Auth: standard DATABRICKS_HOST + DATABRICKS_TOKEN or DATABRICKS_CONFIG_PROFILE.
 Warehouse: DATABRICKS_WAREHOUSE_ID. Never hardcodes host/warehouse/token.
@@ -22,6 +22,11 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 SEED_DIR = ROOT / "data" / "seed" / "csv"
 DEFAULT_CATALOG = "mig_redshift_dev"
 TAGS = {"demo_type": "redshift", "source_repo": "dbx-redshift-migration"}
+SCHEMA_COMMENTS = {
+    "bronze": "Raw seed data loaded as-is",
+    "silver": "Cleaned, typed tables mirroring the Redshift core layer",
+    "gold": "Business marts migrated from Redshift",
+}
 _pendingStates = {StatementState.PENDING, StatementState.RUNNING}
 
 
@@ -54,40 +59,45 @@ def runSql(w, sql):
         raise RuntimeError(f"Databricks SQL failed: {error}\n{sql[:400]}")
 
 
+def createSchemas(w, catalog):
+    for schema, comment in SCHEMA_COMMENTS.items():
+        runSql(w, f"CREATE SCHEMA IF NOT EXISTS {catalog}.{schema} "
+                  f"COMMENT '{comment}'")
+    runSql(w, f"CREATE VOLUME IF NOT EXISTS {catalog}.bronze.raw")
+
+
+def uploadSeed(w, catalog):
+    volumePath = f"/Volumes/{catalog}/bronze/raw"
+    for csvPath in sorted(SEED_DIR.glob("*.csv")):
+        target = f"{volumePath}/{csvPath.name}"
+        print(f"upload {csvPath.name} -> {target}")
+        with open(csvPath, "rb") as f:
+            w.files.upload(target, f, overwrite=True)
+
+
 def setup(reset=False):
     w = WorkspaceClient()
     catalog = catalogName()
 
     if reset:
-        runSql(w, f"DROP SCHEMA IF EXISTS {catalog}.core CASCADE")
-        runSql(w, f"DROP SCHEMA IF EXISTS {catalog}.mart CASCADE")
-        runSql(w, f"CREATE SCHEMA IF NOT EXISTS {catalog}.core")
-        runSql(w, f"CREATE SCHEMA IF NOT EXISTS {catalog}.mart")
-        print(f"reset {catalog}.core and {catalog}.mart")
-        return
+        for schema in ("gold", "silver", "bronze"):
+            runSql(w, f"DROP SCHEMA IF EXISTS {catalog}.{schema} CASCADE")
+        print(f"dropped {catalog}.gold, .silver, .bronze — running full setup")
 
     tagSql = " ".join(f"'{k}' = '{v}'," for k, v in TAGS.items()).rstrip(",")
     runSql(w, f"CREATE CATALOG IF NOT EXISTS {catalog} "
               f"COMMENT 'Redshift migration demo dev catalog'")
     runSql(w, f"ALTER CATALOG {catalog} SET TAGS ({tagSql})")
 
-    for schema in ("landing", "core", "mart"):
-        runSql(w, f"CREATE SCHEMA IF NOT EXISTS {catalog}.{schema}")
-    runSql(w, f"CREATE VOLUME IF NOT EXISTS {catalog}.landing.raw")
-
-    volumePath = f"/Volumes/{catalog}/landing/raw"
-    for csvPath in sorted(SEED_DIR.glob("*.csv")):
-        target = f"{volumePath}/{csvPath.name}"
-        print(f"upload {csvPath.name} -> {target}")
-        with open(csvPath, "rb") as f:
-            w.files.upload(target, f, overwrite=True)
+    createSchemas(w, catalog)
+    uploadSeed(w, catalog)
     print(f"catalog {catalog} ready")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reset", action="store_true",
-                        help="drop and recreate core and mart only")
+                        help="drop gold/silver/bronze, then run the full setup")
     args = parser.parse_args()
     setup(reset=args.reset)
 

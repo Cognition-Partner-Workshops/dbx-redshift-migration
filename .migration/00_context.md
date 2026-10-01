@@ -4,11 +4,14 @@
 
 - Source: Amazon Redshift Serverless, database `mig_redshift_src`, schemas
   `core` (10 seeded tables) and `mart` (18 unit marts + `exec_summary`).
-- Target dev catalog: `mig_redshift_dev` (env `MIG_CATALOG`), schemas
-  `landing` (managed volume `raw` = historical extract), `core`, `mart`.
+- Target dev catalog: `mig_redshift_dev` (env `MIG_CATALOG`), medallion
+  schemas `bronze` (managed volume `raw` = historical extract), `silver`,
+  `gold`. Mapping: Redshift `core.x` → `silver.x`, `mart.x` → `gold.x`;
+  `bronze` holds the raw seed CSVs loaded as-is and is written only by
+  `foundation`.
 - Target prod catalog: `mig_redshift`, deployed only from merged PRs
   (DAB target `prod`).
-- Converted SQL references unqualified `core.x` / `mart.x`; the validation
+- Converted SQL references unqualified `silver.x` / `gold.x`; the validation
   harness sets the catalog via the Statement Execution API `catalog` field.
 
 ## Recon mode: golden snapshot
@@ -16,7 +19,9 @@
 Each unit's expected outputs were captured once from Redshift into `golden/`
 (CSV + `.meta.json` with column families, row count, sha256). Validation on a
 migration VM compares the Databricks result to those files — there is no live
-federation into Redshift.
+federation into Redshift. The orchestrator may run read-only discovery
+queries (SELECT / information_schema / svv_*) against `mig_redshift_src`, but
+those queries are never the validation oracle.
 
 Why: child sessions run in parallel on their own VMs; a live Redshift
 dependency would make validation non-hermetic, couple every session to shared

@@ -16,7 +16,12 @@ These rules apply to every Devin session working in this repository.
   only.
 - Never merge to `main`. Child PRs target `migration-run-N`; the orchestrator
   owns the run branch. Devin does not approve or merge its own PRs.
-- Never run `tools/legacy_redshift.py` — Redshift is the operator-only golden
-  oracle, already captured. The migration VMs never touch Redshift.
+- Never run `tools/legacy_redshift.py` (operator-only golden capture).
+  Redshift `mig_redshift_src` is read-only: the orchestrator may run SELECT /
+  catalog queries for discovery; no session writes to it, and validation
+  always compares to `golden/`, never live Redshift.
+- Converted SQL reads `silver.*` and writes `gold.*` (Redshift `core.x` →
+  `silver.x`, `mart.x` → `gold.x`); `bronze.*` is written only by
+  `foundation`.
 - All logic must be deterministic: no `GETDATE()`/`CURRENT_DATE`/`SYSDATE`/
   `RANDOM()` in outputs; "as of" is the literal `2025-12-31`.

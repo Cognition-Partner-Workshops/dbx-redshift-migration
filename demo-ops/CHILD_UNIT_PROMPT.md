@@ -9,7 +9,7 @@ You are a child migration session owning exactly one unit: `<name>`.
    start from it; otherwise hand-convert
    `legacy/redshift/units/<name>/etl.sql` and `report.sql`.
 3. Write only `databricks/units/<name>/etl.sql` and `report.sql` — unqualified
-   `core.x`/`mart.x` references; the harness sets the catalog.
+   `silver.x`/`gold.x` references; the harness sets the catalog.
 4. Set `DATABRICKS_HOST`, `DATABRICKS_TOKEN`, `DATABRICKS_WAREHOUSE_ID` (and
    `MIG_CATALOG` if not the default `mig_redshift_dev`), then run
    `make validate UNIT=<name>` until PASS — max 3 full attempts; then stop and

@@ -16,8 +16,9 @@ Reusable checklist for one migration demo run.
       `ORCHESTRATOR_PROMPT.md`).
 - [ ] `make db-setup` — dev catalog `mig_redshift_dev`, schemas, volume, seed upload.
 - [ ] Lakebridge analyze + per-unit transpile; drafts committed to run branch.
-- [ ] Wave 0: orchestrator migrates `foundation`, loads `core.*` from
-      `/Volumes/<catalog>/landing/raw`, validates.
+- [ ] Wave 0: `foundation` (own session via `demo-ops/FOUNDATION_PROMPT.md`,
+      or orchestrator): bronze from `/Volumes/<catalog>/bronze/raw`, then
+      `silver.*`, validates.
 - [ ] Wave 1a: 5 parallel child sessions (one unit each).
 - [ ] Wave 1b: 13 parallel child sessions.
 - [ ] Wave 2: orchestration (`exec_summary` + Lakeflow job from

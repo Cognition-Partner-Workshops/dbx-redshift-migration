@@ -70,7 +70,7 @@
     },
     {
       "title": "Databricks Environment & Reconciliation Tooling",
-      "purpose": "Factually document databricks/databricks.yml (bundle, catalogs, variables), tools/databricks_setup.py (catalog, schemas, landing volume and seed upload), the validation/ package (running SQL on a SQL warehouse, statement splitting, comparing results against golden/ with tolerances.yaml) and the .migration/units.yaml manifest with tools/check_manifest.py.",
+      "purpose": "Factually document databricks/databricks.yml (bundle, catalogs, variables), tools/databricks_setup.py (catalog, bronze/silver/gold schemas and the bronze raw volume, seed upload), the validation/ package (running SQL on a SQL warehouse, statement splitting, comparing results against golden/ with tolerances.yaml) and the .migration/units.yaml manifest with tools/check_manifest.py.",
       "parent": null
     }
   ]

@@ -14,7 +14,7 @@ from `migration-run-N`.
    start from it; otherwise hand-convert `legacy/redshift/units/<unit>/etl.sql`
    and `report.sql`.
 3. Write only `databricks/units/<name>/etl.sql` and `report.sql`. SQL references
-   unqualified `core.x` / `mart.x`; the harness sets the catalog.
+   unqualified `silver.x` / `gold.x`; the harness sets the catalog.
 4. Run `make validate UNIT=<name>` until it reports PASS — max 3 full attempts,
    then stop and report.
 5. Never edit `legacy/`, `golden/`, `data/seed/`, `validation/` or

@@ -45,9 +45,11 @@ hypothesis for the demo narrative, never a fact; actuals are recorded in
   `mig_redshift` (accepted/prod, deployed only from merged PRs via the DAB
   `prod` target). Both tagged `demo_type=redshift`,
   `source_repo=dbx-redshift-migration`.
-- Schemas inside each catalog: `landing` (managed volume `raw` holding the
-  seed CSVs as the "historical extract"), `core`, `mart`. Converted SQL
-  references unqualified `core.x` / `mart.x`; the harness sets the catalog.
+- Medallion schemas inside each catalog: `bronze` (managed volume `raw`
+  holding the seed CSVs as the "historical extract", raw Delta tables loaded
+  as-is), `silver` (typed tables mirroring the Redshift core layer), `gold`
+  (unit marts). Converted SQL references unqualified `silver.x` / `gold.x`;
+  the harness sets the catalog.
 - Goldens stay in git (`golden/`): validation compares on the VM — no golden
   tables are created in Databricks.
 - The DAB `warehouse_id` variable has no default: pass
@@ -59,8 +61,9 @@ hypothesis for the demo narrative, never a fact; actuals are recorded in
 1. An orchestrator session runs Lakebridge analyze and per-unit transpile
    (commands in `demo-ops/ORCHESTRATOR_PROMPT.md`), commits the drafts to
    `migration-run-N`, and runs
-   wave 0 (`foundation`: convert DDL, load `core.*` from
-   `/Volumes/<catalog>/landing/raw`) itself.
+   wave 0 (`foundation`: bronze from `/Volumes/<catalog>/bronze/raw`, then
+   typed `silver.*`). A foundation can alternatively be pre-built by its own
+   session using `demo-ops/FOUNDATION_PROMPT.md` before the orchestrator runs.
 2. Waves 1a (5 units) and 1b (13 units) fan out to parallel child sessions,
    one unit each: start from the Lakebridge draft if present, write only
    `databricks/units/<unit>/{etl,report}.sql`, run `make validate UNIT=<unit>`
@@ -108,7 +111,7 @@ See `.env.example` for placeholders.
 | --- | --- |
 | `make check` | `ruff check .` + `pytest` + `python tools/check_manifest.py` |
 | `make seed` | regenerate `data/seed/csv/` deterministically |
-| `make db-setup` / `make db-reset` | create (or reset core/mart) the dev catalog via `tools/databricks_setup.py` |
+| `make db-setup` / `make db-reset` | create (or fully reset) the dev catalog via `tools/databricks_setup.py` |
 | `make validate UNIT=x` | build the unit's converted SQL on Databricks and compare all outputs to goldens |
 | `make validate-all` | validate every unit that has converted `etl.sql` |
 | `make legacy-all` | one-time Redshift setup + build + golden capture (operator only) |
