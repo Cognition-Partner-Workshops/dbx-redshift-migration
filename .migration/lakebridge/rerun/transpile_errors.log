@@ -1,0 +1,1 @@
+TranspileError(code=None, kind=INTERNAL, severity=WARNING, path='~/ws1_lakebridge/staging/units__finance_export__export.sql', message='REDSHIFT: Databricks SQL has no equivalent to the UNLOAD command, and it cannot be translated')

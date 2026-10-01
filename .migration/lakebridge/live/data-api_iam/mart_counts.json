@@ -1,0 +1,8 @@
+{
+  "step": "mart_counts",
+  "status": "ERROR",
+  "error": "ERROR: permission denied for schema mart",
+  "columns": [],
+  "row_count": 0,
+  "rows": []
+}

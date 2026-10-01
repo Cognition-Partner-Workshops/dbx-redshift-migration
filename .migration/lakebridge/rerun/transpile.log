@@ -1,0 +1,48 @@
+[90m01:56:12[0m [1m[32m    INFO[0m [1m[databricks.sdk] loading DEFAULT profile from ~/.databrickscfg: host, auth_type, client_id, audience[0m
+[90m01:56:16[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__inventory_snapshot__etl.sql (errors: 0)[0m
+[90m01:56:16[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/00_foundation__03_udfs.sql (errors: 0)[0m
+[90m01:56:16[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__product_perf__report.sql (errors: 0)[0m
+[90m01:56:17[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__payment_mix__etl.sql (errors: 0)[0m
+[90m01:56:17[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__store_weekly__etl.sql (errors: 0)[0m
+[90m01:56:17[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__shipping_sla__etl.sql (errors: 0)[0m
+[90m01:56:17[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__finance_export__export.sql (errors: 1)[0m
+[90m01:56:17[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__attribution__report.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/00_foundation__02_core_tables.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/00_foundation__01_schemas.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__promo_lift__etl.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__churn_flags__etl.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__finance_export__etl.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__finance_export__report.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__daily_revenue__etl.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__payment_mix__report.sql (errors: 0)[0m
+[90m01:56:19[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__category_mix__report.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__geo_rollup__etl.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__rfm_segments__report.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__rfm_segments__etl.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__inventory_snapshot__report.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__basket_affinity__report.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__churn_flags__report.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/99_orchestration__exec_summary__report.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__store_weekly__report.sql (errors: 0)[0m
+[90m01:56:20[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__promo_lift__report.sql (errors: 0)[0m
+[90m01:56:21[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/99_orchestration__exec_summary__etl.sql (errors: 0)[0m
+[90m01:56:21[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__customer_ltv__etl.sql (errors: 0)[0m
+[90m01:56:21[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__sessionization__report.sql (errors: 0)[0m
+[90m01:56:21[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__returns_rate__etl.sql (errors: 0)[0m
+[90m01:56:21[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__customer_ltv__report.sql (errors: 0)[0m
+[90m01:56:21[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__cohort_retention__report.sql (errors: 0)[0m
+[90m01:56:21[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__returns_rate__report.sql (errors: 0)[0m
+[90m01:56:22[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__cohort_retention__etl.sql (errors: 0)[0m
+[90m01:56:22[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__daily_revenue__report.sql (errors: 0)[0m
+[90m01:56:22[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__sessionization__etl.sql (errors: 0)[0m
+[90m01:56:22[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__basket_affinity__etl.sql (errors: 0)[0m
+[90m01:56:22[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__geo_rollup__report.sql (errors: 0)[0m
+[90m01:56:22[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__category_mix__etl.sql (errors: 0)[0m
+[90m01:56:23[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__attribution__etl.sql (errors: 0)[0m
+[90m01:56:23[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__product_perf__etl.sql (errors: 0)[0m
+[90m01:56:23[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Processed file: ~/ws1_lakebridge/staging/units__shipping_sla__report.sql (errors: 0)[0m
+[90m01:56:23[0m [1m[32m    INFO[0m [1m[d.l.l.transpiler.execute] Done transpiling.[0m
+[90m01:56:23[0m [1m[33m WARNING[0m [1m[d.labs.lakebridge] ~/ws1_lakebridge/staging/units__finance_export__export.sql: 1  found[0m
+total_files_processed  total_queries_processed  analysis_error_count  parsing_error_count  validation_error_count  generation_error_count  error_log_file
+43                     42                       0                     0                    0                       0                       .migration/lakebridge/rerun/transpile_errors.log
+exit=0

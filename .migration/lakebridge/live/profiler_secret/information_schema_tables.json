@@ -1,0 +1,158 @@
+{
+  "step": "information_schema_tables",
+  "status": "COMPLETE",
+  "error": null,
+  "columns": [
+    "table_schema",
+    "table_name",
+    "table_type"
+  ],
+  "row_count": 29,
+  "rows": [
+    [
+      "core",
+      "campaign_touches",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "customers",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "order_items",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "orders",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "payments",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "products",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "returns",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "shipments",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "stores",
+      "BASE TABLE"
+    ],
+    [
+      "core",
+      "web_events",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "attribution",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "basket_affinity",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "category_mix",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "churn_flags",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "cohort_retention",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "customer_ltv",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "daily_revenue",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "exec_summary",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "finance_monthly",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "geo_rollup",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "inventory_snapshot",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "payment_mix",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "product_perf",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "promo_lift",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "returns_rate",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "rfm_segments",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "shipping_sla",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "store_weekly",
+      "BASE TABLE"
+    ],
+    [
+      "mart",
+      "web_sessions",
+      "BASE TABLE"
+    ]
+  ]
+}

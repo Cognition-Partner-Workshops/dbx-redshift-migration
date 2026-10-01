@@ -1,0 +1,513 @@
+{
+  "staging_dir": "~/ws1_lakebridge/staging",
+  "files": [
+    {
+      "staged_name": "00_foundation__01_schemas.sql",
+      "source_path": "legacy/redshift/00_foundation/01_schemas.sql",
+      "unit": "foundation",
+      "wave": "0",
+      "sha256": "193f84793a54a361976d1a96759ceb577e4e9fcf44b0cd4fa30d3ac669aa05ad",
+      "lines": 4,
+      "statements": 2,
+      "constructs": []
+    },
+    {
+      "staged_name": "00_foundation__02_core_tables.sql",
+      "source_path": "legacy/redshift/00_foundation/02_core_tables.sql",
+      "unit": "foundation",
+      "wave": "0",
+      "sha256": "68ddc1918d127e6bcac4c3fb6de7c82ff73e2578ead4c36218e4669669bd5394",
+      "lines": 107,
+      "statements": 10,
+      "constructs": [
+        "DISTKEY/SORTKEY",
+        "ENCODE"
+      ]
+    },
+    {
+      "staged_name": "00_foundation__03_udfs.sql",
+      "source_path": "legacy/redshift/00_foundation/03_udfs.sql",
+      "unit": "foundation",
+      "wave": "0",
+      "sha256": "5aa33e6c8bd8e0a774f38c5be11b9c84fd634cad41b41479c76d5d31580f2a35",
+      "lines": 17,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "UDF f_clean_phone",
+        "UDF f_fiscal_qtr"
+      ]
+    },
+    {
+      "staged_name": "99_orchestration__exec_summary__etl.sql",
+      "source_path": "legacy/redshift/99_orchestration/exec_summary/etl.sql",
+      "unit": "orchestration",
+      "wave": "2",
+      "sha256": "8e591b9e5f51aa929df9fcd53f6eba69567aec268fac667205ee287f3559a669",
+      "lines": 18,
+      "statements": 2,
+      "constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "staged_name": "99_orchestration__exec_summary__report.sql",
+      "source_path": "legacy/redshift/99_orchestration/exec_summary/report.sql",
+      "unit": "orchestration",
+      "wave": "2",
+      "sha256": "503d760bd8761382c421363679e4a8ba985abd1d76b0c46bd8749bf3a9fcd9f3",
+      "lines": 5,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "99_orchestration__refresh_schedule.yaml",
+      "source_path": "legacy/redshift/99_orchestration/refresh_schedule.yaml",
+      "unit": "orchestration",
+      "wave": "2",
+      "sha256": "7fd4c71414c12c65eee58717a1e2192b6136481d15c82dcab3e9155811bf037d",
+      "lines": 39,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__attribution__etl.sql",
+      "source_path": "legacy/redshift/units/attribution/etl.sql",
+      "unit": "attribution",
+      "wave": "1b",
+      "sha256": "3edd3a9e0c8d28458138918c163f75c00604e88cfa5d01d079b5d11074307db4",
+      "lines": 10,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "SUPER/PartiQL nav"
+      ]
+    },
+    {
+      "staged_name": "units__attribution__report.sql",
+      "source_path": "legacy/redshift/units/attribution/report.sql",
+      "unit": "attribution",
+      "wave": "1b",
+      "sha256": "7015ba01d9467cbcd564e36938bfc2decb1c02b5c80564af1fa22aa9951748bd",
+      "lines": 7,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__basket_affinity__etl.sql",
+      "source_path": "legacy/redshift/units/basket_affinity/etl.sql",
+      "unit": "basket_affinity",
+      "wave": "1b",
+      "sha256": "e4feec01cd9fa91dcf6938f76d60caf3b9921dfabbc04c39a9bfd615f64a45b6",
+      "lines": 12,
+      "statements": 2,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__basket_affinity__report.sql",
+      "source_path": "legacy/redshift/units/basket_affinity/report.sql",
+      "unit": "basket_affinity",
+      "wave": "1b",
+      "sha256": "d0187b89a21014f5a8d0c3aa33893e46a5321951771c0cd3adc309814cd841d2",
+      "lines": 10,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__category_mix__etl.sql",
+      "source_path": "legacy/redshift/units/category_mix/etl.sql",
+      "unit": "category_mix",
+      "wave": "1b",
+      "sha256": "ecbc34208b3205846956d43dcccafe456f97092188eb642aac62457e3d9c8ae5",
+      "lines": 16,
+      "statements": 2,
+      "constructs": [
+        "RATIO_TO_REPORT"
+      ]
+    },
+    {
+      "staged_name": "units__category_mix__report.sql",
+      "source_path": "legacy/redshift/units/category_mix/report.sql",
+      "unit": "category_mix",
+      "wave": "1b",
+      "sha256": "b77f5f1a8278a86f7956b0bbd18661c5d80378a3efb5394e05657dcae20ffc4a",
+      "lines": 4,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__churn_flags__etl.sql",
+      "source_path": "legacy/redshift/units/churn_flags/etl.sql",
+      "unit": "churn_flags",
+      "wave": "1a",
+      "sha256": "c2264bd6253bc041adef3ba8c374bd6e352847e911041d223318c17241b4445d",
+      "lines": 53,
+      "statements": 4,
+      "constructs": [
+        ":: cast",
+        "CALL",
+        "CREATE PROCEDURE",
+        "DISTKEY/SORTKEY",
+        "FOR loop",
+        "PL/pgSQL",
+        "TEMP TABLE"
+      ]
+    },
+    {
+      "staged_name": "units__churn_flags__report.sql",
+      "source_path": "legacy/redshift/units/churn_flags/report.sql",
+      "unit": "churn_flags",
+      "wave": "1a",
+      "sha256": "6cce3da438bbf059134d30a260f792ebaba4718d97bd3245634e37672bf8b4b6",
+      "lines": 7,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__cohort_retention__etl.sql",
+      "source_path": "legacy/redshift/units/cohort_retention/etl.sql",
+      "unit": "cohort_retention",
+      "wave": "1b",
+      "sha256": "479028c33d38d106e3651451f5b6c14e9397afa941b77ffd6de7f9bba529806a",
+      "lines": 40,
+      "statements": 9,
+      "constructs": [
+        ":: cast",
+        "DATEDIFF",
+        "DISTKEY/SORTKEY",
+        "TEMP TABLE"
+      ]
+    },
+    {
+      "staged_name": "units__cohort_retention__report.sql",
+      "source_path": "legacy/redshift/units/cohort_retention/report.sql",
+      "unit": "cohort_retention",
+      "wave": "1b",
+      "sha256": "d2699a301ce6a6897ccc0ac4ab8978501459e471b031ac3b5a6c5f0c059c6ab8",
+      "lines": 8,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__customer_ltv__etl.sql",
+      "source_path": "legacy/redshift/units/customer_ltv/etl.sql",
+      "unit": "customer_ltv",
+      "wave": "1a",
+      "sha256": "a16e001290eb87dc1114dcf36f9e02088e1ddb4e49ded6c106da162c6964f518",
+      "lines": 19,
+      "statements": 2,
+      "constructs": [
+        "DISTKEY/SORTKEY",
+        "UDF f_clean_phone"
+      ]
+    },
+    {
+      "staged_name": "units__customer_ltv__report.sql",
+      "source_path": "legacy/redshift/units/customer_ltv/report.sql",
+      "unit": "customer_ltv",
+      "wave": "1a",
+      "sha256": "4d248888d49a9896f4cc4855d135cc4285c809ea00ee170fd4105e4e9d018ed2",
+      "lines": 9,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__daily_revenue__etl.sql",
+      "source_path": "legacy/redshift/units/daily_revenue/etl.sql",
+      "unit": "daily_revenue",
+      "wave": "1a",
+      "sha256": "aafbe9cd21c2d1b6f2ca6dc9c2f77425521b4590d2cff684f72e69a8c9d318fb",
+      "lines": 14,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "staged_name": "units__daily_revenue__report.sql",
+      "source_path": "legacy/redshift/units/daily_revenue/report.sql",
+      "unit": "daily_revenue",
+      "wave": "1a",
+      "sha256": "2693ba30d4bda714f21bf13377edc4f01746ee3e226fe2b52f068584806085db",
+      "lines": 8,
+      "statements": 1,
+      "constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "staged_name": "units__finance_export__etl.sql",
+      "source_path": "legacy/redshift/units/finance_export/etl.sql",
+      "unit": "finance_export",
+      "wave": "1b",
+      "sha256": "58ca7bd6934adbcc4f1346c7c6cb2bd2441d3269acadc6c21d97af9df3fc391a",
+      "lines": 16,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "UDF f_fiscal_qtr"
+      ]
+    },
+    {
+      "staged_name": "units__finance_export__export.sql",
+      "source_path": "legacy/redshift/units/finance_export/export.sql",
+      "unit": "finance_export",
+      "wave": "1b",
+      "sha256": "1005e292f35fafcf30f05c086163c4745feaea1e976c8de49d998c2764f634b8",
+      "lines": 8,
+      "statements": 1,
+      "constructs": [
+        "UNLOAD"
+      ]
+    },
+    {
+      "staged_name": "units__finance_export__report.sql",
+      "source_path": "legacy/redshift/units/finance_export/report.sql",
+      "unit": "finance_export",
+      "wave": "1b",
+      "sha256": "484efed45891a4e099d7d5d50c7a0d5fce4b337398b8b80da8f3333c0a84752b",
+      "lines": 7,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__geo_rollup__etl.sql",
+      "source_path": "legacy/redshift/units/geo_rollup/etl.sql",
+      "unit": "geo_rollup",
+      "wave": "1a",
+      "sha256": "cdbbc0cb2e16ecc37ab3294907faab7ec9ab178511b77f8395fd5aac3bea9ab6",
+      "lines": 18,
+      "statements": 2,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__geo_rollup__report.sql",
+      "source_path": "legacy/redshift/units/geo_rollup/report.sql",
+      "unit": "geo_rollup",
+      "wave": "1a",
+      "sha256": "ac0a6cb480c69757ad61f4c9955f366b7b4839f8400b0601084a7c226193c109",
+      "lines": 4,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__inventory_snapshot__etl.sql",
+      "source_path": "legacy/redshift/units/inventory_snapshot/etl.sql",
+      "unit": "inventory_snapshot",
+      "wave": "1b",
+      "sha256": "45f645a4d5c02ee84c1c6bc7fc41408f2f1249cf564ac9b574cf128e8b31395d",
+      "lines": 41,
+      "statements": 4,
+      "constructs": [
+        ":: cast",
+        "CALL",
+        "CREATE PROCEDURE",
+        "DELETE",
+        "DISTKEY/SORTKEY",
+        "PL/pgSQL",
+        "TEMP TABLE"
+      ]
+    },
+    {
+      "staged_name": "units__inventory_snapshot__report.sql",
+      "source_path": "legacy/redshift/units/inventory_snapshot/report.sql",
+      "unit": "inventory_snapshot",
+      "wave": "1b",
+      "sha256": "ba99820570e25749eb5b98ceff4702803daf2dbd23baa4f2247662898800fc2d",
+      "lines": 5,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__payment_mix__etl.sql",
+      "source_path": "legacy/redshift/units/payment_mix/etl.sql",
+      "unit": "payment_mix",
+      "wave": "1b",
+      "sha256": "cd2041d304e8640bb1fbd3e06ba283ba127f2c4d202aaf455258f47fe959cf94",
+      "lines": 17,
+      "statements": 2,
+      "constructs": [
+        "DECODE",
+        "NVL",
+        "NVL2"
+      ]
+    },
+    {
+      "staged_name": "units__payment_mix__report.sql",
+      "source_path": "legacy/redshift/units/payment_mix/report.sql",
+      "unit": "payment_mix",
+      "wave": "1b",
+      "sha256": "35a1b5ba109446454f58e73997b28efbebe56200b3223e38e376a30fdbf2b85d",
+      "lines": 7,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__product_perf__etl.sql",
+      "source_path": "legacy/redshift/units/product_perf/etl.sql",
+      "unit": "product_perf",
+      "wave": "1a",
+      "sha256": "1ed1a5409e2359aed6a11c97b554f213c9fc7b2002f42eaf04bd7788cb761a06",
+      "lines": 43,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "DISTKEY/SORTKEY",
+        "LISTAGG"
+      ]
+    },
+    {
+      "staged_name": "units__product_perf__report.sql",
+      "source_path": "legacy/redshift/units/product_perf/report.sql",
+      "unit": "product_perf",
+      "wave": "1a",
+      "sha256": "ee34baefbebe4a21b983df7705f57c95f2fed2394f3182f173ee4ca757d46815",
+      "lines": 8,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__promo_lift__etl.sql",
+      "source_path": "legacy/redshift/units/promo_lift/etl.sql",
+      "unit": "promo_lift",
+      "wave": "1b",
+      "sha256": "f93eec6fb755c95c5069704f2e6ef7703a6c0b63f48d10bdd55579079cfc1b80",
+      "lines": 18,
+      "statements": 2,
+      "constructs": [
+        "MEDIAN"
+      ]
+    },
+    {
+      "staged_name": "units__promo_lift__report.sql",
+      "source_path": "legacy/redshift/units/promo_lift/report.sql",
+      "unit": "promo_lift",
+      "wave": "1b",
+      "sha256": "da604b9ede060e6d8e5a7d969ecbd54d1273a45375264bee042556a8023c6b67",
+      "lines": 4,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__returns_rate__etl.sql",
+      "source_path": "legacy/redshift/units/returns_rate/etl.sql",
+      "unit": "returns_rate",
+      "wave": "1b",
+      "sha256": "b6bccd75e250811f0d0cdabe03c646e08368de7455b083a6ffdde788d1b79e46",
+      "lines": 15,
+      "statements": 2,
+      "constructs": [
+        ":: cast"
+      ]
+    },
+    {
+      "staged_name": "units__returns_rate__report.sql",
+      "source_path": "legacy/redshift/units/returns_rate/report.sql",
+      "unit": "returns_rate",
+      "wave": "1b",
+      "sha256": "39d3474a65feb3fceb3fd351522e09dfa75b888897ae0b194db8b58d5243d235",
+      "lines": 4,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__rfm_segments__etl.sql",
+      "source_path": "legacy/redshift/units/rfm_segments/etl.sql",
+      "unit": "rfm_segments",
+      "wave": "1b",
+      "sha256": "f45735bda11eec80c715b24d97772be21ac40ebd7ac99a8a352efb1b0f4c6c9f",
+      "lines": 37,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "DATEDIFF",
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "staged_name": "units__rfm_segments__report.sql",
+      "source_path": "legacy/redshift/units/rfm_segments/report.sql",
+      "unit": "rfm_segments",
+      "wave": "1b",
+      "sha256": "973880a67fd68a7f465f410771f971a1ca61324c9066404f424c3da3d090c4eb",
+      "lines": 8,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__sessionization__etl.sql",
+      "source_path": "legacy/redshift/units/sessionization/etl.sql",
+      "unit": "sessionization",
+      "wave": "1b",
+      "sha256": "f5766aca8358774c51d6db8a655a651cbd2293dbd3e2beb99907d2b16569b718",
+      "lines": 42,
+      "statements": 2,
+      "constructs": [
+        "DATEDIFF",
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "staged_name": "units__sessionization__report.sql",
+      "source_path": "legacy/redshift/units/sessionization/report.sql",
+      "unit": "sessionization",
+      "wave": "1b",
+      "sha256": "f2f5bfbf4291828bfb7ca2e04075242b47ee00d337adf1e26483d6ba462e5703",
+      "lines": 8,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__shipping_sla__etl.sql",
+      "source_path": "legacy/redshift/units/shipping_sla/etl.sql",
+      "unit": "shipping_sla",
+      "wave": "1b",
+      "sha256": "6a54699a1749607bfc1219d944772ccbfffa0111e2079d7fd2dff418490473d5",
+      "lines": 17,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "CONVERT_TIMEZONE",
+        "DATEDIFF"
+      ]
+    },
+    {
+      "staged_name": "units__shipping_sla__report.sql",
+      "source_path": "legacy/redshift/units/shipping_sla/report.sql",
+      "unit": "shipping_sla",
+      "wave": "1b",
+      "sha256": "3fe2b9c97460fb81c30354042bacf7b6ebc0042c4f8576bb78dfb1870f280b22",
+      "lines": 5,
+      "statements": 1,
+      "constructs": []
+    },
+    {
+      "staged_name": "units__store_weekly__etl.sql",
+      "source_path": "legacy/redshift/units/store_weekly/etl.sql",
+      "unit": "store_weekly",
+      "wave": "1b",
+      "sha256": "437fbe6a31b9a8d7d3717e8a97f31bead41f58dc16ba73619da84b6f8c38b019",
+      "lines": 17,
+      "statements": 2,
+      "constructs": [
+        ":: cast",
+        "DATEADD",
+        "DATEDIFF",
+        "DISTKEY/SORTKEY"
+      ]
+    },
+    {
+      "staged_name": "units__store_weekly__report.sql",
+      "source_path": "legacy/redshift/units/store_weekly/report.sql",
+      "unit": "store_weekly",
+      "wave": "1b",
+      "sha256": "fdd6e8a8d3c243662072bcfe4f4326a9c45320ace8fa6e2bbef79d16d6ac44cf",
+      "lines": 10,
+      "statements": 1,
+      "constructs": [
+        "DATEDIFF"
+      ]
+    }
+  ]
+}

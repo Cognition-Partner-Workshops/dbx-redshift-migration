@@ -1,0 +1,101 @@
+{
+  "unit": "category_mix",
+  "engine": "databricks_sql",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "8224a73b09302814c599f1876954e3a1df8680d6",
+  "started_at": "2026-10-01T03:06:22+00:00",
+  "build": {
+    "status": "SKIPPED"
+  },
+  "outputs": [
+    {
+      "output": "category_mix",
+      "golden": "golden/category_mix/category_mix.csv",
+      "target": "gold.category_mix",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "category": "STRING",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL",
+            "revenue_share": "DOUBLE"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 6,
+          "target": 6
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "category"
+          ],
+          "matched_rows": 6,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    },
+    {
+      "output": "report",
+      "golden": "golden/category_mix/report.csv",
+      "target": "databricks/units/category_mix/report.sql",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "category": "STRING",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL",
+            "revenue_share": "DOUBLE"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 6,
+          "target": 6
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "category"
+          ],
+          "matched_rows": 6,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T03:06:23+00:00"
+}

@@ -1,0 +1,176 @@
+$ databricks labs lakebridge analyze --source-directory ~/ws1_lakebridge/staging --report-file ~/repos/dbx-redshift-migration/.migration/lakebridge/rerun/analyze.xlsx --source-tech Redshift --generate-json true
+exit=0
+--- stdout ---
+Databricks Code Analyzer
+Copyright (c) 2026 Databricks. All rights reserved.
+Version 5.6.6 Build 20251204
+
+CodeAnalyzer [806]: 2026-10-01 01:56:03 Start time: 20261001_015603
+CodeAnalyzer [807]: 2026-10-01 01:56:03 OS Process ID: 6106
+ANLZ_CC [694]: 2026-10-01 01:56:03 PROGRESS:	Reading config file 
+ANLZ_CC [694]: 2026-10-01 01:56:03 PROGRESS:	Done reading config file 
+CodeAnalyzer [922]: 2026-10-01 01:56:03 Stats folder: ~/repos/dbx-redshift-migration/.migration/lakebridge/rerun
+CodeAnalyzer [967]: 2026-10-01 01:56:03 Applying job type filter: 
+CodeAnalyzer [1003]: 2026-10-01 01:56:03 Verbose Mode: 
+CodeAnalyzer [5165]: 2026-10-01 01:56:03 Traversing folder ~/ws1_lakebridge/staging
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__inventory_snapshot__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/00_foundation__03_udfs.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__product_perf__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__payment_mix__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__store_weekly__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__shipping_sla__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__finance_export__export.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__attribution__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/00_foundation__02_core_tables.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/00_foundation__01_schemas.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__promo_lift__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__churn_flags__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__finance_export__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__finance_export__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__daily_revenue__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__payment_mix__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__category_mix__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__geo_rollup__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__rfm_segments__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__rfm_segments__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__inventory_snapshot__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__basket_affinity__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__churn_flags__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/99_orchestration__exec_summary__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__store_weekly__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__promo_lift__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/99_orchestration__exec_summary__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__customer_ltv__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__sessionization__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__returns_rate__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__customer_ltv__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__cohort_retention__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__returns_rate__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__cohort_retention__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__daily_revenue__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__sessionization__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__basket_affinity__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/99_orchestration__refresh_schedule.yaml - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__geo_rollup__report.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__category_mix__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__attribution__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__product_perf__etl.sql - 20261001_015559
+CodeAnalyzer [5309]: 2026-10-01 01:56:03 File ~/ws1_lakebridge/staging/units__shipping_sla__report.sql - 20261001_015559
+CodeAnalyzer [1171]: 2026-10-01 01:56:03 Total files found: 43
+CodeAnalyzer [1183]: 2026-10-01 01:56:03 Total size of all files (28131) < limit of 10000000000000; processing files in a single run
+CodeAnalyzer [1195]: 2026-10-01 01:56:03 Files per thread: 43
+THREAD 1 [4697]: 2026-10-01 01:56:03 Started thread # 1 with file count 43
+~/ws1_lakebridge/staging/units__inventory_snapshot__etl.sql
+~/ws1_lakebridge/staging/00_foundation__03_udfs.sql
+~/ws1_lakebridge/staging/units__product_perf__report.sql
+~/ws1_lakebridge/staging/units__payment_mix__etl.sql
+~/ws1_lakebridge/staging/units__store_weekly__etl.sql
+~/ws1_lakebridge/staging/units__shipping_sla__etl.sql
+~/ws1_lakebridge/staging/units__finance_export__export.sql
+~/ws1_lakebridge/staging/units__attribution__report.sql
+~/ws1_lakebridge/staging/00_foundation__02_core_tables.sql
+~/ws1_lakebridge/staging/00_foundation__01_schemas.sql
+~/ws1_lakebridge/staging/units__promo_lift__etl.sql
+~/ws1_lakebridge/staging/units__churn_flags__etl.sql
+~/ws1_lakebridge/staging/units__finance_export__etl.sql
+~/ws1_lakebridge/staging/units__finance_export__report.sql
+~/ws1_lakebridge/staging/units__daily_revenue__etl.sql
+~/ws1_lakebridge/staging/units__payment_mix__report.sql
+~/ws1_lakebridge/staging/units__category_mix__report.sql
+~/ws1_lakebridge/staging/units__geo_rollup__etl.sql
+~/ws1_lakebridge/staging/units__rfm_segments__report.sql
+~/ws1_lakebridge/staging/units__rfm_segments__etl.sql
+~/ws1_lakebridge/staging/units__inventory_snapshot__report.sql
+~/ws1_lakebridge/staging/units__basket_affinity__report.sql
+~/ws1_lakebridge/staging/units__churn_flags__report.sql
+~/ws1_lakebridge/staging/99_orchestration__exec_summary__report.sql
+~/ws1_lakebridge/staging/units__store_weekly__report.sql
+~/ws1_lakebridge/staging/units__promo_lift__report.sql
+~/ws1_lakebridge/staging/99_orchestration__exec_summary__etl.sql
+~/ws1_lakebridge/staging/units__customer_ltv__etl.sql
+~/ws1_lakebridge/staging/units__sessionization__report.sql
+~/ws1_lakebridge/staging/units__returns_rate__etl.sql
+~/ws1_lakebridge/staging/units__customer_ltv__report.sql
+~/ws1_lakebridge/staging/units__cohort_retention__report.sql
+~/ws1_lakebridge/staging/units__returns_rate__report.sql
+~/ws1_lakebridge/staging/units__cohort_retention__etl.sql
+~/ws1_lakebridge/staging/units__daily_revenue__report.sql
+~/ws1_lakebridge/staging/units__sessionization__etl.sql
+~/ws1_lakebridge/staging/units__basket_affinity__etl.sql
+~/ws1_lakebridge/staging/99_orchestration__refresh_schedule.yaml
+~/ws1_lakebridge/staging/units__geo_rollup__report.sql
+~/ws1_lakebridge/staging/units__category_mix__etl.sql
+~/ws1_lakebridge/staging/units__attribution__etl.sql
+~/ws1_lakebridge/staging/units__product_perf__etl.sql
+~/ws1_lakebridge/staging/units__shipping_sla__report.sql
+THREAD 1 [4724]: 2026-10-01 01:56:03 Processing all files in a single pass
+ANLZ_CC [694]: 2026-10-01 01:56:03 PROGRESS:	Analyzing ~/ws1_lakebridge/staging/units__inventory_snapshot__etl.sql
+DBCatalog::SQLParser [593]: 2026-10-01 01:56:03 ********** PARSER VERBOSE FLAG:  **********
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__inventory_snapshot__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/00_foundation__03_udfs.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__product_perf__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__payment_mix__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__store_weekly__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__shipping_sla__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__finance_export__export.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__attribution__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:03 analyze_file: Analyzing file ~/ws1_lakebridge/staging/00_foundation__02_core_tables.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/00_foundation__01_schemas.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__promo_lift__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__churn_flags__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__finance_export__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__finance_export__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__daily_revenue__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__payment_mix__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__category_mix__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__geo_rollup__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__rfm_segments__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__rfm_segments__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__inventory_snapshot__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__basket_affinity__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__churn_flags__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/99_orchestration__exec_summary__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__store_weekly__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__promo_lift__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/99_orchestration__exec_summary__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__customer_ltv__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__sessionization__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__returns_rate__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__customer_ltv__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__cohort_retention__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__returns_rate__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__cohort_retention__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__daily_revenue__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__sessionization__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__basket_affinity__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/99_orchestration__refresh_schedule.yaml
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__geo_rollup__report.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__category_mix__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__attribution__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__product_perf__etl.sql
+DBCatalog::SQLParser [1276]: 2026-10-01 01:56:04 analyze_file: Analyzing file ~/ws1_lakebridge/staging/units__shipping_sla__report.sql
+THREAD 1 [4974]: 2026-10-01 01:56:04 Exiting thread # 1
+ANLZ_CC [694]: 2026-10-01 01:56:04 PROGRESS:	Thread 1 - done analyzing data
+CodeAnalyzer [1244]: 2026-10-01 01:56:04 
+
+******************* Analyzed all files, consolidating data. -t option is SQL *******************
+
+
+ANLZ_CC [694]: 2026-10-01 01:56:04 PROGRESS:	Consolidating data
+CodeAnalyzer [6264]: 2026-10-01 01:56:04 Starting read_log_files. -t option is SQL. glob_pattern: .  opt I: . DEBUG_FLAG: 
+CodeAnalyzer [6277]: 2026-10-01 01:56:04 Traversing for log files: ~/repos/dbx-redshift-migration/.migration/lakebridge/rerun/*20261001_015603.tmp
+ANLZ_CC [694]: 2026-10-01 01:56:04 PROGRESS:	Reading meta file for SQL ~/repos/dbx-redshift-migration/.migration/lakebridge/rerun/analyze.xlsx.1.1.20261001_015603.tmp
+ANLZ_CC [694]: 2026-10-01 01:56:04 PROGRESS:	Creating stats file
+CodeAnalyzer [1392]: 2026-10-01 01:56:04 Creating stats file for SQL. embedded_sql_flag: 
+CodeAnalyzer [1456]: 2026-10-01 01:56:04 localtime sql(2026,10,1,1,56,3,2026,10,1,1,56,4)
+Analyzer::ModelBuilder [404]: 2026-10-01 01:56:04 Built object_lineage with 36 unique targets
+ANLZ_CC [694]: 2026-10-01 01:56:04 PROGRESS:	Done creating stats file
+CodeAnalyzer [1299]: 2026-10-01 01:56:04 Removing temp files...
+CodeAnalyzer [1309]: 2026-10-01 01:56:04 Analyzer run completed. for -t SQL, -r ~/repos/dbx-redshift-migration/.migration/lakebridge/rerun/analyze.xlsx
+ANLZ_CC [694]: 2026-10-01 01:56:04 PROGRESS:	Analyzer run completed.
+ANLZ_CC [702]: 2026-10-01 01:56:04 INFO:    	DONE!
+
+--- stderr ---
+[90m01:56:03[0m [1m[32m    INFO[0m [1m[databricks.sdk] loading DEFAULT profile from ~/.databrickscfg: host, auth_type, client_id, audience[0m
+[90m01:56:04[0m [1m[32m    INFO[0m [1m[d.l.bladespector.analyzer] Analyzer JSON output validated successfully against analyzer-sql-schema.json: ~/repos/dbx-redshift-migration/.migration/lakebridge/rerun/analyze.json[0m
+[90m01:56:04[0m [1m[32m    INFO[0m [1m[d.l.l.analyzer.lakebridge_analyzer] Analyzed Redshift files in ~/ws1_lakebridge/staging; report saved to: ~/repos/dbx-redshift-migration/.migration/lakebridge/rerun/analyze.xlsx[0m

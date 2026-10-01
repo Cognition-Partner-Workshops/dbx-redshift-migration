@@ -1,0 +1,277 @@
+# Lakeflow job converted from legacy/redshift/99_orchestration/refresh_schedule.yaml.
+#
+# DAG preserved from the legacy nightly job:
+#   load_core -> wave_1a (5 unit tasks) || wave_1b (13 unit tasks)
+#   -> exec_summary (after ALL 18 units)
+#   -> mart_views + finance_export (finance export kept after exec_summary;
+#      legacy depended only on wave_1b — the stricter edge also preserves order)
+#
+# The legacy `0 2 * * *` (minute hour dom month dow) is converted to the
+# Quartz format Databricks expects: `0 0 2 * * ?` — seconds field prepended
+# (0) and `?` ("no specific value") in day-of-week, required because
+# day-of-month is `*`. Same firing time: 02:00 UTC daily.
+resources:
+  jobs:
+    nightly_mart_refresh:
+      name: nightly_mart_refresh
+      max_concurrent_runs: 1
+      schedule:
+        quartz_cron_expression: "0 0 2 * * ?"
+        timezone_id: UTC
+        pause_status: UNPAUSED
+      tasks:
+        - task_key: load_core
+          max_retries: 1
+          notebook_task:
+            notebook_path: ../job/load_core.sql
+            source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              catalog: ${var.catalog}
+        - task_key: daily_revenue
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_daily_revenue.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: customer_ltv
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_customer_ltv.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: geo_rollup
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_geo_rollup.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: churn_flags
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_churn_flags.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: product_perf
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_product_perf.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: store_weekly
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_store_weekly.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: category_mix
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_category_mix.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: basket_affinity
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_basket_affinity.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: sessionization
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_sessionization.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: shipping_sla
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_shipping_sla.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: rfm_segments
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_rfm_segments.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: promo_lift
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_promo_lift.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: payment_mix
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_payment_mix.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: returns_rate
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_returns_rate.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: attribution
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_attribution.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: inventory_snapshot
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_inventory_snapshot.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: finance_export
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_finance_export.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: cohort_retention
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_cohort_retention.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: exec_summary
+          depends_on:
+            - task_key: daily_revenue
+            - task_key: customer_ltv
+            - task_key: geo_rollup
+            - task_key: churn_flags
+            - task_key: product_perf
+            - task_key: store_weekly
+            - task_key: category_mix
+            - task_key: basket_affinity
+            - task_key: sessionization
+            - task_key: shipping_sla
+            - task_key: rfm_segments
+            - task_key: promo_lift
+            - task_key: payment_mix
+            - task_key: returns_rate
+            - task_key: attribution
+            - task_key: inventory_snapshot
+            - task_key: finance_export
+            - task_key: cohort_retention
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/exec_summary.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: mart_views
+          depends_on:
+            - task_key: exec_summary
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/mart_views.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: finance_export_csv
+          depends_on:
+            - task_key: exec_summary
+          max_retries: 1
+          notebook_task:
+            notebook_path: ../units/finance_export/export.py
+            source: WORKSPACE
+            base_parameters:
+              catalog: ${var.catalog}
+              export_path: /Volumes/${var.catalog}/gold/finance_export/monthly

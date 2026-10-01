@@ -1,0 +1,107 @@
+{
+  "unit": "orchestration",
+  "engine": "databricks_sql",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "8224a73b09302814c599f1876954e3a1df8680d6",
+  "started_at": "2026-10-01T03:06:54+00:00",
+  "build": {
+    "status": "SKIPPED"
+  },
+  "outputs": [
+    {
+      "output": "exec_summary",
+      "golden": "golden/orchestration/exec_summary.csv",
+      "target": "gold.exec_summary",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "snapshot_label": "STRING",
+            "as_of_date": "DATE",
+            "total_revenue": "DECIMAL",
+            "total_orders": "LONG",
+            "avg_customer_ltv": "DECIMAL",
+            "overall_return_pct": "DECIMAL",
+            "avg_ship_hours": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 1,
+          "target": 1
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "snapshot_label"
+          ],
+          "matched_rows": 1,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    },
+    {
+      "output": "report",
+      "golden": "golden/orchestration/report.csv",
+      "target": "databricks/orchestration/exec_summary_report.sql",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "snapshot_label": "STRING",
+            "as_of_date": "DATE",
+            "total_revenue": "DECIMAL",
+            "total_orders": "LONG",
+            "avg_customer_ltv": "DECIMAL",
+            "overall_return_pct": "DECIMAL",
+            "avg_ship_hours": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 1,
+          "target": 1
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "snapshot_label"
+          ],
+          "matched_rows": 1,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T03:06:56+00:00"
+}

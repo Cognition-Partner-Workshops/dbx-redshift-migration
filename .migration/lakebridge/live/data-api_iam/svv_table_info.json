@@ -1,0 +1,8 @@
+{
+  "step": "svv_table_info",
+  "status": "ERROR",
+  "error": "ERROR: permission denied for relation svv_table_info",
+  "columns": [],
+  "row_count": 0,
+  "rows": []
+}

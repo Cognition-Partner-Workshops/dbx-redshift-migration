@@ -1,0 +1,27 @@
+{
+  "engine": "data-api",
+  "auth": "iam",
+  "started_utc": "2026-10-01T01:59:17+00:00",
+  "workgroup": "demo-wg",
+  "database": "mig_redshift_src",
+  "pipeline": "tools/redshift_discovery/pipeline_config.yml",
+  "error": null,
+  "steps": {
+    "session_identity": "COMPLETE",
+    "information_schema_tables": "COMPLETE",
+    "pg_class_relations": "COMPLETE",
+    "columns_dist_sort": "COMPLETE",
+    "routines": "COMPLETE",
+    "svv_table_info": "ERROR",
+    "core_counts": "ERROR",
+    "mart_counts": "ERROR",
+    "exec_summary": "ERROR",
+    "serverless_storage": "ABSENT",
+    "serverless_capacity": "ABSENT"
+  },
+  "golden_comparison": {
+    "MATCH": 0,
+    "MISMATCH": 0,
+    "BLOCKED": 29
+  }
+}
