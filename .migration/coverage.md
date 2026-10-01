@@ -21,7 +21,7 @@ outcome and the fix that made `make validate` pass.
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
-| returns_rate | integer division on INTs, :: casts | mismatch | | |
+| returns_rate | integer division on INTs, :: casts | mismatch | mismatch: draft `/` is float division and NUMERIC(14,4) quotient scale differs; 2/2 outputs PASS | `DIV` for INT/INT; exact NUMERIC quotient truncated at Redshift scale 15 via DIV + remainder, `* 100` as DECIMAL(38,15); report keeps Redshift NULL ordering (DESC NULLS FIRST) |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
