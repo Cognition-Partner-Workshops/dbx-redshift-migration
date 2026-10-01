@@ -19,7 +19,7 @@ outcome and the fix that made `make validate` pass.
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
-| promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
+| promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | mismatch: draft keeps `MEDIAN`/`PERCENTILE_CONT`, which return DOUBLE (e.g. 390.21500000000003, 1110.566) vs Redshift NUMERIC truncated to input scale (390.21, 1110.56); 2/2 outputs PASS | exact DECIMAL linear interpolation over `ROW_NUMBER`/`COUNT` (pos = 1 + p*(n-1), NULLs excluded), truncate toward zero to scale 2, cast DECIMAL(38,2); no approximation |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
