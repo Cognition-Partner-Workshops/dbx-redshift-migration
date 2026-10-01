@@ -1,19 +1,19 @@
 {
-  "unit": "rfm_segments",
+  "unit": "finance_export",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:02+00:00",
+  "started_at": "2026-10-01T02:51:38+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/rfm_segments/etl.sql"
+    "file": "databricks/units/finance_export/etl.sql"
   },
   "outputs": [
     {
-      "output": "rfm_segments",
-      "golden": "golden/rfm_segments/rfm_segments.csv",
-      "target": "gold.rfm_segments",
+      "output": "finance_monthly",
+      "golden": "golden/finance_export/finance_monthly.csv",
+      "target": "gold.finance_monthly",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,29 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "customer_id": "LONG",
-            "recency_days": "LONG",
-            "frequency": "LONG",
-            "monetary": "DECIMAL",
-            "r_tile": "LONG",
-            "f_tile": "LONG",
-            "m_tile": "LONG",
-            "rfm_segment": "STRING"
+            "month": "DATE",
+            "fiscal_year": "INT",
+            "fiscal_qtr": "STRING",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 1500,
-          "target": 1500
+          "golden": 12,
+          "target": 12
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "customer_id"
+            "month"
           ],
-          "matched_rows": 1500,
+          "matched_rows": 12,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -59,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/rfm_segments/report.csv",
-      "target": "databricks/units/rfm_segments/report.sql",
+      "golden": "golden/finance_export/report.csv",
+      "target": "databricks/units/finance_export/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -70,25 +67,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "rfm_segment": "STRING",
-            "customers": "LONG",
-            "total_monetary": "DECIMAL",
-            "avg_frequency": "LONG"
+            "fiscal_year": "INT",
+            "fiscal_qtr": "STRING",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 103,
-          "target": 103
+          "golden": 5,
+          "target": 5
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "rfm_segment"
+            "fiscal_year",
+            "fiscal_qtr"
           ],
-          "matched_rows": 103,
+          "matched_rows": 5,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -102,5 +100,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:07+00:00"
+  "finished_at": "2026-10-01T02:51:42+00:00"
 }
