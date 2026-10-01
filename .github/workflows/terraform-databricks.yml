@@ -67,19 +67,36 @@ jobs:
           terraform_version: ${{ env.TF_VERSION }}
       - name: terraform fmt
         run: terraform fmt -check -recursive
+      - name: terraform validate (offline)
+        run: |
+          terraform init -backend=false
+          terraform validate
+      - name: check plan credentials
+        id: creds
+        env:
+          TF_STATE_BUCKET: ${{ secrets.TF_STATE_BUCKET }}
+          TF_STATE_REGION: ${{ vars.TF_STATE_REGION }}
+        run: |
+          if [ -n "$DATABRICKS_HOST" ] && [ -n "$TF_STATE_BUCKET" ] && [ -n "$TF_STATE_REGION" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::dev environment secrets not configured; skipping remote plan (fmt/validate ran offline)"
+          fi
       - uses: aws-actions/configure-aws-credentials@v4
+        if: steps.creds.outputs.configured == 'true'
         with:
           role-to-assume: ${{ secrets.TF_STATE_ROLE_ARN }}
           aws-region: ${{ vars.TF_STATE_REGION }}
       - name: terraform init
+        if: steps.creds.outputs.configured == 'true'
         run: >-
-          terraform init
+          terraform init -reconfigure
           -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}"
           -backend-config="key=${STATE_KEY_PREFIX}/dev/terraform.tfstate"
           -backend-config="region=${{ vars.TF_STATE_REGION }}"
-      - name: terraform validate
-        run: terraform validate
       - name: terraform plan
+        if: steps.creds.outputs.configured == 'true'
         run: terraform plan -lock-timeout=5m -out=dev.tfplan
 
   apply-dev:
