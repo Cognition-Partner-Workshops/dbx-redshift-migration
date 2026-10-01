@@ -12,7 +12,7 @@ outcome and the fix that made `make validate` pass.
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | clean: draft only needed core/mart to silver/gold; 2/2 outputs PASS | CREATE OR REPLACE for DROP+CTAS; CHAR(4) region padding from silver; CAST revenue DECIMAL(38,2) for Redshift SUM(NUMERIC) scale; explicit ASC NULLS LAST |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
-| product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
+| product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | mismatch: Lakebridge ARRAY_AGG draft kept CHAR(4) padding ("NE  ") and core/mart names; 2/2 outputs PASS | ARRAY_SORT(COLLECT_LIST(struct(rn, RTRIM(region)))) ordered by the ROW_NUMBER rank (keeps duplicates, skips NULLs, NULL when empty); explicit NULLS FIRST/LAST for Redshift DESC/ASC; ::VARCHAR(64) -> LEFT(...,64); CAST DECIMAL(18,2)/BIGINT; report ORDER BY NULLS LAST |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
