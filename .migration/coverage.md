@@ -8,7 +8,7 @@ outcome and the fix that made `make validate` pass.
 | unit | construct | expected | observed | fix pattern |
 | --- | --- | --- | --- | --- |
 | foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | mismatch: CHAR padding and SUPER representation; 10/10 outputs PASS | typed Delta bronze/silver; liquid clustering; explicit RPAD for CHAR(4); parse_json VARIANT in bronze, source JSON text in silver; fiscal UDF uses DIV and source +9 |
-| daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
+| daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | clean: Lakebridge draft correct apart from core/mart naming and redundant double CAST; 2/2 outputs PASS | `TRUNC(ts)::DATE` -> `CAST(ts AS DATE)`; SUM cast to DECIMAL(38,2) to match Redshift NUMERIC(38,2); SORTKEY -> CLUSTER BY; report ORDER BY ... NULLS LAST |
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
