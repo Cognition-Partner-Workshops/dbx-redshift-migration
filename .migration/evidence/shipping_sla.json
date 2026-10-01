@@ -1,19 +1,19 @@
 {
-  "unit": "payment_mix",
+  "unit": "shipping_sla",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:14+00:00",
+  "started_at": "2026-10-01T02:50:57+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/payment_mix/etl.sql"
+    "file": "databricks/units/shipping_sla/etl.sql"
   },
   "outputs": [
     {
-      "output": "payment_mix",
-      "golden": "golden/payment_mix/payment_mix.csv",
-      "target": "gold.payment_mix",
+      "output": "shipping_sla",
+      "golden": "golden/shipping_sla/shipping_sla.csv",
+      "target": "gold.shipping_sla",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,27 +23,29 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "method": "STRING",
-            "method_family": "STRING",
-            "method_status": "STRING",
-            "payment_count": "LONG",
-            "amount_total": "DECIMAL",
-            "amount_share": "DECIMAL"
+            "carrier": "STRING",
+            "shipments": "LONG",
+            "delivered": "LONG",
+            "in_flight": "LONG",
+            "avg_hours_to_deliver": "DECIMAL",
+            "max_hours_to_deliver": "LONG",
+            "on_time_96h": "LONG",
+            "earliest_local_delivery_hour": "INT"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 5,
-          "target": 5
+          "golden": 4,
+          "target": 4
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "method"
+            "carrier"
           ],
-          "matched_rows": 5,
+          "matched_rows": 4,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -57,8 +59,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/payment_mix/report.csv",
-      "target": "databricks/units/payment_mix/report.sql",
+      "golden": "golden/shipping_sla/report.csv",
+      "target": "databricks/units/shipping_sla/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -68,9 +70,13 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "method_family": "STRING",
-            "payment_count": "LONG",
-            "amount_total": "DECIMAL"
+            "carrier": "STRING",
+            "shipments": "LONG",
+            "delivered": "LONG",
+            "in_flight": "LONG",
+            "avg_hours_to_deliver": "DECIMAL",
+            "max_hours_to_deliver": "LONG",
+            "on_time_96h": "LONG"
           }
         },
         {
@@ -83,7 +89,7 @@
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "method_family"
+            "carrier"
           ],
           "matched_rows": 4,
           "mismatched_rows": 0,
@@ -99,5 +105,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:19+00:00"
+  "finished_at": "2026-10-01T02:51:01+00:00"
 }

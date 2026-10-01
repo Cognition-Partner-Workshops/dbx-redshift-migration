@@ -1,19 +1,19 @@
 {
-  "unit": "payment_mix",
+  "unit": "cohort_retention",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:14+00:00",
+  "started_at": "2026-10-01T02:51:43+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/payment_mix/etl.sql"
+    "file": "databricks/units/cohort_retention/etl.sql"
   },
   "outputs": [
     {
-      "output": "payment_mix",
-      "golden": "golden/payment_mix/payment_mix.csv",
-      "target": "gold.payment_mix",
+      "output": "cohort_retention",
+      "golden": "golden/cohort_retention/cohort_retention.csv",
+      "target": "gold.cohort_retention",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,27 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "method": "STRING",
-            "method_family": "STRING",
-            "method_status": "STRING",
-            "payment_count": "LONG",
-            "amount_total": "DECIMAL",
-            "amount_share": "DECIMAL"
+            "cohort_month": "DATE",
+            "month_offset": "INT",
+            "cohort_size": "LONG",
+            "active_buyers": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 5,
-          "target": 5
+          "golden": 65,
+          "target": 65
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "method"
+            "cohort_month",
+            "month_offset"
           ],
-          "matched_rows": 5,
+          "matched_rows": 65,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -57,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/payment_mix/report.csv",
-      "target": "databricks/units/payment_mix/report.sql",
+      "golden": "golden/cohort_retention/report.csv",
+      "target": "databricks/units/cohort_retention/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -68,24 +67,27 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "method_family": "STRING",
-            "payment_count": "LONG",
-            "amount_total": "DECIMAL"
+            "cohort_month": "DATE",
+            "month_offset": "INT",
+            "cohort_size": "LONG",
+            "active_buyers": "LONG",
+            "retention_pct": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 65,
+          "target": 65
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "method_family"
+            "cohort_month",
+            "month_offset"
           ],
-          "matched_rows": 4,
+          "matched_rows": 65,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -99,5 +101,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:19+00:00"
+  "finished_at": "2026-10-01T02:51:49+00:00"
 }

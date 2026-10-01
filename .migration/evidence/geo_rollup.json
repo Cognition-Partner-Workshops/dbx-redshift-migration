@@ -1,19 +1,19 @@
 {
-  "unit": "payment_mix",
+  "unit": "geo_rollup",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:14+00:00",
+  "started_at": "2026-10-01T02:50:15+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/payment_mix/etl.sql"
+    "file": "databricks/units/geo_rollup/etl.sql"
   },
   "outputs": [
     {
-      "output": "payment_mix",
-      "golden": "golden/payment_mix/payment_mix.csv",
-      "target": "gold.payment_mix",
+      "output": "geo_rollup",
+      "golden": "golden/geo_rollup/geo_rollup.csv",
+      "target": "gold.geo_rollup",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,27 +23,28 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "method": "STRING",
-            "method_family": "STRING",
-            "method_status": "STRING",
-            "payment_count": "LONG",
-            "amount_total": "DECIMAL",
-            "amount_share": "DECIMAL"
+            "grouping_id": "INT",
+            "region": "STRING",
+            "state": "STRING",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 5,
-          "target": 5
+          "golden": 21,
+          "target": 21
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "method"
+            "grouping_id",
+            "region",
+            "state"
           ],
-          "matched_rows": 5,
+          "matched_rows": 21,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -57,8 +58,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/payment_mix/report.csv",
-      "target": "databricks/units/payment_mix/report.sql",
+      "golden": "golden/geo_rollup/report.csv",
+      "target": "databricks/units/geo_rollup/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -68,24 +69,28 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "method_family": "STRING",
-            "payment_count": "LONG",
-            "amount_total": "DECIMAL"
+            "grouping_id": "INT",
+            "region": "STRING",
+            "state": "STRING",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 21,
+          "target": 21
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "method_family"
+            "grouping_id",
+            "region",
+            "state"
           ],
-          "matched_rows": 4,
+          "matched_rows": 21,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -99,5 +104,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:19+00:00"
+  "finished_at": "2026-10-01T02:50:19+00:00"
 }

@@ -88,3 +88,14 @@ wave 1b width 13), wall-clock is bounded by the slowest unit per wave: wave 1a �
 - **exec_summary** (wave 2) reads only `daily_revenue`, `customer_ltv`, `returns_rate`, `shipping_sla`; a drift in any of
   those four shows up in the single golden `exec_summary` row (live values currently equal golden exactly).
 - No unit reads another unit's output in wave 1, matching the schedule's two parallel waves.
+
+## Final actual results (post-run)
+
+All 18 unit children landed and `make validate-all` passes: foundation 10/10 outputs, 18/18 units (table +
+report), orchestration 2/2 outputs. The `exec_summary` golden row reproduces exactly, including the truncated
+`AVG(NUMERIC(38,2))` (7029.21), NUMERIC(14,4) quotient at scale 15 (5.013772053897100) and weighted
+avg-hours at scale 4 (71.2551). The actual effort matched the ranking: churn_flags and inventory_snapshot were the
+structural rewrites (procedure → set-based / Delta MERGE); finance_export's residual was only the `UNLOAD` export
+(replaced by a parameterized Spark CSV write in `databricks/units/finance_export/export.py`). Orchestration
+(Lakeflow job + exec_summary + mart compat views + per-unit aggregate checks) came in at ≈ 0.5 session as
+estimated.
