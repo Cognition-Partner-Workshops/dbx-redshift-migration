@@ -15,7 +15,7 @@ outcome and the fix that made `make validate` pass.
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
-| basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
+| basket_affinity | self-join pairs, HAVING support >= threshold | clean | clean: Lakebridge draft semantically correct; 2/2 outputs PASS first attempt | CREATE OR REPLACE TABLE gold.x; core->silver, mart->gold; explicit Redshift null ordering (ASC NULLS LAST, DESC NULLS FIRST); INT keys, COUNT DISTINCT BIGINT |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
