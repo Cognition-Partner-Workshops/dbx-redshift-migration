@@ -11,8 +11,9 @@ The wave plan lives in `.migration/units.yaml` (`waves`: 0 foundation,
 
 1. Run Lakebridge analyze + per-unit transpile exactly as in
    `demo-ops/ORCHESTRATOR_PROMPT.md` step 2; commit drafts to the run branch.
-2. Run wave 0 (foundation) yourself: convert `00_foundation`, load `core.*`
-   from `/Volumes/<catalog>/landing/raw`.
+2. Run wave 0 (foundation): use the pre-built `databricks/foundation/` if a
+   `demo-ops/FOUNDATION_PROMPT.md` session already PR'd it, else build bronze
+   from `/Volumes/<catalog>/bronze/raw` then `silver.*` yourself.
 3. Launch one child session per unit in the wave, each on branch
    `unit/<name>` from the run branch, with the migrate-unit skill. Never exceed
    the wave width.

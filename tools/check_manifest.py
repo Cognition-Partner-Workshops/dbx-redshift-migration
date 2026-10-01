@@ -5,7 +5,7 @@ Checks:
 - every output's golden csv + meta.json exist and sha256 matches
 - declared keys exist in the golden header and are unique across rows
 - no two units write the same table
-- every read is core.* or an earlier-wave write
+- every read is silver.* or an earlier-wave write
 - waves list every unit exactly once; width >= units in wave
 """
 import csv
@@ -48,7 +48,7 @@ def checkManifest(path=MANIFEST):
             writes[table] = name
         for read in unit["reads"]:
             schema = read.split(".")[0]
-            if schema == "core":
+            if schema == "silver":
                 continue
             writer = writes.get(read)
             if writer is None:
