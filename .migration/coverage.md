@@ -25,5 +25,5 @@ outcome and the fix that made `make validate` pass.
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
-| cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
+| cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | mismatch: draft kept session TEMP TABLEs/mart.* refs and RTAS with schema fails; 2/2 outputs PASS | temp tables folded into CTEs; typed CREATE OR REPLACE + INSERT OVERWRITE (rerun-safe); DATEDIFF(month) as year*12+month boundary count; NULL customer cohort still counted in cohort_size as in source |
 | orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
