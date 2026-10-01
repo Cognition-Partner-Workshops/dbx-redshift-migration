@@ -22,7 +22,7 @@ outcome and the fix that made `make validate` pass.
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
-| attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
+| attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | mismatch: Lakebridge emitted invalid `CROSS JOIN t.payload.touches` over STRING silver payload and lost VARCHAR(16) cast; 2/2 outputs PASS | parse_json + `try_variant_get($.touches, ARRAY<VARIANT>)` typed explode (non-array → no rows); string-only `variant_get` → NULL otherwise, `left(...,16)` for VARCHAR(16); ORDER BY NULLS LAST |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
