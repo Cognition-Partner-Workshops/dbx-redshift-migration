@@ -460,3 +460,41 @@ Re-run after granting: `python tools/redshift_discovery.py --engine data-api --a
 | 11 | Row counts | golden snapshot | - | 29/29 equal |
 | 12 | information_schema | - | - | empty for IAM user, 29 for `demoadmin`; `pg_class` shows 29 for both |
 | 13 | Readiness score | none defined | none emitted | - |
+
+## 10. Final validation results (post-migration)
+
+All migrated outputs validated against committed goldens with `make validate-all`
+(`validation/validate_unit.py`, row-level, `mig_redshift_dev`, warehouse `6dc4b80538621b7b`):
+
+- **foundation**: 10/10 silver outputs PASS (1500/40/300/20000/40938/20000/2518/12817/25000/8000 rows).
+- **18 units**: all PASS, both table and report outputs (`row_values` mismatched=0/missing=0/extra=0).
+- **orchestration**: `exec_summary` + report PASS — the single golden row
+  `as_of_2025-12-31,2025-12-31,10543825.25,20000,7029.21,5.013772053897100,71.2551` reproduces exactly.
+
+New assets added by the orchestration workstream:
+
+- `databricks/orchestration/{etl.sql,exec_summary_report.sql,mart_views.sql}` — exec_summary CTAS over the four
+  source marts with Redshift-truncated decimal semantics, plus 19 `mart.*` compatibility views over `gold.*`.
+- `databricks/databricks.yml` + `databricks/resources/` — DAB job `nightly_mart_refresh` preserving the legacy DAG
+  (`load_core` → 5 ‖ 13 → `exec_summary` → `mart_views` + `finance_export_csv`), Quartz `0 0 2 * * ?` UTC,
+  `max_concurrent_runs=1`; `bundle validate` passes for dev and prod (not deployed).
+- `databricks/job/*.sql` — per-task runner files (`USE CATALOG IDENTIFIER(:catalog)` + unit body) since SQL tasks
+  have no catalog field.
+- `databricks/units/finance_export/export.py` — executable replacement for `UNLOAD`: `spark.read.table` →
+  `orderBy(month)` → single-file CSV `overwrite` to a parameterized `/Volumes/<catalog>/gold/finance_export/monthly`
+  UC volume path (declared as a bundle volume resource).
+- Per-unit `validation.sql` (assert_true aggregate checks) and `tools/aggregate_validate.py` (offline drift check +
+  `--live` SELECT-only aggregate compare against the warehouse).
+- `Makefile` `validate-all` now re-mints `DATABRICKS_OIDC_TOKEN` per unit when `devin-oidc` is present (the OIDC ID
+  token has a 60s lifetime; a long sweep otherwise dies mid-run). A persistent-token alternative used during this
+  workstream is `DATABRICKS_AUTH_TYPE=file-oidc` + `DATABRICKS_OIDC_TOKEN_FILE` pointing at a file refreshed every
+  30s by `devin-oidc token` — this also fixes transient `Not supported yet: 'expires_in'` failures on multi-chunk
+  fetches (the SDK re-exchanges the ID token on each refresh; the exchange occasionally returns a body without
+  `expires_in`).
+
+Limitations:
+
+- Export CSV landing in the UC volume is not validated end-to-end (no `bundle deploy` / job run was performed;
+  prod target validated only, no writes to `mig_redshift`).
+- `make validate-all` is the row-level oracle; `validation.sql`/`aggregate_validate.py` are coarse gates and do not
+  replace it.
