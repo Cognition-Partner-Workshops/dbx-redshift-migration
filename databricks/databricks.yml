@@ -1,6 +1,9 @@
 bundle:
   name: dbx-redshift-migration
 
+include:
+  - resources/*.yml
+
 variables:
   catalog:
     description: Target catalog for migration outputs
@@ -10,11 +13,6 @@ variables:
     # No default — set with `databricks bundle deploy --var warehouse_id=<id>`
     # or env BUNDLE_VAR_warehouse_id.
 
-# Wave 2 fills resources: the Lakeflow job built from
-# legacy/redshift/99_orchestration/refresh_schedule.yaml plus the migrated
-# unit SQL tasks. Intentionally empty in the "before" estate.
-resources: {}
-
 targets:
   dev:
     default: true
@@ -23,5 +21,7 @@ targets:
       catalog: mig_redshift_dev
   prod:
     mode: production
+    workspace:
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     variables:
       catalog: mig_redshift

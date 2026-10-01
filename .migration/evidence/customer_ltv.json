@@ -1,19 +1,19 @@
 {
-  "unit": "churn_flags",
+  "unit": "customer_ltv",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:21+00:00",
+  "started_at": "2026-10-01T02:50:08+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/churn_flags/etl.sql"
+    "file": "databricks/units/customer_ltv/etl.sql"
   },
   "outputs": [
     {
-      "output": "churn_flags",
-      "golden": "golden/churn_flags/churn_flags.csv",
-      "target": "gold.churn_flags",
+      "output": "customer_ltv",
+      "golden": "golden/customer_ltv/customer_ltv.csv",
+      "target": "gold.customer_ltv",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -24,9 +24,11 @@
           "extra": [],
           "target_types": {
             "customer_id": "LONG",
-            "last_order_date": "DATE",
-            "days_since_order": "INT",
-            "churn_flag": "STRING"
+            "region": "STRING",
+            "clean_phone": "STRING",
+            "order_count": "LONG",
+            "ltv": "DECIMAL",
+            "aov": "DECIMAL"
           }
         },
         {
@@ -55,8 +57,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/churn_flags/report.csv",
-      "target": "databricks/units/churn_flags/report.sql",
+      "golden": "golden/customer_ltv/report.csv",
+      "target": "databricks/units/customer_ltv/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -66,24 +68,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "churn_flag": "STRING",
+            "region": "STRING",
             "customers": "LONG",
-            "avg_days_since_order": "LONG"
+            "orders": "LONG",
+            "total_ltv": "DECIMAL",
+            "avg_ltv": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 6,
+          "target": 6
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "churn_flag"
+            "region"
           ],
-          "matched_rows": 4,
+          "matched_rows": 6,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -97,5 +101,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:25+00:00"
+  "finished_at": "2026-10-01T02:50:14+00:00"
 }
