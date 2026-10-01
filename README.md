@@ -56,6 +56,26 @@ hypothesis for the demo narrative, never a fact; actuals are recorded in
   `databricks bundle deploy --var warehouse_id=<id>` or set env
   `BUNDLE_VAR_warehouse_id`.
 
+Terraform (`infra/terraform/`, databricks provider pinned to 1.95.0) owns the
+long-lived objects: the catalog (`var.environment` dev → `mig_redshift_dev`,
+prod → `mig_redshift`; anything outside `.migration/allowed_targets.json` fails
+the plan), the `bronze`/`silver`/`gold` schemas, the `account users` catalog
+grant, and the validation SQL warehouse `mig-redshift-<env>` (output
+`warehouse_id`), all tagged `demo_type`/`source_repo`. The volume, seed upload
+and table contents stay with `make db-setup`, foundation and `make validate`;
+`databricks_setup.py` uses `IF NOT EXISTS`, so it runs cleanly after an apply
+(a catalog first created by `make db-setup` must be `terraform import`ed).
+State is in S3 (`backend.tf`, partial config, one key per environment);
+`terraform init -backend=false` works offline for fmt/validate.
+
+The `terraform-databricks` workflow runs fmt/init/validate/plan (dev) on PRs
+touching `infra/terraform/`, applies dev on pushes to `migration-run-*` and
+`main`, then applies prod on `main` behind the `prod` environment. Manual
+dispatch can also run `make validate UNIT=<unit>` against the dev warehouse.
+Secrets per environment: `DATABRICKS_HOST`, `DATABRICKS_CLIENT_ID`,
+`DATABRICKS_CLIENT_SECRET`, `TF_STATE_BUCKET`, `TF_STATE_ROLE_ARN` (variable
+`TF_STATE_REGION`).
+
 ## Demo flow
 
 1. An orchestrator session runs Lakebridge analyze and per-unit transpile
@@ -112,6 +132,7 @@ See `.env.example` for placeholders.
 | `make check` | Ruff + pytest + manifest checks + generated job SQL drift check |
 | `make seed` | regenerate `data/seed/csv/` deterministically |
 | `make db-setup` / `make db-reset` | create (or fully reset) the dev catalog via `tools/databricks_setup.py` |
+| `terraform -chdir=infra/terraform plan -var environment=dev` | plan catalog/schemas/grants/warehouse (after `init` with the S3 backend config) |
 | `make validate UNIT=x` | build the unit's converted SQL on Databricks and compare all outputs to goldens |
 | `make validate-all` | validate every unit that has converted `etl.sql` |
 | `make legacy-all` | one-time Redshift setup + build + golden capture (operator only) |

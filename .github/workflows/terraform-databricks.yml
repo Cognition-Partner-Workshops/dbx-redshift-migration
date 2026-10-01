@@ -1,0 +1,202 @@
+name: terraform-databricks
+
+# Provisions the migration catalog, medallion schemas, grants and validation
+# SQL warehouse from infra/terraform/.
+#   pull_request            -> fmt / init / validate / plan (dev)
+#   push migration-run-*    -> apply dev
+#   push main               -> apply dev, then apply prod (gated by the `prod` environment)
+#   workflow_dispatch       -> plan dev, optionally `make validate UNIT=<unit>` on the dev warehouse
+#
+# Secrets (per GitHub environment `dev` / `prod`): DATABRICKS_HOST,
+# DATABRICKS_CLIENT_ID, DATABRICKS_CLIENT_SECRET (service principal OAuth M2M),
+# TF_STATE_BUCKET, TF_STATE_ROLE_ARN. Variable: TF_STATE_REGION.
+
+on:
+  pull_request:
+    paths:
+      - "infra/terraform/**"
+      - ".migration/allowed_targets.json"
+      - ".github/workflows/terraform-databricks.yml"
+  push:
+    branches:
+      - main
+      - "migration-run-*"
+    paths:
+      - "infra/terraform/**"
+      - ".migration/allowed_targets.json"
+      - ".github/workflows/terraform-databricks.yml"
+  workflow_dispatch:
+    inputs:
+      validate_unit:
+        description: "Unit to run `make validate` for on the dev warehouse (empty = skip)"
+        required: false
+        default: customer_ltv
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: terraform-databricks-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  TF_VERSION: "1.10.5"
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  STATE_KEY_PREFIX: dbx-redshift-migration
+
+defaults:
+  run:
+    working-directory: infra/terraform
+
+jobs:
+  plan-dev:
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+      TF_VAR_environment: dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+      - name: terraform fmt
+        run: terraform fmt -check -recursive
+      - name: terraform validate (offline)
+        run: |
+          terraform init -backend=false
+          terraform validate
+      - name: check plan credentials
+        id: creds
+        env:
+          TF_STATE_BUCKET: ${{ secrets.TF_STATE_BUCKET }}
+          TF_STATE_REGION: ${{ vars.TF_STATE_REGION }}
+        run: |
+          if [ -n "$DATABRICKS_HOST" ] && [ -n "$TF_STATE_BUCKET" ] && [ -n "$TF_STATE_REGION" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::dev environment secrets not configured; skipping remote plan (fmt/validate ran offline)"
+          fi
+      - uses: aws-actions/configure-aws-credentials@v4
+        if: steps.creds.outputs.configured == 'true'
+        with:
+          role-to-assume: ${{ secrets.TF_STATE_ROLE_ARN }}
+          aws-region: ${{ vars.TF_STATE_REGION }}
+      - name: terraform init
+        if: steps.creds.outputs.configured == 'true'
+        run: >-
+          terraform init -reconfigure
+          -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}"
+          -backend-config="key=${STATE_KEY_PREFIX}/dev/terraform.tfstate"
+          -backend-config="region=${{ vars.TF_STATE_REGION }}"
+      - name: terraform plan
+        if: steps.creds.outputs.configured == 'true'
+        run: terraform plan -lock-timeout=5m -out=dev.tfplan
+
+  apply-dev:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+      TF_VAR_environment: dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.TF_STATE_ROLE_ARN }}
+          aws-region: ${{ vars.TF_STATE_REGION }}
+      - name: terraform init
+        run: >-
+          terraform init
+          -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}"
+          -backend-config="key=${STATE_KEY_PREFIX}/dev/terraform.tfstate"
+          -backend-config="region=${{ vars.TF_STATE_REGION }}"
+      - name: terraform plan
+        run: terraform plan -lock-timeout=5m -out=dev.tfplan
+      - name: terraform apply
+        run: terraform apply -lock-timeout=5m dev.tfplan
+
+  apply-prod:
+    needs: apply-dev
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+      TF_VAR_environment: prod
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.TF_STATE_ROLE_ARN }}
+          aws-region: ${{ vars.TF_STATE_REGION }}
+      - name: terraform init
+        run: >-
+          terraform init
+          -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}"
+          -backend-config="key=${STATE_KEY_PREFIX}/prod/terraform.tfstate"
+          -backend-config="region=${{ vars.TF_STATE_REGION }}"
+      - name: terraform plan
+        run: terraform plan -lock-timeout=5m -out=prod.tfplan
+      - name: terraform apply
+        run: terraform apply -lock-timeout=5m prod.tfplan
+
+  validate:
+    needs: plan-dev
+    if: github.event_name == 'workflow_dispatch' && inputs.validate_unit != ''
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.TF_STATE_ROLE_ARN }}
+          aws-region: ${{ vars.TF_STATE_REGION }}
+      - name: Read dev warehouse and catalog from state
+        run: |
+          terraform init \
+            -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
+            -backend-config="key=${STATE_KEY_PREFIX}/dev/terraform.tfstate" \
+            -backend-config="region=${{ vars.TF_STATE_REGION }}"
+          echo "DATABRICKS_WAREHOUSE_ID=$(terraform output -raw warehouse_id)" >> "$GITHUB_ENV"
+          echo "MIG_CATALOG=$(terraform output -raw catalog_name)" >> "$GITHUB_ENV"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: make validate
+        working-directory: .
+        env:
+          UNIT: ${{ inputs.validate_unit }}
+        run: |
+          pip install -r requirements.txt
+          make validate UNIT="$UNIT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-${{ inputs.validate_unit }}
+          path: .migration/evidence/${{ inputs.validate_unit }}.json
