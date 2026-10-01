@@ -1,0 +1,1769 @@
+{
+   "inventory" : [
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 4,
+         "name" : "00_foundation__01_schemas.sql",
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "UNKNOWN"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "00_foundation__01_schemas.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "DISTKEY" : 8,
+            "NUMERIC" : 5,
+            "SORTKEY" : 10
+         },
+         "lineCount" : 107,
+         "name" : "00_foundation__02_core_tables.sql",
+         "objectRel" : [
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.campaign_touches"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.customers"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.payments"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.products"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.returns"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.shipments"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.stores"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "core.web_events"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "00_foundation__02_core_tables.sql",
+         "statementCount" : 10
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "EXTRACT" : 1,
+            "REGEXP_REPLACE" : 1
+         },
+         "lineCount" : 17,
+         "name" : "00_foundation__03_udfs.sql",
+         "procAndFunctionCount" : 2,
+         "scriptCategories" : [
+            "PROGRAM_DECLARATION"
+         ],
+         "scriptType" : "ETL",
+         "sourceFile" : "00_foundation__03_udfs.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "::NUMERIC" : 2,
+            "::VARCHAR" : 1,
+            "AVG" : 1,
+            "SUM" : 6
+         },
+         "lineCount" : 18,
+         "name" : "99_orchestration__exec_summary__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.exec_summary"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.exec_summary"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "99_orchestration__exec_summary__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 5,
+         "name" : "99_orchestration__exec_summary__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.exec_summary"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "99_orchestration__exec_summary__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 39,
+         "name" : "99_orchestration__refresh_schedule.yaml",
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "UNKNOWN"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "99_orchestration__refresh_schedule.yaml",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 2
+         },
+         "lineCount" : 10,
+         "name" : "units__attribution__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.campaign_touches"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.attribution"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.attribution"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "t.payload.touches"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__attribution__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "SUM" : 2
+         },
+         "lineCount" : 7,
+         "name" : "units__attribution__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.attribution"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__attribution__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 2
+         },
+         "lineCount" : 12,
+         "name" : "units__basket_affinity__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.basket_affinity"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.basket_affinity"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__basket_affinity__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 10,
+         "name" : "units__basket_affinity__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.products"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.basket_affinity"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__basket_affinity__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "RATIO_TO_REPORT" : 1,
+            "SUM" : 2
+         },
+         "lineCount" : 16,
+         "name" : "units__category_mix__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.products"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.category_mix"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.category_mix"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__category_mix__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 4,
+         "name" : "units__category_mix__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.category_mix"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__category_mix__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "MEDIUM",
+         "functionCall" : {
+            "DISTKEY" : 1,
+            "MAX" : 1,
+            "SORTKEY" : 1,
+            "SP_BUILD_CHURN_FLAGS" : 1
+         },
+         "lineCount" : 53,
+         "loopsAndCursors" : [
+            {
+               "content" : "FOR rec IN",
+               "lineNumber" : 30
+            }
+         ],
+         "name" : "units__churn_flags__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.customers"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.churn_flags"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.churn_flags"
+            },
+            {
+               "action" : "write",
+               "count" : 1,
+               "object" : "mart.churn_flags"
+            }
+         ],
+         "procAndFunctionCount" : 1,
+         "scriptCategories" : [
+            "CALL",
+            "CREATE_PROCEDURE",
+            "END_LOOP",
+            "INSERT_INTO",
+            "SELECT_INTO_REAL_TABLE",
+            "TABLE_DDL",
+            "TABLE_DROP",
+            "UNKNOWN"
+         ],
+         "scriptType" : "ETL",
+         "sourceFile" : "units__churn_flags__etl.sql",
+         "statementCount" : 11
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "AVG" : 1,
+            "COUNT" : 1
+         },
+         "lineCount" : 7,
+         "name" : "units__churn_flags__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.churn_flags"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__churn_flags__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 2,
+            "DATEDIFF" : 2,
+            "DATE_TRUNC" : 3,
+            "MIN" : 1,
+            "SORTKEY" : 1
+         },
+         "lineCount" : 40,
+         "name" : "units__cohort_retention__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 2,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.cohort_retention"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.cohort_retention"
+            },
+            {
+               "action" : "write",
+               "count" : 1,
+               "object" : "mart.cohort_retention"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "INSERT_INTO",
+            "TABLE_DDL",
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__cohort_retention__etl.sql",
+         "statementCount" : 9
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "ROUND" : 1
+         },
+         "lineCount" : 8,
+         "name" : "units__cohort_retention__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.cohort_retention"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__cohort_retention__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "AVG" : 1,
+            "COALESCE" : 1,
+            "COUNT" : 1,
+            "F_CLEAN_PHONE" : 1,
+            "SORTKEY" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 19,
+         "name" : "units__customer_ltv__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.customers"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.customer_ltv"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.customer_ltv"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__customer_ltv__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "AVG" : 1,
+            "COUNT" : 1,
+            "SUM" : 2
+         },
+         "lineCount" : 9,
+         "name" : "units__customer_ltv__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.customer_ltv"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__customer_ltv__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "SORTKEY" : 1,
+            "SUM" : 1,
+            "TRUNC" : 1
+         },
+         "lineCount" : 14,
+         "name" : "units__daily_revenue__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.daily_revenue"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.daily_revenue"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__daily_revenue__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "DATE_TRUNC" : 1,
+            "SUM" : 2
+         },
+         "lineCount" : 8,
+         "name" : "units__daily_revenue__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.daily_revenue"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__daily_revenue__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "DATE_TRUNC" : 1,
+            "EXTRACT" : 3,
+            "F_FISCAL_QTR" : 1,
+            "SUM" : 1,
+            "TRUNC" : 1
+         },
+         "lineCount" : 16,
+         "name" : "units__finance_export__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.finance_monthly"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.finance_monthly"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__finance_export__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "UNLOAD" : 1
+         },
+         "lineCount" : 8,
+         "name" : "units__finance_export__export.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.finance_monthly"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "UNKNOWN"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__finance_export__export.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "SUM" : 2
+         },
+         "lineCount" : 7,
+         "name" : "units__finance_export__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.finance_monthly"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__finance_export__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COALESCE" : 1,
+            "COUNT" : 1,
+            "GROUPING" : 4,
+            "SETS" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 18,
+         "name" : "units__geo_rollup__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.stores"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.geo_rollup"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.geo_rollup"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__geo_rollup__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 4,
+         "name" : "units__geo_rollup__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.geo_rollup"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__geo_rollup__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COALESCE" : 2,
+            "DISTKEY" : 1,
+            "GREATEST" : 1,
+            "SORTKEY" : 1,
+            "SP_UPSERT_INVENTORY" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 41,
+         "name" : "units__inventory_snapshot__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.products"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.inventory_snapshot"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.inventory_snapshot"
+            },
+            {
+               "action" : "write",
+               "count" : 2,
+               "object" : "mart.inventory_snapshot"
+            }
+         ],
+         "procAndFunctionCount" : 1,
+         "scriptCategories" : [
+            "CALL",
+            "CREATE_PROCEDURE",
+            "DELETE",
+            "INSERT_INTO",
+            "TABLE_DDL",
+            "TABLE_DROP",
+            "UNKNOWN"
+         ],
+         "scriptType" : "ETL",
+         "sourceFile" : "units__inventory_snapshot__etl.sql",
+         "statementCount" : 10
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 5,
+         "name" : "units__inventory_snapshot__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.inventory_snapshot"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__inventory_snapshot__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "DECODE" : 1,
+            "NVL" : 2,
+            "NVL2" : 1,
+            "SUM" : 4
+         },
+         "lineCount" : 17,
+         "name" : "units__payment_mix__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.payments"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.payment_mix"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.payment_mix"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__payment_mix__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "SUM" : 2
+         },
+         "lineCount" : 7,
+         "name" : "units__payment_mix__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.payment_mix"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__payment_mix__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "::NUMERIC" : 1,
+            "::VARCHAR" : 1,
+            "COALESCE" : 2,
+            "GROUP" : 1,
+            "LISTAGG" : 1,
+            "ROW_NUMBER" : 1,
+            "SORTKEY" : 1,
+            "SUM" : 3
+         },
+         "lineCount" : 43,
+         "name" : "units__product_perf__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "agg"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.products"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.stores"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.product_perf"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.product_perf"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__product_perf__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "SUM" : 2
+         },
+         "lineCount" : 8,
+         "name" : "units__product_perf__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.product_perf"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__product_perf__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "GROUP" : 1,
+            "MEDIAN" : 1,
+            "PERCENTILE_CONT" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 18,
+         "name" : "units__promo_lift__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.promo_lift"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.promo_lift"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "order_totals"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__promo_lift__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 4,
+         "name" : "units__promo_lift__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.promo_lift"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__promo_lift__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "::NUMERIC" : 2,
+            "COALESCE" : 3,
+            "SUM" : 6
+         },
+         "lineCount" : 15,
+         "name" : "units__returns_rate__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.products"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.returns"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.returns_rate"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.returns_rate"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__returns_rate__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 4,
+         "name" : "units__returns_rate__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.returns_rate"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__returns_rate__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "::VARCHAR" : 1,
+            "COALESCE" : 1,
+            "COUNT" : 1,
+            "DATEDIFF" : 1,
+            "MAX" : 1,
+            "NTILE" : 3,
+            "SORTKEY" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 37,
+         "name" : "units__rfm_segments__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.customers"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.rfm_segments"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.rfm_segments"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "metrics"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__rfm_segments__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "AVG" : 1,
+            "COUNT" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 8,
+         "name" : "units__rfm_segments__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.rfm_segments"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__rfm_segments__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "DATEDIFF" : 1,
+            "LAG" : 2,
+            "MAX" : 1,
+            "MIN" : 1,
+            "SORTKEY" : 1,
+            "SUM" : 2
+         },
+         "lineCount" : 42,
+         "name" : "units__sessionization__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.web_events"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "flagged"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.web_sessions"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.web_sessions"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__sessionization__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "SUM" : 2
+         },
+         "lineCount" : 8,
+         "name" : "units__sessionization__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.web_sessions"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__sessionization__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "::NUMERIC" : 1,
+            "AVG" : 1,
+            "CONVERT_TIMEZONE" : 1,
+            "COUNT" : 4,
+            "DATEDIFF" : 3,
+            "EXTRACT" : 1,
+            "MAX" : 1,
+            "MIN" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 17,
+         "name" : "units__shipping_sla__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.shipments"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.shipping_sla"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.shipping_sla"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__shipping_sla__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "lineCount" : 5,
+         "name" : "units__shipping_sla__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.shipping_sla"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__shipping_sla__report.sql",
+         "statementCount" : 1
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "COUNT" : 1,
+            "DATEADD" : 1,
+            "DATEDIFF" : 1,
+            "DATE_TRUNC" : 4,
+            "SORTKEY" : 1,
+            "SUM" : 1
+         },
+         "lineCount" : 17,
+         "name" : "units__store_weekly__etl.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.order_items"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.orders"
+            },
+            {
+               "action" : "create",
+               "count" : 1,
+               "object" : "mart.store_weekly"
+            },
+            {
+               "action" : "drop",
+               "count" : 1,
+               "object" : "mart.store_weekly"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "TABLE_DDL_AS_SELECT",
+            "TABLE_DROP"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__store_weekly__etl.sql",
+         "statementCount" : 2
+      },
+      {
+         "complexityLevel" : "LOW",
+         "functionCall" : {
+            "DATEDIFF" : 1,
+            "MAX" : 1,
+            "MIN" : 1,
+            "SUM" : 2
+         },
+         "lineCount" : 10,
+         "name" : "units__store_weekly__report.sql",
+         "objectRel" : [
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "core.stores"
+            },
+            {
+               "action" : "read",
+               "count" : 1,
+               "object" : "mart.store_weekly"
+            }
+         ],
+         "procAndFunctionCount" : 0,
+         "scriptCategories" : [
+            "READ_DML"
+         ],
+         "scriptType" : "SQL",
+         "sourceFile" : "units__store_weekly__report.sql",
+         "statementCount" : 1
+      }
+   ],
+   "object_lineage" : [
+      {
+         "reads" : [
+            "units__product_perf__etl.sql"
+         ],
+         "target" : "agg"
+      },
+      {
+         "reads" : [
+            "units__attribution__etl.sql"
+         ],
+         "target" : "core.campaign_touches"
+      },
+      {
+         "reads" : [
+            "units__churn_flags__etl.sql",
+            "units__customer_ltv__etl.sql",
+            "units__rfm_segments__etl.sql"
+         ],
+         "target" : "core.customers"
+      },
+      {
+         "reads" : [
+            "units__basket_affinity__etl.sql",
+            "units__category_mix__etl.sql",
+            "units__customer_ltv__etl.sql",
+            "units__daily_revenue__etl.sql",
+            "units__finance_export__etl.sql",
+            "units__geo_rollup__etl.sql",
+            "units__inventory_snapshot__etl.sql",
+            "units__product_perf__etl.sql",
+            "units__promo_lift__etl.sql",
+            "units__returns_rate__etl.sql",
+            "units__rfm_segments__etl.sql",
+            "units__store_weekly__etl.sql"
+         ],
+         "target" : "core.order_items"
+      },
+      {
+         "reads" : [
+            "units__churn_flags__etl.sql",
+            "units__customer_ltv__etl.sql",
+            "units__daily_revenue__etl.sql",
+            "units__finance_export__etl.sql",
+            "units__geo_rollup__etl.sql",
+            "units__product_perf__etl.sql",
+            "units__promo_lift__etl.sql",
+            "units__rfm_segments__etl.sql",
+            "units__store_weekly__etl.sql"
+         ],
+         "target" : "core.orders"
+      },
+      {
+         "reads" : [
+            "units__payment_mix__etl.sql"
+         ],
+         "target" : "core.payments"
+      },
+      {
+         "reads" : [
+            "units__category_mix__etl.sql",
+            "units__inventory_snapshot__etl.sql",
+            "units__product_perf__etl.sql",
+            "units__returns_rate__etl.sql"
+         ],
+         "target" : "core.products"
+      },
+      {
+         "reads" : [
+            "units__returns_rate__etl.sql"
+         ],
+         "target" : "core.returns"
+      },
+      {
+         "reads" : [
+            "units__shipping_sla__etl.sql"
+         ],
+         "target" : "core.shipments"
+      },
+      {
+         "reads" : [
+            "units__geo_rollup__etl.sql",
+            "units__product_perf__etl.sql"
+         ],
+         "target" : "core.stores"
+      },
+      {
+         "reads" : [
+            "units__sessionization__etl.sql"
+         ],
+         "target" : "core.web_events"
+      },
+      {
+         "reads" : [
+            "units__sessionization__etl.sql"
+         ],
+         "target" : "flagged"
+      },
+      {
+         "target" : "mart.attribution",
+         "writes" : [
+            {
+               "file" : "units__attribution__etl.sql",
+               "sources" : [
+                  "core.campaign_touches",
+                  "t.payload.touches"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.basket_affinity",
+         "writes" : [
+            {
+               "file" : "units__basket_affinity__etl.sql",
+               "sources" : [
+                  "core.order_items"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.category_mix",
+         "writes" : [
+            {
+               "file" : "units__category_mix__etl.sql",
+               "sources" : [
+                  "core.order_items",
+                  "core.products"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.cohort_retention",
+         "writes" : [
+            {
+               "file" : "units__cohort_retention__etl.sql",
+               "sources" : [
+                  "tmp_activity",
+                  "tmp_cohorts"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.customer_ltv",
+         "writes" : [
+            {
+               "file" : "units__customer_ltv__etl.sql",
+               "sources" : [
+                  "core.customers",
+                  "core.order_items",
+                  "core.orders"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.daily_revenue",
+         "writes" : [
+            {
+               "file" : "units__daily_revenue__etl.sql",
+               "sources" : [
+                  "core.order_items",
+                  "core.orders"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.finance_monthly",
+         "writes" : [
+            {
+               "file" : "units__finance_export__etl.sql",
+               "sources" : [
+                  "core.order_items",
+                  "core.orders"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.geo_rollup",
+         "writes" : [
+            {
+               "file" : "units__geo_rollup__etl.sql",
+               "sources" : [
+                  "core.order_items",
+                  "core.orders",
+                  "core.stores"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.inventory_snapshot",
+         "writes" : [
+            {
+               "file" : "units__inventory_snapshot__etl.sql",
+               "sources" : [
+                  "core.products",
+                  "stg_inventory"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.payment_mix",
+         "writes" : [
+            {
+               "file" : "units__payment_mix__etl.sql",
+               "sources" : [
+                  "core.payments"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.product_perf",
+         "writes" : [
+            {
+               "file" : "units__product_perf__etl.sql",
+               "sources" : [
+                  "agg",
+                  "core.order_items",
+                  "core.orders",
+                  "core.products",
+                  "core.stores"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.promo_lift",
+         "writes" : [
+            {
+               "file" : "units__promo_lift__etl.sql",
+               "sources" : [
+                  "core.order_items",
+                  "core.orders",
+                  "order_totals"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.returns_rate",
+         "writes" : [
+            {
+               "file" : "units__returns_rate__etl.sql",
+               "sources" : [
+                  "core.order_items",
+                  "core.products",
+                  "core.returns"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.rfm_segments",
+         "writes" : [
+            {
+               "file" : "units__rfm_segments__etl.sql",
+               "sources" : [
+                  "core.customers",
+                  "core.order_items",
+                  "core.orders",
+                  "metrics"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.shipping_sla",
+         "writes" : [
+            {
+               "file" : "units__shipping_sla__etl.sql",
+               "sources" : [
+                  "core.shipments"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.store_weekly",
+         "writes" : [
+            {
+               "file" : "units__store_weekly__etl.sql",
+               "sources" : [
+                  "core.order_items",
+                  "core.orders"
+               ]
+            }
+         ]
+      },
+      {
+         "target" : "mart.web_sessions",
+         "writes" : [
+            {
+               "file" : "units__sessionization__etl.sql",
+               "sources" : [
+                  "core.web_events",
+                  "flagged"
+               ]
+            }
+         ]
+      },
+      {
+         "reads" : [
+            "units__rfm_segments__etl.sql"
+         ],
+         "target" : "metrics"
+      },
+      {
+         "reads" : [
+            "units__promo_lift__etl.sql"
+         ],
+         "target" : "order_totals"
+      },
+      {
+         "reads" : [
+            "units__inventory_snapshot__etl.sql"
+         ],
+         "target" : "stg_inventory",
+         "writes" : [
+            {
+               "file" : "units__inventory_snapshot__etl.sql",
+               "sources" : [
+                  "core.order_items"
+               ]
+            }
+         ]
+      },
+      {
+         "reads" : [
+            "units__attribution__etl.sql"
+         ],
+         "target" : "t.payload.touches"
+      },
+      {
+         "reads" : [
+            "units__cohort_retention__etl.sql"
+         ],
+         "target" : "tmp_activity"
+      },
+      {
+         "reads" : [
+            "units__cohort_retention__etl.sql"
+         ],
+         "target" : "tmp_cohorts"
+      },
+      {
+         "target" : "tmp_last_orders",
+         "writes" : [
+            {
+               "file" : "units__churn_flags__etl.sql",
+               "sources" : [
+                  "core.customers",
+                  "core.orders"
+               ]
+            }
+         ]
+      }
+   ],
+   "runInfo" : {
+      "inputFolder" : "/home/ubuntu/ws1_lakebridge/staging",
+      "reportName" : "/home/ubuntu/repos/dbx-redshift-migration/.migration/lakebridge/rerun/analyze.xlsx",
+      "runDurationSeconds" : 1,
+      "sourceTechnology" : "SQL",
+      "startTime" : "2026-10-01T01:56:03Z"
+   }
+}
