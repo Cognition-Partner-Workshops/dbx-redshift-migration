@@ -24,6 +24,6 @@ outcome and the fix that made `make validate` pass.
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
-| finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
+| finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | rejected only for UNLOAD (export.sql); etl/report transpiled clean apart from core/mart naming and bare F_FISCAL_QTR; 2/2 outputs PASS | CTAS -> CREATE OR REPLACE TABLE gold.finance_monthly; core.* -> silver.*; call silver.f_fiscal_qtr; TRUNC(ts)::DATE -> CAST(ts AS DATE); revenue DECIMAL(34,2) keeps scale 2; report ORDER BY ... NULLS LAST (Redshift default); UNLOAD left to parent export |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
 | orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
