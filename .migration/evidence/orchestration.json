@@ -1,19 +1,19 @@
 {
-  "unit": "sessionization",
+  "unit": "orchestration",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:51+00:00",
+  "started_at": "2026-10-01T02:54:12+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/sessionization/etl.sql"
+    "file": "databricks/orchestration/etl.sql"
   },
   "outputs": [
     {
-      "output": "web_sessions",
-      "golden": "golden/sessionization/web_sessions.csv",
-      "target": "gold.web_sessions",
+      "output": "exec_summary",
+      "golden": "golden/orchestration/exec_summary.csv",
+      "target": "gold.exec_summary",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,28 +23,28 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "customer_id": "LONG",
-            "session_id": "LONG",
-            "session_start_ts": "TIMESTAMP_NTZ",
-            "session_end_ts": "TIMESTAMP_NTZ",
-            "event_count": "LONG",
-            "checkout_events": "LONG"
+            "snapshot_label": "STRING",
+            "as_of_date": "DATE",
+            "total_revenue": "DECIMAL",
+            "total_orders": "LONG",
+            "avg_customer_ltv": "DECIMAL",
+            "overall_return_pct": "DECIMAL",
+            "avg_ship_hours": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 21280,
-          "target": 21280
+          "golden": 1,
+          "target": 1
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "customer_id",
-            "session_id"
+            "snapshot_label"
           ],
-          "matched_rows": 21280,
+          "matched_rows": 1,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -58,8 +58,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/sessionization/report.csv",
-      "target": "databricks/units/sessionization/report.sql",
+      "golden": "golden/orchestration/report.csv",
+      "target": "databricks/orchestration/exec_summary_report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -69,25 +69,28 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "customer_id": "LONG",
-            "sessions": "LONG",
-            "events": "LONG",
-            "checkout_sessions": "LONG"
+            "snapshot_label": "STRING",
+            "as_of_date": "DATE",
+            "total_revenue": "DECIMAL",
+            "total_orders": "LONG",
+            "avg_customer_ltv": "DECIMAL",
+            "overall_return_pct": "DECIMAL",
+            "avg_ship_hours": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 1500,
-          "target": 1500
+          "golden": 1,
+          "target": 1
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "customer_id"
+            "snapshot_label"
           ],
-          "matched_rows": 1500,
+          "matched_rows": 1,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -101,5 +104,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:56+00:00"
+  "finished_at": "2026-10-01T02:54:17+00:00"
 }

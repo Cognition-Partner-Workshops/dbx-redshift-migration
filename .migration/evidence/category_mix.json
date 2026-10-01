@@ -1,19 +1,19 @@
 {
-  "unit": "sessionization",
+  "unit": "category_mix",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:51+00:00",
+  "started_at": "2026-10-01T02:50:39+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/sessionization/etl.sql"
+    "file": "databricks/units/category_mix/etl.sql"
   },
   "outputs": [
     {
-      "output": "web_sessions",
-      "golden": "golden/sessionization/web_sessions.csv",
-      "target": "gold.web_sessions",
+      "output": "category_mix",
+      "golden": "golden/category_mix/category_mix.csv",
+      "target": "gold.category_mix",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,28 +23,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "customer_id": "LONG",
-            "session_id": "LONG",
-            "session_start_ts": "TIMESTAMP_NTZ",
-            "session_end_ts": "TIMESTAMP_NTZ",
-            "event_count": "LONG",
-            "checkout_events": "LONG"
+            "category": "STRING",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL",
+            "revenue_share": "DOUBLE"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 21280,
-          "target": 21280
+          "golden": 6,
+          "target": 6
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "customer_id",
-            "session_id"
+            "category"
           ],
-          "matched_rows": 21280,
+          "matched_rows": 6,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -58,8 +55,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/sessionization/report.csv",
-      "target": "databricks/units/sessionization/report.sql",
+      "golden": "golden/category_mix/report.csv",
+      "target": "databricks/units/category_mix/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -69,25 +66,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "customer_id": "LONG",
-            "sessions": "LONG",
-            "events": "LONG",
-            "checkout_sessions": "LONG"
+            "category": "STRING",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL",
+            "revenue_share": "DOUBLE"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 1500,
-          "target": 1500
+          "golden": 6,
+          "target": 6
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "customer_id"
+            "category"
           ],
-          "matched_rows": 1500,
+          "matched_rows": 6,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -101,5 +98,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:56+00:00"
+  "finished_at": "2026-10-01T02:50:44+00:00"
 }
