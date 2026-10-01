@@ -1,19 +1,19 @@
 {
-  "unit": "promo_lift",
+  "unit": "basket_affinity",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:08+00:00",
+  "started_at": "2026-10-01T02:50:45+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/promo_lift/etl.sql"
+    "file": "databricks/units/basket_affinity/etl.sql"
   },
   "outputs": [
     {
-      "output": "promo_lift",
-      "golden": "golden/promo_lift/promo_lift.csv",
-      "target": "gold.promo_lift",
+      "output": "basket_affinity",
+      "golden": "golden/basket_affinity/basket_affinity.csv",
+      "target": "gold.basket_affinity",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,25 +23,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "median_order_value": "DECIMAL",
-            "p90_order_value": "DECIMAL"
+            "product_id_a": "INT",
+            "product_id_b": "INT",
+            "pair_orders": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 50,
+          "target": 50
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "sales_channel"
+            "product_id_a",
+            "product_id_b"
           ],
-          "matched_rows": 4,
+          "matched_rows": 50,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -55,8 +55,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/promo_lift/report.csv",
-      "target": "databricks/units/promo_lift/report.sql",
+      "golden": "golden/basket_affinity/report.csv",
+      "target": "databricks/units/basket_affinity/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -66,25 +66,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "median_order_value": "DECIMAL",
-            "p90_order_value": "DECIMAL"
+            "product_id_a": "INT",
+            "product_id_b": "INT",
+            "pair": "STRING",
+            "pair_orders": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 50,
+          "target": 50
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "sales_channel"
+            "product_id_a",
+            "product_id_b"
           ],
-          "matched_rows": 4,
+          "matched_rows": 50,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -98,5 +99,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:13+00:00"
+  "finished_at": "2026-10-01T02:50:50+00:00"
 }

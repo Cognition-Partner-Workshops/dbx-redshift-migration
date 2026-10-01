@@ -1,19 +1,19 @@
 {
-  "unit": "promo_lift",
+  "unit": "rfm_segments",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:08+00:00",
+  "started_at": "2026-10-01T02:51:02+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/promo_lift/etl.sql"
+    "file": "databricks/units/rfm_segments/etl.sql"
   },
   "outputs": [
     {
-      "output": "promo_lift",
-      "golden": "golden/promo_lift/promo_lift.csv",
-      "target": "gold.promo_lift",
+      "output": "rfm_segments",
+      "golden": "golden/rfm_segments/rfm_segments.csv",
+      "target": "gold.rfm_segments",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,25 +23,29 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "median_order_value": "DECIMAL",
-            "p90_order_value": "DECIMAL"
+            "customer_id": "LONG",
+            "recency_days": "LONG",
+            "frequency": "LONG",
+            "monetary": "DECIMAL",
+            "r_tile": "LONG",
+            "f_tile": "LONG",
+            "m_tile": "LONG",
+            "rfm_segment": "STRING"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 1500,
+          "target": 1500
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "sales_channel"
+            "customer_id"
           ],
-          "matched_rows": 4,
+          "matched_rows": 1500,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -55,8 +59,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/promo_lift/report.csv",
-      "target": "databricks/units/promo_lift/report.sql",
+      "golden": "golden/rfm_segments/report.csv",
+      "target": "databricks/units/rfm_segments/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -66,25 +70,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "median_order_value": "DECIMAL",
-            "p90_order_value": "DECIMAL"
+            "rfm_segment": "STRING",
+            "customers": "LONG",
+            "total_monetary": "DECIMAL",
+            "avg_frequency": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 103,
+          "target": 103
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "sales_channel"
+            "rfm_segment"
           ],
-          "matched_rows": 4,
+          "matched_rows": 103,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -98,5 +102,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:13+00:00"
+  "finished_at": "2026-10-01T02:51:07+00:00"
 }

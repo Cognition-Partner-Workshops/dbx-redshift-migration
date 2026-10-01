@@ -1,19 +1,19 @@
 {
-  "unit": "promo_lift",
+  "unit": "attribution",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:08+00:00",
+  "started_at": "2026-10-01T02:51:25+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/promo_lift/etl.sql"
+    "file": "databricks/units/attribution/etl.sql"
   },
   "outputs": [
     {
-      "output": "promo_lift",
-      "golden": "golden/promo_lift/promo_lift.csv",
-      "target": "gold.promo_lift",
+      "output": "attribution",
+      "golden": "golden/attribution/attribution.csv",
+      "target": "gold.attribution",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,25 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "median_order_value": "DECIMAL",
-            "p90_order_value": "DECIMAL"
+            "campaign_id": "STRING",
+            "touch_channel": "STRING",
+            "touches": "LONG",
+            "customers_reached": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 100,
+          "target": 100
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "sales_channel"
+            "campaign_id",
+            "touch_channel"
           ],
-          "matched_rows": 4,
+          "matched_rows": 100,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -55,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/promo_lift/report.csv",
-      "target": "databricks/units/promo_lift/report.sql",
+      "golden": "golden/attribution/report.csv",
+      "target": "databricks/units/attribution/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -66,25 +67,24 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "sales_channel": "STRING",
-            "order_count": "LONG",
-            "median_order_value": "DECIMAL",
-            "p90_order_value": "DECIMAL"
+            "campaign_id": "STRING",
+            "touches": "LONG",
+            "customers_reached": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 4,
-          "target": 4
+          "golden": 20,
+          "target": 20
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "sales_channel"
+            "campaign_id"
           ],
-          "matched_rows": 4,
+          "matched_rows": 20,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -98,5 +98,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:13+00:00"
+  "finished_at": "2026-10-01T02:51:29+00:00"
 }
