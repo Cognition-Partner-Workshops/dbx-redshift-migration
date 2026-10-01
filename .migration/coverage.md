@@ -17,7 +17,7 @@ outcome and the fix that made `make validate` pass.
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
-| shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
+| shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | mismatch: Lakebridge kept Redshift DATEDIFF(hour) (Databricks counts elapsed hours) and float AVG (Redshift AVG(BIGINT) truncates; naive AVG gives 72.00 vs golden 71.00); 2/2 outputs PASS | TIMESTAMPDIFF(HOUR) over date_trunc('HOUR') of both NTZ timestamps; SUM DIV NULLIF(COUNT,0) cast to DECIMAL(10,2); explicit convert_timezone('UTC','America/Los_Angeles') on TIMESTAMP_NTZ; ORDER BY NULLS LAST |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
