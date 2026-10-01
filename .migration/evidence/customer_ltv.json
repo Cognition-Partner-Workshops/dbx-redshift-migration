@@ -3,10 +3,11 @@
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
-  "git_commit": "8224a73b09302814c599f1876954e3a1df8680d6",
-  "started_at": "2026-10-01T03:06:09+00:00",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T04:27:46+00:00",
   "build": {
-    "status": "SKIPPED"
+    "status": "PASS",
+    "file": "databricks/units/customer_ltv/etl.sql"
   },
   "outputs": [
     {
@@ -14,7 +15,7 @@
       "golden": "golden/customer_ltv/customer_ltv.csv",
       "target": "gold.customer_ltv",
       "tolerance_overrides": {},
-      "status": "PASS",
+      "status": "FAIL",
       "checks": [
         {
           "check": "columns",
@@ -38,17 +39,240 @@
         },
         {
           "check": "row_values",
-          "status": "PASS",
+          "status": "FAIL",
           "keys": [
             "customer_id"
           ],
-          "matched_rows": 1500,
-          "mismatched_rows": 0,
+          "matched_rows": 192,
+          "mismatched_rows": 1308,
           "missing_in_target": 0,
           "extra_in_target": 0,
           "duplicate_keys_in_target": 0,
-          "mismatches_by_column": {},
-          "sample_mismatches": [],
+          "mismatches_by_column": {
+            "aov": 1308
+          },
+          "sample_mismatches": [
+            {
+              "key": [
+                "1"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "193.25",
+                  "target": "193.253556"
+                }
+              }
+            },
+            {
+              "key": [
+                "10"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "181.11",
+                  "target": "181.113966"
+                }
+              }
+            },
+            {
+              "key": [
+                "100"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "183.02",
+                  "target": "183.027500"
+                }
+              }
+            },
+            {
+              "key": [
+                "1000"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "215.42",
+                  "target": "215.422000"
+                }
+              }
+            },
+            {
+              "key": [
+                "1001"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "218.43",
+                  "target": "218.430625"
+                }
+              }
+            },
+            {
+              "key": [
+                "1002"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "230.31",
+                  "target": "230.311935"
+                }
+              }
+            },
+            {
+              "key": [
+                "1003"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "183.39",
+                  "target": "183.397073"
+                }
+              }
+            },
+            {
+              "key": [
+                "1004"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "179.25",
+                  "target": "179.258846"
+                }
+              }
+            },
+            {
+              "key": [
+                "1005"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "173.87",
+                  "target": "173.876765"
+                }
+              }
+            },
+            {
+              "key": [
+                "1006"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "169.18",
+                  "target": "169.183514"
+                }
+              }
+            },
+            {
+              "key": [
+                "1008"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "217.20",
+                  "target": "217.208286"
+                }
+              }
+            },
+            {
+              "key": [
+                "1009"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "211.11",
+                  "target": "211.117273"
+                }
+              }
+            },
+            {
+              "key": [
+                "101"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "167.45",
+                  "target": "167.458621"
+                }
+              }
+            },
+            {
+              "key": [
+                "1010"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "187.51",
+                  "target": "187.512245"
+                }
+              }
+            },
+            {
+              "key": [
+                "1011"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "214.54",
+                  "target": "214.547073"
+                }
+              }
+            },
+            {
+              "key": [
+                "1012"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "197.57",
+                  "target": "197.573571"
+                }
+              }
+            },
+            {
+              "key": [
+                "1013"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "189.01",
+                  "target": "189.017778"
+                }
+              }
+            },
+            {
+              "key": [
+                "1014"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "209.70",
+                  "target": "209.706364"
+                }
+              }
+            },
+            {
+              "key": [
+                "1015"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "231.55",
+                  "target": "231.557222"
+                }
+              }
+            },
+            {
+              "key": [
+                "1016"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "201.06",
+                  "target": "201.061481"
+                }
+              }
+            }
+          ],
           "sample_missing": [],
           "sample_extra": []
         }
@@ -59,7 +283,7 @@
       "golden": "golden/customer_ltv/report.csv",
       "target": "databricks/units/customer_ltv/report.sql",
       "tolerance_overrides": {},
-      "status": "PASS",
+      "status": "FAIL",
       "checks": [
         {
           "check": "columns",
@@ -82,23 +306,92 @@
         },
         {
           "check": "row_values",
-          "status": "PASS",
+          "status": "FAIL",
           "keys": [
             "region"
           ],
-          "matched_rows": 6,
-          "mismatched_rows": 0,
+          "matched_rows": 0,
+          "mismatched_rows": 6,
           "missing_in_target": 0,
           "extra_in_target": 0,
           "duplicate_keys_in_target": 0,
-          "mismatches_by_column": {},
-          "sample_mismatches": [],
+          "mismatches_by_column": {
+            "avg_ltv": 6
+          },
+          "sample_mismatches": [
+            {
+              "key": [
+                "EAST"
+              ],
+              "diffs": {
+                "avg_ltv": {
+                  "golden": "6935.91",
+                  "target": "6935.910789"
+                }
+              }
+            },
+            {
+              "key": [
+                "NE  "
+              ],
+              "diffs": {
+                "avg_ltv": {
+                  "golden": "7118.14",
+                  "target": "7118.146494"
+                }
+              }
+            },
+            {
+              "key": [
+                "NRTH"
+              ],
+              "diffs": {
+                "avg_ltv": {
+                  "golden": "7134.68",
+                  "target": "7134.682826"
+                }
+              }
+            },
+            {
+              "key": [
+                "SOTH"
+              ],
+              "diffs": {
+                "avg_ltv": {
+                  "golden": "6857.81",
+                  "target": "6857.813301"
+                }
+              }
+            },
+            {
+              "key": [
+                "SW  "
+              ],
+              "diffs": {
+                "avg_ltv": {
+                  "golden": "7457.51",
+                  "target": "7457.517261"
+                }
+              }
+            },
+            {
+              "key": [
+                "WEST"
+              ],
+              "diffs": {
+                "avg_ltv": {
+                  "golden": "6920.24",
+                  "target": "6920.240985"
+                }
+              }
+            }
+          ],
           "sample_missing": [],
           "sample_extra": []
         }
       ]
     }
   ],
-  "status": "PASS",
-  "finished_at": "2026-10-01T03:06:11+00:00"
+  "status": "FAIL",
+  "finished_at": "2026-10-01T04:27:56+00:00"
 }
