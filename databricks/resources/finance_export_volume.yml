@@ -1,0 +1,8 @@
+resources:
+  volumes:
+    finance_export:
+      catalog_name: ${var.catalog}
+      schema_name: gold
+      name: finance_export
+      volume_type: MANAGED
+      comment: Destination volume for the finance_export monthly CSV export

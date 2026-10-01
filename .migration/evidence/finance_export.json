@@ -1,19 +1,19 @@
 {
-  "unit": "customer_ltv",
+  "unit": "finance_export",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:08+00:00",
+  "started_at": "2026-10-01T02:51:38+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/customer_ltv/etl.sql"
+    "file": "databricks/units/finance_export/etl.sql"
   },
   "outputs": [
     {
-      "output": "customer_ltv",
-      "golden": "golden/customer_ltv/customer_ltv.csv",
-      "target": "gold.customer_ltv",
+      "output": "finance_monthly",
+      "golden": "golden/finance_export/finance_monthly.csv",
+      "target": "gold.finance_monthly",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,27 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "customer_id": "LONG",
-            "region": "STRING",
-            "clean_phone": "STRING",
+            "month": "DATE",
+            "fiscal_year": "INT",
+            "fiscal_qtr": "STRING",
             "order_count": "LONG",
-            "ltv": "DECIMAL",
-            "aov": "DECIMAL"
+            "revenue": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 1500,
-          "target": 1500
+          "golden": 12,
+          "target": 12
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "customer_id"
+            "month"
           ],
-          "matched_rows": 1500,
+          "matched_rows": 12,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -57,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/customer_ltv/report.csv",
-      "target": "databricks/units/customer_ltv/report.sql",
+      "golden": "golden/finance_export/report.csv",
+      "target": "databricks/units/finance_export/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -68,26 +67,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "region": "STRING",
-            "customers": "LONG",
-            "orders": "LONG",
-            "total_ltv": "DECIMAL",
-            "avg_ltv": "DECIMAL"
+            "fiscal_year": "INT",
+            "fiscal_qtr": "STRING",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 6,
-          "target": 6
+          "golden": 5,
+          "target": 5
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "region"
+            "fiscal_year",
+            "fiscal_qtr"
           ],
-          "matched_rows": 6,
+          "matched_rows": 5,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -101,5 +100,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:14+00:00"
+  "finished_at": "2026-10-01T02:51:42+00:00"
 }

@@ -1,19 +1,19 @@
 {
-  "unit": "customer_ltv",
+  "unit": "rfm_segments",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:08+00:00",
+  "started_at": "2026-10-01T02:51:02+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/customer_ltv/etl.sql"
+    "file": "databricks/units/rfm_segments/etl.sql"
   },
   "outputs": [
     {
-      "output": "customer_ltv",
-      "golden": "golden/customer_ltv/customer_ltv.csv",
-      "target": "gold.customer_ltv",
+      "output": "rfm_segments",
+      "golden": "golden/rfm_segments/rfm_segments.csv",
+      "target": "gold.rfm_segments",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -24,11 +24,13 @@
           "extra": [],
           "target_types": {
             "customer_id": "LONG",
-            "region": "STRING",
-            "clean_phone": "STRING",
-            "order_count": "LONG",
-            "ltv": "DECIMAL",
-            "aov": "DECIMAL"
+            "recency_days": "LONG",
+            "frequency": "LONG",
+            "monetary": "DECIMAL",
+            "r_tile": "LONG",
+            "f_tile": "LONG",
+            "m_tile": "LONG",
+            "rfm_segment": "STRING"
           }
         },
         {
@@ -57,8 +59,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/customer_ltv/report.csv",
-      "target": "databricks/units/customer_ltv/report.sql",
+      "golden": "golden/rfm_segments/report.csv",
+      "target": "databricks/units/rfm_segments/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -68,26 +70,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "region": "STRING",
+            "rfm_segment": "STRING",
             "customers": "LONG",
-            "orders": "LONG",
-            "total_ltv": "DECIMAL",
-            "avg_ltv": "DECIMAL"
+            "total_monetary": "DECIMAL",
+            "avg_frequency": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 6,
-          "target": 6
+          "golden": 103,
+          "target": 103
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "region"
+            "rfm_segment"
           ],
-          "matched_rows": 6,
+          "matched_rows": 103,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -101,5 +102,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:14+00:00"
+  "finished_at": "2026-10-01T02:51:07+00:00"
 }
