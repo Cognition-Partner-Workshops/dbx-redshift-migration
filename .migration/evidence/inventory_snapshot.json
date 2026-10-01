@@ -1,19 +1,19 @@
 {
-  "unit": "product_perf",
+  "unit": "inventory_snapshot",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:26+00:00",
+  "started_at": "2026-10-01T02:51:31+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/product_perf/etl.sql"
+    "file": "databricks/units/inventory_snapshot/etl.sql"
   },
   "outputs": [
     {
-      "output": "product_perf",
-      "golden": "golden/product_perf/product_perf.csv",
-      "target": "gold.product_perf",
+      "output": "inventory_snapshot",
+      "golden": "golden/inventory_snapshot/inventory_snapshot.csv",
+      "target": "gold.inventory_snapshot",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -24,10 +24,9 @@
           "extra": [],
           "target_types": {
             "product_id": "INT",
-            "category": "STRING",
+            "snapshot_date": "DATE",
             "units_sold": "LONG",
-            "revenue": "DECIMAL",
-            "top_stores": "STRING"
+            "on_hand": "INT"
           }
         },
         {
@@ -56,8 +55,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/product_perf/report.csv",
-      "target": "databricks/units/product_perf/report.sql",
+      "golden": "golden/inventory_snapshot/report.csv",
+      "target": "databricks/units/inventory_snapshot/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -67,25 +66,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "category": "STRING",
-            "products": "LONG",
+            "product_id": "INT",
+            "snapshot_date": "DATE",
             "units_sold": "LONG",
-            "revenue": "DECIMAL"
+            "on_hand": "INT"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 6,
-          "target": 6
+          "golden": 50,
+          "target": 50
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "category"
+            "product_id"
           ],
-          "matched_rows": 6,
+          "matched_rows": 50,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -99,5 +98,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:31+00:00"
+  "finished_at": "2026-10-01T02:51:37+00:00"
 }
