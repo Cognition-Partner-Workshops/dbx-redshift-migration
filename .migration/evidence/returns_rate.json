@@ -3,8 +3,8 @@
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
-  "git_commit": "f2a7b04ee3f2ccbee3b2907f7e353704f5edea9b",
-  "started_at": "2026-10-01T02:28:25+00:00",
+  "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
+  "started_at": "2026-10-01T02:51:20+00:00",
   "build": {
     "status": "PASS",
     "file": "databricks/units/returns_rate/etl.sql"
@@ -100,5 +100,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:28:28+00:00"
+  "finished_at": "2026-10-01T02:51:24+00:00"
 }
