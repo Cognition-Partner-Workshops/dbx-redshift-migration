@@ -24,6 +24,6 @@ outcome and the fix that made `make validate` pass.
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | mismatch: Lakebridge emitted invalid `CROSS JOIN t.payload.touches` over STRING silver payload and lost VARCHAR(16) cast; 2/2 outputs PASS | parse_json + `try_variant_get($.touches, ARRAY<VARIANT>)` typed explode (non-array → no rows); string-only `variant_get` → NULL otherwise, `left(...,16)` for VARCHAR(16); ORDER BY NULLS LAST |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
-| finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
+| finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | rejected only for UNLOAD (export.sql); etl/report transpiled clean apart from core/mart naming and bare F_FISCAL_QTR; 2/2 outputs PASS | CTAS -> CREATE OR REPLACE TABLE gold.finance_monthly; core.* -> silver.*; call silver.f_fiscal_qtr; TRUNC(ts)::DATE -> CAST(ts AS DATE); revenue DECIMAL(34,2) keeps scale 2; report ORDER BY ... NULLS LAST (Redshift default); UNLOAD left to parent export |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
 | orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
