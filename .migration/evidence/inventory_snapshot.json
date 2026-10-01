@@ -1,19 +1,19 @@
 {
-  "unit": "store_weekly",
+  "unit": "inventory_snapshot",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:32+00:00",
+  "started_at": "2026-10-01T02:51:31+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/store_weekly/etl.sql"
+    "file": "databricks/units/inventory_snapshot/etl.sql"
   },
   "outputs": [
     {
-      "output": "store_weekly",
-      "golden": "golden/store_weekly/store_weekly.csv",
-      "target": "gold.store_weekly",
+      "output": "inventory_snapshot",
+      "golden": "golden/inventory_snapshot/inventory_snapshot.csv",
+      "target": "gold.inventory_snapshot",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,28 +23,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "store_id": "INT",
-            "week_start": "DATE",
-            "week_end": "DATE",
-            "week_number": "LONG",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "product_id": "INT",
+            "snapshot_date": "DATE",
+            "units_sold": "LONG",
+            "on_hand": "INT"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 2120,
-          "target": 2120
+          "golden": 300,
+          "target": 300
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "store_id",
-            "week_start"
+            "product_id"
           ],
-          "matched_rows": 2120,
+          "matched_rows": 300,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -58,8 +55,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/store_weekly/report.csv",
-      "target": "databricks/units/store_weekly/report.sql",
+      "golden": "golden/inventory_snapshot/report.csv",
+      "target": "databricks/units/inventory_snapshot/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -69,26 +66,25 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "store_id": "INT",
-            "region": "STRING",
-            "active_weeks": "LONG",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "product_id": "INT",
+            "snapshot_date": "DATE",
+            "units_sold": "LONG",
+            "on_hand": "INT"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 40,
-          "target": 40
+          "golden": 50,
+          "target": 50
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "store_id"
+            "product_id"
           ],
-          "matched_rows": 40,
+          "matched_rows": 50,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -102,5 +98,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:38+00:00"
+  "finished_at": "2026-10-01T02:51:37+00:00"
 }

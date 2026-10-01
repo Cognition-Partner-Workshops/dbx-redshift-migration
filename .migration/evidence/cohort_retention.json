@@ -1,19 +1,19 @@
 {
-  "unit": "store_weekly",
+  "unit": "cohort_retention",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:32+00:00",
+  "started_at": "2026-10-01T02:51:43+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/store_weekly/etl.sql"
+    "file": "databricks/units/cohort_retention/etl.sql"
   },
   "outputs": [
     {
-      "output": "store_weekly",
-      "golden": "golden/store_weekly/store_weekly.csv",
-      "target": "gold.store_weekly",
+      "output": "cohort_retention",
+      "golden": "golden/cohort_retention/cohort_retention.csv",
+      "target": "gold.cohort_retention",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,28 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "store_id": "INT",
-            "week_start": "DATE",
-            "week_end": "DATE",
-            "week_number": "LONG",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "cohort_month": "DATE",
+            "month_offset": "INT",
+            "cohort_size": "LONG",
+            "active_buyers": "LONG"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 2120,
-          "target": 2120
+          "golden": 65,
+          "target": 65
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "store_id",
-            "week_start"
+            "cohort_month",
+            "month_offset"
           ],
-          "matched_rows": 2120,
+          "matched_rows": 65,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -58,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/store_weekly/report.csv",
-      "target": "databricks/units/store_weekly/report.sql",
+      "golden": "golden/cohort_retention/report.csv",
+      "target": "databricks/units/cohort_retention/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -69,26 +67,27 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "store_id": "INT",
-            "region": "STRING",
-            "active_weeks": "LONG",
-            "order_count": "LONG",
-            "revenue": "DECIMAL"
+            "cohort_month": "DATE",
+            "month_offset": "INT",
+            "cohort_size": "LONG",
+            "active_buyers": "LONG",
+            "retention_pct": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 40,
-          "target": 40
+          "golden": 65,
+          "target": 65
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "store_id"
+            "cohort_month",
+            "month_offset"
           ],
-          "matched_rows": 40,
+          "matched_rows": 65,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -102,5 +101,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:50:38+00:00"
+  "finished_at": "2026-10-01T02:51:49+00:00"
 }
