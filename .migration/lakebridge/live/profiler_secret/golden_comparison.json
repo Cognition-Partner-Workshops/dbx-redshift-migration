@@ -1,0 +1,233 @@
+{
+  "summary": {
+    "MATCH": 29,
+    "MISMATCH": 0,
+    "BLOCKED": 0
+  },
+  "tables": [
+    {
+      "table": "core.campaign_touches",
+      "golden": "golden/foundation/campaign_touches.csv",
+      "golden_rows": 8000,
+      "live_rows": 8000,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.customers",
+      "golden": "golden/foundation/customers.csv",
+      "golden_rows": 1500,
+      "live_rows": 1500,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.order_items",
+      "golden": "golden/foundation/order_items.csv",
+      "golden_rows": 40938,
+      "live_rows": 40938,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.orders",
+      "golden": "golden/foundation/orders.csv",
+      "golden_rows": 20000,
+      "live_rows": 20000,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.payments",
+      "golden": "golden/foundation/payments.csv",
+      "golden_rows": 20000,
+      "live_rows": 20000,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.products",
+      "golden": "golden/foundation/products.csv",
+      "golden_rows": 300,
+      "live_rows": 300,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.returns",
+      "golden": "golden/foundation/returns.csv",
+      "golden_rows": 2518,
+      "live_rows": 2518,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.shipments",
+      "golden": "golden/foundation/shipments.csv",
+      "golden_rows": 12817,
+      "live_rows": 12817,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.stores",
+      "golden": "golden/foundation/stores.csv",
+      "golden_rows": 40,
+      "live_rows": 40,
+      "status": "MATCH"
+    },
+    {
+      "table": "core.web_events",
+      "golden": "golden/foundation/web_events.csv",
+      "golden_rows": 25000,
+      "live_rows": 25000,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.attribution",
+      "golden": "golden/attribution/attribution.csv",
+      "golden_rows": 100,
+      "live_rows": 100,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.basket_affinity",
+      "golden": "golden/basket_affinity/basket_affinity.csv",
+      "golden_rows": 50,
+      "live_rows": 50,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.category_mix",
+      "golden": "golden/category_mix/category_mix.csv",
+      "golden_rows": 6,
+      "live_rows": 6,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.churn_flags",
+      "golden": "golden/churn_flags/churn_flags.csv",
+      "golden_rows": 1500,
+      "live_rows": 1500,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.cohort_retention",
+      "golden": "golden/cohort_retention/cohort_retention.csv",
+      "golden_rows": 65,
+      "live_rows": 65,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.customer_ltv",
+      "golden": "golden/customer_ltv/customer_ltv.csv",
+      "golden_rows": 1500,
+      "live_rows": 1500,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.daily_revenue",
+      "golden": "golden/daily_revenue/daily_revenue.csv",
+      "golden_rows": 1460,
+      "live_rows": 1460,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.exec_summary",
+      "golden": "golden/orchestration/exec_summary.csv",
+      "golden_rows": 1,
+      "live_rows": 1,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.finance_monthly",
+      "golden": "golden/finance_export/finance_monthly.csv",
+      "golden_rows": 12,
+      "live_rows": 12,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.geo_rollup",
+      "golden": "golden/geo_rollup/geo_rollup.csv",
+      "golden_rows": 21,
+      "live_rows": 21,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.inventory_snapshot",
+      "golden": "golden/inventory_snapshot/inventory_snapshot.csv",
+      "golden_rows": 300,
+      "live_rows": 300,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.payment_mix",
+      "golden": "golden/payment_mix/payment_mix.csv",
+      "golden_rows": 5,
+      "live_rows": 5,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.product_perf",
+      "golden": "golden/product_perf/product_perf.csv",
+      "golden_rows": 300,
+      "live_rows": 300,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.promo_lift",
+      "golden": "golden/promo_lift/promo_lift.csv",
+      "golden_rows": 4,
+      "live_rows": 4,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.returns_rate",
+      "golden": "golden/returns_rate/returns_rate.csv",
+      "golden_rows": 6,
+      "live_rows": 6,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.rfm_segments",
+      "golden": "golden/rfm_segments/rfm_segments.csv",
+      "golden_rows": 1500,
+      "live_rows": 1500,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.shipping_sla",
+      "golden": "golden/shipping_sla/shipping_sla.csv",
+      "golden_rows": 4,
+      "live_rows": 4,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.store_weekly",
+      "golden": "golden/store_weekly/store_weekly.csv",
+      "golden_rows": 2120,
+      "live_rows": 2120,
+      "status": "MATCH"
+    },
+    {
+      "table": "mart.web_sessions",
+      "golden": "golden/sessionization/web_sessions.csv",
+      "golden_rows": 21280,
+      "live_rows": 21280,
+      "status": "MATCH"
+    }
+  ],
+  "exec_summary_values": {
+    "live": [
+      "as_of_2025-12-31",
+      "2025-12-31",
+      "10543825.25",
+      "20000",
+      "7029.21",
+      "5.013772053897100",
+      "71.2551"
+    ],
+    "golden": [
+      "as_of_2025-12-31",
+      "2025-12-31",
+      "10543825.25",
+      "20000",
+      "7029.21",
+      "5.013772053897100",
+      "71.2551"
+    ],
+    "match": true
+  }
+}

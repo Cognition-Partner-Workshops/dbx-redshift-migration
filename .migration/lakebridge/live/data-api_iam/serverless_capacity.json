@@ -1,0 +1,8 @@
+{
+  "step": "serverless_capacity",
+  "status": "ABSENT",
+  "error": "ERROR: permission denied for relation sys_serverless_usage",
+  "columns": [],
+  "row_count": 0,
+  "rows": []
+}

@@ -1,0 +1,12 @@
+{
+  "step": "information_schema_tables",
+  "status": "COMPLETE",
+  "error": null,
+  "columns": [
+    "table_schema",
+    "table_name",
+    "table_type"
+  ],
+  "row_count": 0,
+  "rows": []
+}

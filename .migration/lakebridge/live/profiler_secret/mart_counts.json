@@ -1,0 +1,88 @@
+{
+  "step": "mart_counts",
+  "status": "COMPLETE",
+  "error": null,
+  "columns": [
+    "table_name",
+    "row_count"
+  ],
+  "row_count": 19,
+  "rows": [
+    [
+      "mart.attribution",
+      100
+    ],
+    [
+      "mart.basket_affinity",
+      50
+    ],
+    [
+      "mart.category_mix",
+      6
+    ],
+    [
+      "mart.churn_flags",
+      1500
+    ],
+    [
+      "mart.cohort_retention",
+      65
+    ],
+    [
+      "mart.customer_ltv",
+      1500
+    ],
+    [
+      "mart.daily_revenue",
+      1460
+    ],
+    [
+      "mart.exec_summary",
+      1
+    ],
+    [
+      "mart.finance_monthly",
+      12
+    ],
+    [
+      "mart.geo_rollup",
+      21
+    ],
+    [
+      "mart.inventory_snapshot",
+      300
+    ],
+    [
+      "mart.payment_mix",
+      5
+    ],
+    [
+      "mart.product_perf",
+      300
+    ],
+    [
+      "mart.promo_lift",
+      4
+    ],
+    [
+      "mart.returns_rate",
+      6
+    ],
+    [
+      "mart.rfm_segments",
+      1500
+    ],
+    [
+      "mart.shipping_sla",
+      4
+    ],
+    [
+      "mart.store_weekly",
+      2120
+    ],
+    [
+      "mart.web_sessions",
+      21280
+    ]
+  ]
+}

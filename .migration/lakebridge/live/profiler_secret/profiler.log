@@ -1,0 +1,22 @@
+{
+  "engine": "profiler",
+  "auth": "secret",
+  "started_utc": "2026-10-01T02:01:59+00:00",
+  "workgroup": "demo-wg",
+  "database": "mig_redshift_src",
+  "pipeline": "tools/redshift_discovery/pipeline_config.yml",
+  "error": null,
+  "steps": {
+    "session_identity": "COMPLETE",
+    "information_schema_tables": "COMPLETE",
+    "pg_class_relations": "COMPLETE",
+    "columns_dist_sort": "COMPLETE",
+    "routines": "COMPLETE",
+    "svv_table_info": "COMPLETE",
+    "core_counts": "COMPLETE",
+    "mart_counts": "COMPLETE",
+    "exec_summary": "COMPLETE",
+    "serverless_storage": "COMPLETE",
+    "serverless_capacity": "COMPLETE"
+  }
+}
