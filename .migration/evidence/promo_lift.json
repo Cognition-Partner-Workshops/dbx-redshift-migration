@@ -1,19 +1,19 @@
 {
-  "unit": "shipping_sla",
+  "unit": "promo_lift",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:50:57+00:00",
+  "started_at": "2026-10-01T02:51:08+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/shipping_sla/etl.sql"
+    "file": "databricks/units/promo_lift/etl.sql"
   },
   "outputs": [
     {
-      "output": "shipping_sla",
-      "golden": "golden/shipping_sla/shipping_sla.csv",
-      "target": "gold.shipping_sla",
+      "output": "promo_lift",
+      "golden": "golden/promo_lift/promo_lift.csv",
+      "target": "gold.promo_lift",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,14 +23,10 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "carrier": "STRING",
-            "shipments": "LONG",
-            "delivered": "LONG",
-            "in_flight": "LONG",
-            "avg_hours_to_deliver": "DECIMAL",
-            "max_hours_to_deliver": "LONG",
-            "on_time_96h": "LONG",
-            "earliest_local_delivery_hour": "INT"
+            "sales_channel": "STRING",
+            "order_count": "LONG",
+            "median_order_value": "DECIMAL",
+            "p90_order_value": "DECIMAL"
           }
         },
         {
@@ -43,7 +39,7 @@
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "carrier"
+            "sales_channel"
           ],
           "matched_rows": 4,
           "mismatched_rows": 0,
@@ -59,8 +55,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/shipping_sla/report.csv",
-      "target": "databricks/units/shipping_sla/report.sql",
+      "golden": "golden/promo_lift/report.csv",
+      "target": "databricks/units/promo_lift/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -70,13 +66,10 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "carrier": "STRING",
-            "shipments": "LONG",
-            "delivered": "LONG",
-            "in_flight": "LONG",
-            "avg_hours_to_deliver": "DECIMAL",
-            "max_hours_to_deliver": "LONG",
-            "on_time_96h": "LONG"
+            "sales_channel": "STRING",
+            "order_count": "LONG",
+            "median_order_value": "DECIMAL",
+            "p90_order_value": "DECIMAL"
           }
         },
         {
@@ -89,7 +82,7 @@
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "carrier"
+            "sales_channel"
           ],
           "matched_rows": 4,
           "mismatched_rows": 0,
@@ -105,5 +98,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:01+00:00"
+  "finished_at": "2026-10-01T02:51:13+00:00"
 }
