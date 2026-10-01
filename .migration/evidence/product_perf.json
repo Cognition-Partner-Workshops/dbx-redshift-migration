@@ -1,19 +1,19 @@
 {
-  "unit": "returns_rate",
+  "unit": "product_perf",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:20+00:00",
+  "started_at": "2026-10-01T02:50:26+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/returns_rate/etl.sql"
+    "file": "databricks/units/product_perf/etl.sql"
   },
   "outputs": [
     {
-      "output": "returns_rate",
-      "golden": "golden/returns_rate/returns_rate.csv",
-      "target": "gold.returns_rate",
+      "output": "product_perf",
+      "golden": "golden/product_perf/product_perf.csv",
+      "target": "gold.product_perf",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,26 +23,26 @@
           "missing": [],
           "extra": [],
           "target_types": {
+            "product_id": "INT",
             "category": "STRING",
-            "sold_qty": "LONG",
-            "returned_qty": "LONG",
-            "return_rate_int": "LONG",
-            "return_pct": "DECIMAL"
+            "units_sold": "LONG",
+            "revenue": "DECIMAL",
+            "top_stores": "STRING"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 6,
-          "target": 6
+          "golden": 300,
+          "target": 300
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "category"
+            "product_id"
           ],
-          "matched_rows": 6,
+          "matched_rows": 300,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -56,8 +56,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/returns_rate/report.csv",
-      "target": "databricks/units/returns_rate/report.sql",
+      "golden": "golden/product_perf/report.csv",
+      "target": "databricks/units/product_perf/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -68,10 +68,9 @@
           "extra": [],
           "target_types": {
             "category": "STRING",
-            "sold_qty": "LONG",
-            "returned_qty": "LONG",
-            "return_rate_int": "LONG",
-            "return_pct": "DECIMAL"
+            "products": "LONG",
+            "units_sold": "LONG",
+            "revenue": "DECIMAL"
           }
         },
         {
@@ -100,5 +99,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:24+00:00"
+  "finished_at": "2026-10-01T02:50:31+00:00"
 }

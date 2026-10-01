@@ -1,19 +1,19 @@
 {
-  "unit": "returns_rate",
+  "unit": "customer_ltv",
   "engine": "databricks_sql",
   "catalog": "mig_redshift_dev",
   "warehouse_id": "6dc4b80538621b7b",
   "git_commit": "fda9b06be25be4c97869eed544bcbb4d65cf1460",
-  "started_at": "2026-10-01T02:51:20+00:00",
+  "started_at": "2026-10-01T02:50:08+00:00",
   "build": {
     "status": "PASS",
-    "file": "databricks/units/returns_rate/etl.sql"
+    "file": "databricks/units/customer_ltv/etl.sql"
   },
   "outputs": [
     {
-      "output": "returns_rate",
-      "golden": "golden/returns_rate/returns_rate.csv",
-      "target": "gold.returns_rate",
+      "output": "customer_ltv",
+      "golden": "golden/customer_ltv/customer_ltv.csv",
+      "target": "gold.customer_ltv",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -23,26 +23,27 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "category": "STRING",
-            "sold_qty": "LONG",
-            "returned_qty": "LONG",
-            "return_rate_int": "LONG",
-            "return_pct": "DECIMAL"
+            "customer_id": "LONG",
+            "region": "STRING",
+            "clean_phone": "STRING",
+            "order_count": "LONG",
+            "ltv": "DECIMAL",
+            "aov": "DECIMAL"
           }
         },
         {
           "check": "row_count",
           "status": "PASS",
-          "golden": 6,
-          "target": 6
+          "golden": 1500,
+          "target": 1500
         },
         {
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "category"
+            "customer_id"
           ],
-          "matched_rows": 6,
+          "matched_rows": 1500,
           "mismatched_rows": 0,
           "missing_in_target": 0,
           "extra_in_target": 0,
@@ -56,8 +57,8 @@
     },
     {
       "output": "report",
-      "golden": "golden/returns_rate/report.csv",
-      "target": "databricks/units/returns_rate/report.sql",
+      "golden": "golden/customer_ltv/report.csv",
+      "target": "databricks/units/customer_ltv/report.sql",
       "tolerance_overrides": {},
       "status": "PASS",
       "checks": [
@@ -67,11 +68,11 @@
           "missing": [],
           "extra": [],
           "target_types": {
-            "category": "STRING",
-            "sold_qty": "LONG",
-            "returned_qty": "LONG",
-            "return_rate_int": "LONG",
-            "return_pct": "DECIMAL"
+            "region": "STRING",
+            "customers": "LONG",
+            "orders": "LONG",
+            "total_ltv": "DECIMAL",
+            "avg_ltv": "DECIMAL"
           }
         },
         {
@@ -84,7 +85,7 @@
           "check": "row_values",
           "status": "PASS",
           "keys": [
-            "category"
+            "region"
           ],
           "matched_rows": 6,
           "mismatched_rows": 0,
@@ -100,5 +101,5 @@
     }
   ],
   "status": "PASS",
-  "finished_at": "2026-10-01T02:51:24+00:00"
+  "finished_at": "2026-10-01T02:50:14+00:00"
 }
