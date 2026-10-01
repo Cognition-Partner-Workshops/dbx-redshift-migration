@@ -1,0 +1,61 @@
+{
+  "unit": "semantic.store_weekly_metrics",
+  "legacy_unit": "store_weekly",
+  "definition": "databricks/semantic/revenue/store_weekly.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:43+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.store_weekly_metrics",
+      "golden": "golden/store_weekly/report.csv",
+      "target": "SELECT `store_id`, `region`, MEASURE(`active_weeks`) AS `active_weeks`, MEASURE(`order_count`) AS `order_count`, MEASURE(`revenue`) AS `revenue`\nFROM semantic.store_weekly_metrics\nGROUP BY ALL\nORDER BY store_id",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "store_id": "INT",
+            "region": "STRING",
+            "active_weeks": "LONG",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 40,
+          "target": 40
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "store_id"
+          ],
+          "matched_rows": 40,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:45+00:00"
+}

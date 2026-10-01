@@ -1,0 +1,27 @@
+# Legacy: legacy/redshift/units/rfm_segments/report.sql
+#   SELECT rfm_segment, COUNT(*) AS customers, SUM(monetary) AS total_monetary,
+#          AVG(frequency) AS avg_frequency
+#   FROM mart.rfm_segments GROUP BY 1
+# recency is measured against the fixed '2025-12-31' anchor in the ETL.
+version: 1.1
+comment: RFM customer segments (gold.rfm_segments, one row per customer - recency vs 2025-12-31).
+source: gold.rfm_segments
+dimensions:
+  - name: customer_id
+    expr: customer_id
+  - name: rfm_segment
+    expr: rfm_segment
+  - name: r_tile
+    expr: r_tile
+  - name: f_tile
+    expr: f_tile
+  - name: m_tile
+    expr: m_tile
+measures:
+  - name: customers
+    expr: COUNT(1)
+  - name: total_monetary
+    expr: SUM(monetary)
+  - name: avg_frequency
+    expr: CAST(SUM(frequency) DIV COUNT(frequency) AS BIGINT)
+    comment: Redshift AVG over an integer column is integer (truncating) division.

@@ -1,0 +1,22 @@
+# Legacy: legacy/redshift/units/sessionization/report.sql (mart.web_sessions)
+#   SELECT customer_id, COUNT(*) AS sessions, SUM(event_count) AS events,
+#          SUM(checkout_events) AS checkout_sessions
+#   FROM mart.web_sessions GROUP BY customer_id
+version: 1.1
+comment: Web sessions (30-minute inactivity sessionization) per customer (gold.web_sessions).
+source: gold.web_sessions
+dimensions:
+  - name: customer_id
+    expr: customer_id
+  - name: session_id
+    expr: session_id
+  - name: session_date
+    expr: CAST(session_start_ts AS DATE)
+measures:
+  - name: sessions
+    expr: COUNT(1)
+  - name: events
+    expr: SUM(event_count)
+  - name: checkout_sessions
+    expr: SUM(checkout_events)
+    comment: Sum of checkout events per session, aliased checkout_sessions as in the legacy report.

@@ -1,0 +1,17 @@
+# Legacy: legacy/redshift/units/inventory_snapshot/report.sql
+#   SELECT product_id, snapshot_date, units_sold, on_hand FROM mart.inventory_snapshot
+#   ORDER BY on_hand ASC NULLS LAST, product_id LIMIT 50
+# snapshot_date is the fixed '2025-12-31' anchor written by the ETL.
+version: 1.1
+comment: Product inventory position at the fixed 2025-12-31 snapshot (gold.inventory_snapshot).
+source: gold.inventory_snapshot
+dimensions:
+  - name: product_id
+    expr: product_id
+  - name: snapshot_date
+    expr: snapshot_date
+measures:
+  - name: units_sold
+    expr: SUM(units_sold)
+  - name: on_hand
+    expr: SUM(on_hand)

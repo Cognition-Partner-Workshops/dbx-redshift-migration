@@ -1,0 +1,31 @@
+# Legacy: legacy/redshift/units/basket_affinity/report.sql
+#   SELECT b.product_id_a, b.product_id_b,
+#          pa.product_name || ' + ' || pb.product_name AS pair, b.pair_orders
+#   FROM mart.basket_affinity b JOIN core.products pa ... JOIN core.products pb ...
+#   ORDER BY b.pair_orders DESC, b.product_id_a, b.product_id_b LIMIT 50
+version: 1.1
+comment: Product pairs bought together (gold.basket_affinity) with product names from silver.products.
+source: gold.basket_affinity
+joins:
+  - name: product_a
+    source: silver.products
+    "on": source.product_id_a = product_a.product_id
+  - name: product_b
+    source: silver.products
+    "on": source.product_id_b = product_b.product_id
+dimensions:
+  - name: product_id_a
+    expr: source.product_id_a
+  - name: product_name_a
+    expr: product_a.product_name
+  - name: product_id_b
+    expr: source.product_id_b
+  - name: product_name_b
+    expr: product_b.product_name
+  - name: pair
+    expr: product_a.product_name || ' + ' || product_b.product_name
+    comment: Pair label '<product a> + <product b>' (legacy report).
+measures:
+  - name: pair_orders
+    expr: SUM(pair_orders)
+    comment: Orders containing both products.

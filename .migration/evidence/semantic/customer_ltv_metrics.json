@@ -1,0 +1,61 @@
+{
+  "unit": "semantic.customer_ltv_metrics",
+  "legacy_unit": "customer_ltv",
+  "definition": "databricks/semantic/customer/customer_ltv.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:51+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.customer_ltv_metrics",
+      "golden": "golden/customer_ltv/report.csv",
+      "target": "SELECT `region`, MEASURE(`customers`) AS `customers`, MEASURE(`orders`) AS `orders`, MEASURE(`total_ltv`) AS `total_ltv`, MEASURE(`avg_ltv`) AS `avg_ltv`\nFROM semantic.customer_ltv_metrics\nGROUP BY ALL\nORDER BY region",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "region": "STRING",
+            "customers": "LONG",
+            "orders": "LONG",
+            "total_ltv": "DECIMAL",
+            "avg_ltv": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 6,
+          "target": 6
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "region"
+          ],
+          "matched_rows": 6,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:52+00:00"
+}

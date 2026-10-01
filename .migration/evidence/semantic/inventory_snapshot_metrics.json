@@ -1,0 +1,60 @@
+{
+  "unit": "semantic.inventory_snapshot_metrics",
+  "legacy_unit": "inventory_snapshot",
+  "definition": "databricks/semantic/operations/inventory_snapshot.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:23:03+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.inventory_snapshot_metrics",
+      "golden": "golden/inventory_snapshot/report.csv",
+      "target": "SELECT `product_id`, `snapshot_date`, MEASURE(`units_sold`) AS `units_sold`, MEASURE(`on_hand`) AS `on_hand`\nFROM semantic.inventory_snapshot_metrics\nGROUP BY ALL\nORDER BY on_hand ASC NULLS LAST, product_id\nLIMIT 50",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "product_id": "INT",
+            "snapshot_date": "DATE",
+            "units_sold": "LONG",
+            "on_hand": "LONG"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 50,
+          "target": 50
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "product_id"
+          ],
+          "matched_rows": 50,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:23:04+00:00"
+}

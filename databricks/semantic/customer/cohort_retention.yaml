@@ -1,0 +1,21 @@
+# Legacy: legacy/redshift/units/cohort_retention/report.sql
+#   SELECT cohort_month, month_offset, cohort_size, active_buyers,
+#          ROUND(100.0 * active_buyers / cohort_size, 2) AS retention_pct
+#   FROM mart.cohort_retention
+version: 1.1
+comment: Monthly acquisition-cohort retention (gold.cohort_retention, one row per cohort x month offset).
+source: gold.cohort_retention
+dimensions:
+  - name: cohort_month
+    expr: cohort_month
+  - name: month_offset
+    expr: month_offset
+    comment: Months since the cohort's first order month.
+measures:
+  - name: cohort_size
+    expr: SUM(cohort_size)
+  - name: active_buyers
+    expr: SUM(active_buyers)
+  - name: retention_pct
+    expr: ROUND(100.0 * SUM(active_buyers) / SUM(cohort_size), 2)
+    comment: Percent of the cohort buying in the offset month (legacy report formula).

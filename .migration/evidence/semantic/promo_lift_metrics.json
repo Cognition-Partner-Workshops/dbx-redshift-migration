@@ -1,0 +1,60 @@
+{
+  "unit": "semantic.promo_lift_metrics",
+  "legacy_unit": "promo_lift",
+  "definition": "databricks/semantic/marketing/promo_lift.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:57+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.promo_lift_metrics",
+      "golden": "golden/promo_lift/report.csv",
+      "target": "SELECT `sales_channel`, MEASURE(`order_count`) AS `order_count`, MEASURE(`median_order_value`) AS `median_order_value`, MEASURE(`p90_order_value`) AS `p90_order_value`\nFROM semantic.promo_lift_metrics\nGROUP BY ALL\nORDER BY sales_channel",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "sales_channel": "STRING",
+            "order_count": "LONG",
+            "median_order_value": "DECIMAL",
+            "p90_order_value": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 4,
+          "target": 4
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "sales_channel"
+          ],
+          "matched_rows": 4,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:58+00:00"
+}

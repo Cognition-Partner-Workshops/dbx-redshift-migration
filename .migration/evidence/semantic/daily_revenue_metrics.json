@@ -1,0 +1,61 @@
+{
+  "unit": "semantic.daily_revenue_metrics",
+  "legacy_unit": "daily_revenue",
+  "definition": "databricks/semantic/revenue/daily_revenue.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:42+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.daily_revenue_metrics",
+      "golden": "golden/daily_revenue/report.csv",
+      "target": "SELECT `order_month`, `sales_channel`, MEASURE(`order_count`) AS `order_count`, MEASURE(`revenue`) AS `revenue`\nFROM semantic.daily_revenue_metrics\nGROUP BY ALL\nORDER BY order_month, sales_channel",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "order_month": "DATE",
+            "sales_channel": "STRING",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 48,
+          "target": 48
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "order_month",
+            "sales_channel"
+          ],
+          "matched_rows": 48,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:43+00:00"
+}

@@ -1,0 +1,61 @@
+{
+  "unit": "semantic.returns_rate_metrics",
+  "legacy_unit": "returns_rate",
+  "definition": "databricks/semantic/operations/returns_rate.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:23:02+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.returns_rate_metrics",
+      "golden": "golden/returns_rate/report.csv",
+      "target": "SELECT `category`, MEASURE(`sold_qty`) AS `sold_qty`, MEASURE(`returned_qty`) AS `returned_qty`, MEASURE(`return_rate_int`) AS `return_rate_int`, MEASURE(`return_pct`) AS `return_pct`\nFROM semantic.returns_rate_metrics\nGROUP BY ALL\nORDER BY return_pct DESC NULLS FIRST, category",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "category": "STRING",
+            "sold_qty": "LONG",
+            "returned_qty": "LONG",
+            "return_rate_int": "LONG",
+            "return_pct": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 6,
+          "target": 6
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "category"
+          ],
+          "matched_rows": 6,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:23:03+00:00"
+}

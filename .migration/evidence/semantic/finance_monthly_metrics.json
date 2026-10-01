@@ -1,0 +1,61 @@
+{
+  "unit": "semantic.finance_monthly_metrics",
+  "legacy_unit": "finance_export",
+  "definition": "databricks/semantic/revenue/finance_monthly.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:49+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.finance_monthly_metrics",
+      "golden": "golden/finance_export/report.csv",
+      "target": "SELECT `fiscal_year`, `fiscal_qtr`, MEASURE(`order_count`) AS `order_count`, MEASURE(`revenue`) AS `revenue`\nFROM semantic.finance_monthly_metrics\nGROUP BY ALL\nORDER BY fiscal_year, fiscal_qtr",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "fiscal_year": "INT",
+            "fiscal_qtr": "STRING",
+            "order_count": "LONG",
+            "revenue": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 5,
+          "target": 5
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "fiscal_year",
+            "fiscal_qtr"
+          ],
+          "matched_rows": 5,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:51+00:00"
+}

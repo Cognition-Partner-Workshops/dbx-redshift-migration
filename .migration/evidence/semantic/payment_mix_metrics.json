@@ -1,0 +1,59 @@
+{
+  "unit": "semantic.payment_mix_metrics",
+  "legacy_unit": "payment_mix",
+  "definition": "databricks/semantic/revenue/payment_mix.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:48+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.payment_mix_metrics",
+      "golden": "golden/payment_mix/report.csv",
+      "target": "SELECT `method_family`, MEASURE(`payment_count`) AS `payment_count`, MEASURE(`amount_total`) AS `amount_total`\nFROM semantic.payment_mix_metrics\nGROUP BY ALL\nORDER BY method_family",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "method_family": "STRING",
+            "payment_count": "LONG",
+            "amount_total": "DECIMAL"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 4,
+          "target": 4
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "method_family"
+          ],
+          "matched_rows": 4,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:22:49+00:00"
+}

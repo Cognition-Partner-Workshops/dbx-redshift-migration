@@ -1,0 +1,27 @@
+# Legacy: legacy/redshift/units/returns_rate/report.sql
+#   SELECT category, sold_qty, returned_qty, return_rate_int, return_pct FROM mart.returns_rate
+# The ETL computes return_rate_int = returned_qty / sold_qty (integer division) and
+# return_pct = returned_qty::DECIMAL(14,4) / sold_qty::DECIMAL(14,4) * 100 with
+# Redshift's truncating DECIMAL division (scale 15). Both are recomputed here from
+# the summed quantities so they stay correct at any grain.
+version: 1.1
+comment: Units sold and returned per product category (gold.returns_rate).
+source: gold.returns_rate
+dimensions:
+  - name: category
+    expr: category
+measures:
+  - name: sold_qty
+    expr: SUM(sold_qty)
+  - name: returned_qty
+    expr: SUM(returned_qty)
+  - name: return_rate_int
+    expr: CAST(SUM(returned_qty) DIV SUM(sold_qty) AS BIGINT)
+    comment: Legacy integer division returned_qty / sold_qty (0 unless every unit was returned).
+  - name: return_pct
+    expr: >-
+      CAST((CAST(CAST(SUM(returned_qty) AS DECIMAL(14,4)) DIV CAST(SUM(sold_qty) AS DECIMAL(14,4)) AS DECIMAL(15,0))
+      + CAST((CAST(CAST(SUM(returned_qty) AS DECIMAL(14,4)) % CAST(SUM(sold_qty) AS DECIMAL(14,4)) AS DECIMAL(14,4))
+      * CAST(1000000000000000 AS DECIMAL(16,0))) DIV CAST(SUM(sold_qty) AS DECIMAL(14,4)) AS DECIMAL(15,0))
+      * 0.000000000000001) * 100 AS DECIMAL(38,15))
+    comment: Returned / sold * 100 with Redshift DECIMAL(14,4) truncating division at scale 15.

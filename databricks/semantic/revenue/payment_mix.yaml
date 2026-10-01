@@ -1,0 +1,22 @@
+# Legacy: legacy/redshift/units/payment_mix/report.sql
+#   SELECT method_family, SUM(payment_count) AS payment_count, SUM(amount_total) AS amount_total
+#   FROM mart.payment_mix GROUP BY method_family
+version: 1.1
+comment: Payment counts and amounts per payment method (gold.payment_mix, pre-aggregated by method).
+source: gold.payment_mix
+dimensions:
+  - name: method
+    expr: method
+  - name: method_family
+    expr: method_family
+    comment: Method family derived from the method JSON (SUPER) in the legacy ETL.
+  - name: method_status
+    expr: method_status
+measures:
+  - name: payment_count
+    expr: SUM(payment_count)
+  - name: amount_total
+    expr: SUM(amount_total)
+  - name: amount_share
+    expr: SUM(amount_share)
+    comment: Share of total payment amount, precomputed per method in the mart - additive.

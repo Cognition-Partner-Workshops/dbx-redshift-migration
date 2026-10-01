@@ -1,0 +1,63 @@
+{
+  "unit": "semantic.shipping_sla_metrics",
+  "legacy_unit": "shipping_sla",
+  "definition": "databricks/semantic/operations/shipping_sla.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:23:00+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.shipping_sla_metrics",
+      "golden": "golden/shipping_sla/report.csv",
+      "target": "SELECT `carrier`, MEASURE(`shipments`) AS `shipments`, MEASURE(`delivered`) AS `delivered`, MEASURE(`in_flight`) AS `in_flight`, MEASURE(`avg_hours_to_deliver`) AS `avg_hours_to_deliver`, MEASURE(`max_hours_to_deliver`) AS `max_hours_to_deliver`, MEASURE(`on_time_96h`) AS `on_time_96h`\nFROM semantic.shipping_sla_metrics\nGROUP BY ALL\nORDER BY carrier",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "carrier": "STRING",
+            "shipments": "LONG",
+            "delivered": "LONG",
+            "in_flight": "LONG",
+            "avg_hours_to_deliver": "DECIMAL",
+            "max_hours_to_deliver": "LONG",
+            "on_time_96h": "LONG"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 4,
+          "target": 4
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "carrier"
+          ],
+          "matched_rows": 4,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:23:02+00:00"
+}

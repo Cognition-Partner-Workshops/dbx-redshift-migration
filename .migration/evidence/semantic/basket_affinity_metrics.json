@@ -1,0 +1,61 @@
+{
+  "unit": "semantic.basket_affinity_metrics",
+  "legacy_unit": "basket_affinity",
+  "definition": "databricks/semantic/marketing/basket_affinity.yaml",
+  "engine": "databricks_sql_metric_view",
+  "catalog": "mig_redshift_dev",
+  "warehouse_id": "6dc4b80538621b7b",
+  "git_commit": "74b489fb55e7bebeef48b062ae75b1f6a0aebd2e",
+  "started_at": "2026-10-01T14:22:59+00:00",
+  "build": {
+    "status": "PASS"
+  },
+  "outputs": [
+    {
+      "output": "semantic.basket_affinity_metrics",
+      "golden": "golden/basket_affinity/report.csv",
+      "target": "SELECT `product_id_a`, `product_id_b`, `pair`, MEASURE(`pair_orders`) AS `pair_orders`\nFROM semantic.basket_affinity_metrics\nGROUP BY ALL\nORDER BY pair_orders DESC NULLS FIRST, product_id_a, product_id_b\nLIMIT 50",
+      "tolerance_overrides": {},
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "columns",
+          "status": "PASS",
+          "missing": [],
+          "extra": [],
+          "target_types": {
+            "product_id_a": "INT",
+            "product_id_b": "INT",
+            "pair": "STRING",
+            "pair_orders": "LONG"
+          }
+        },
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "golden": 50,
+          "target": 50
+        },
+        {
+          "check": "row_values",
+          "status": "PASS",
+          "keys": [
+            "product_id_a",
+            "product_id_b"
+          ],
+          "matched_rows": 50,
+          "mismatched_rows": 0,
+          "missing_in_target": 0,
+          "extra_in_target": 0,
+          "duplicate_keys_in_target": 0,
+          "mismatches_by_column": {},
+          "sample_mismatches": [],
+          "sample_missing": [],
+          "sample_extra": []
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-01T14:23:00+00:00"
+}
