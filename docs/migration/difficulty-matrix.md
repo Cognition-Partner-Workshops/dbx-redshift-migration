@@ -99,3 +99,8 @@ structural rewrites (procedure → set-based / Delta MERGE); finance_export's re
 (replaced by a parameterized Spark CSV write in `databricks/units/finance_export/export.py`). Orchestration
 (Lakeflow job + exec_summary + mart compat views + per-unit aggregate checks) came in at ≈ 0.5 session as
 estimated.
+
+The integrated dev Lakeflow job subsequently passed all 22 tasks. A post-job row-level comparison passed
+all 20 units / 48 outputs without rebuilding them, and the exported monthly CSV exactly matched its golden
+snapshot (header + 12 rows). Foundation required a SQL notebook task on the warehouse to preserve its compound
+statement as one cell; the other ETL tasks remain SQL files. Dev scheduling is paused and prod is validation-only.

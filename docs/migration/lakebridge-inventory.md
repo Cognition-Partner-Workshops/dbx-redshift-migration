@@ -477,9 +477,12 @@ New assets added by the orchestration workstream:
   source marts with Redshift-truncated decimal semantics, plus 19 `mart.*` compatibility views over `gold.*`.
 - `databricks/databricks.yml` + `databricks/resources/` — DAB job `nightly_mart_refresh` preserving the legacy DAG
   (`load_core` → 5 ‖ 13 → `exec_summary` → `mart_views` + `finance_export_csv`), Quartz `0 0 2 * * ?` UTC,
-  `max_concurrent_runs=1`; `bundle validate` passes for dev and prod (not deployed).
+  `max_concurrent_runs=1`; strict bundle validation passes for dev and prod. Dev was deployed and run;
+  prod remains validation-only. Dev overrides the schedule to PAUSED; prod retains the 02:00 UTC schedule.
 - `databricks/job/*.sql` — per-task runner files (`USE CATALOG IDENTIFIER(:catalog)` + unit body) since SQL tasks
-  have no catalog field.
+  have no catalog field. Foundation runs as a SQL notebook on the same warehouse so its `BEGIN ... END` block
+  remains one cell; SQL file tasks split that block at semicolons and fail. `tools/sync_job_sql.py` regenerates
+  all 21 wrappers; `make check` detects source drift.
 - `databricks/units/finance_export/export.py` — executable replacement for `UNLOAD`: `spark.read.table` →
   `orderBy(month)` → single-file CSV `overwrite` to a parameterized `/Volumes/<catalog>/gold/finance_export/monthly`
   UC volume path (declared as a bundle volume resource).
@@ -492,9 +495,41 @@ New assets added by the orchestration workstream:
   fetches (the SDK re-exchanges the ID token on each refresh; the exchange occasionally returns a body without
   `expires_in`).
 
+### Lakeflow execution and export verification
+
+The dev job completed with **22/22 tasks SUCCESS** on 2026-10-01:
+[run 862787171499402](https://dbc-c22a0245-3975.cloud.databricks.com/jobs/716790714105868/runs/862787171499402?o=7474652505890469).
+The executed SQL revision is recorded in `.migration/evidence/nightly_job.json`.
+
+- After execution, the row-level validator ran with `--skip-build` for all 20 units to compare the job's
+  outputs without rebuilding them: 48/48 outputs PASS, no mismatched/missing/extra rows.
+- `python tools/aggregate_validate.py --live`: 48/48 aggregate outputs PASS.
+- Finance export produced `_SUCCESS` and one CSV part in `/Volumes/mig_redshift_dev/gold/finance_export/monthly`.
+  Downloading that part and comparing it to `golden/finance_export/finance_monthly.csv` (ignoring CRLF vs LF)
+  passed exactly: header plus 12 rows, in month order, with all fields equal.
+- Foundation now accepts exactly `mig_redshift_dev` and `mig_redshift`. Production bundle files use the
+  deployer's workspace directory instead of the shared directory; both targets pass `bundle validate --strict`.
+
+The initial dev run failed because a SQL file task split the foundation's compound statement. The SQL
+notebook task above fixed it. The CLI's long-running waiter also outlived the wrapper's OIDC token; the
+remote run continued independently. Prefer `--no-wait`, followed by separate `jobs get-run` calls so the
+configured wrapper acquires a fresh token each time.
+
+To reproduce from the bundle directory after the repository setup has uploaded the ten seed CSVs to the
+bronze raw volume:
+
+```bash
+export BUNDLE_VAR_warehouse_id=6dc4b80538621b7b
+databricks bundle validate --strict -t dev --profile DEFAULT
+databricks bundle validate --strict -t prod --profile DEFAULT
+databricks bundle deploy -t dev --profile DEFAULT
+databricks bundle run nightly_mart_refresh -t dev --profile DEFAULT --no-wait
+# Use the run ID returned above:
+databricks jobs get-run <run-id> --profile DEFAULT
+```
+
 Limitations:
 
-- Export CSV landing in the UC volume is not validated end-to-end (no `bundle deploy` / job run was performed;
-  prod target validated only, no writes to `mig_redshift`).
+- Prod target validated only; no deployment or writes to `mig_redshift`. Production deployment follows human merge.
 - `make validate-all` is the row-level oracle; `validation.sql`/`aggregate_validate.py` are coarse gates and do not
   replace it.

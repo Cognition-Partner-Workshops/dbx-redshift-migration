@@ -109,7 +109,7 @@ See `.env.example` for placeholders.
 
 | Target | What it does |
 | --- | --- |
-| `make check` | `ruff check .` + `pytest` + `python tools/check_manifest.py` |
+| `make check` | Ruff + pytest + manifest checks + generated job SQL drift check |
 | `make seed` | regenerate `data/seed/csv/` deterministically |
 | `make db-setup` / `make db-reset` | create (or fully reset) the dev catalog via `tools/databricks_setup.py` |
 | `make validate UNIT=x` | build the unit's converted SQL on Databricks and compare all outputs to goldens |
