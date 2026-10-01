@@ -11,7 +11,7 @@ outcome and the fix that made `make validate` pass.
 | daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
-| churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
+| churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | mismatch: Lakebridge emitted SQL-scripting procedure + FOR loop over mart/core; AVG(INT) returns DOUBLE vs Redshift truncated BIGINT; 2/2 outputs PASS | set-based CTE + CASE replaces procedure/loop/temp table; CREATE OR REPLACE gold table (rerun-idempotent); DATEDIFF for date - date INT days; report uses SUM DIV COUNT cast BIGINT for Redshift integer AVG |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
