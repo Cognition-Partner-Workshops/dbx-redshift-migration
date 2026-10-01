@@ -11,7 +11,7 @@ DECLARE shipments_csv STRING DEFAULT concat('/Volumes/', current_catalog(), '/br
 DECLARE web_events_csv STRING DEFAULT concat('/Volumes/', current_catalog(), '/bronze/raw/web_events.csv');
 DECLARE campaign_touches_csv STRING DEFAULT concat('/Volumes/', current_catalog(), '/bronze/raw/campaign_touches.csv');
 
-SELECT assert_true(current_catalog() = 'mig_redshift_dev', 'Foundation requires mig_redshift_dev');
+SELECT assert_true(current_catalog() IN ('mig_redshift_dev', 'mig_redshift'), 'Foundation requires an allowed migration catalog');
 
 CREATE OR REPLACE TABLE bronze.customers (
     customer_id BIGINT NOT NULL,

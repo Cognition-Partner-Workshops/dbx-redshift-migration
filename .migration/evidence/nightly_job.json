@@ -1,0 +1,249 @@
+{
+  "job_id": 716790714105868,
+  "run_id": 862787171499402,
+  "run_page_url": "https://dbc-c22a0245-3975.cloud.databricks.com/?o=7474652505890469#job/716790714105868/run/862787171499402",
+  "state": {
+    "life_cycle_state": "TERMINATED",
+    "result_state": "SUCCESS",
+    "state_message": "",
+    "user_cancelled_or_timedout": false
+  },
+  "git_commit": "8224a73b09302814c599f1876954e3a1df8680d6",
+  "tasks": [
+    {
+      "task_key": "sessionization",
+      "run_id": 5255121012839,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "product_perf",
+      "run_id": 1095521277064316,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "mart_views",
+      "run_id": 491040343106378,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "geo_rollup",
+      "run_id": 583166474161676,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "churn_flags",
+      "run_id": 1074476913033609,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "payment_mix",
+      "run_id": 305213579486138,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "promo_lift",
+      "run_id": 599953302972692,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "finance_export_csv",
+      "run_id": 173489542587051,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "load_core",
+      "run_id": 401051730566040,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "attribution",
+      "run_id": 1110174938258953,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "rfm_segments",
+      "run_id": 309716062705234,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "finance_export",
+      "run_id": 42075889412363,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "exec_summary",
+      "run_id": 386071371851124,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "customer_ltv",
+      "run_id": 506127305069498,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "store_weekly",
+      "run_id": 263811598265011,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "basket_affinity",
+      "run_id": 536233203188648,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "category_mix",
+      "run_id": 535939905708231,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "cohort_retention",
+      "run_id": 276960094266834,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "inventory_snapshot",
+      "run_id": 706304364416412,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "shipping_sla",
+      "run_id": 466062719384313,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "daily_revenue",
+      "run_id": 313117549807397,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    },
+    {
+      "task_key": "returns_rate",
+      "run_id": 416983942674817,
+      "state": {
+        "life_cycle_state": "TERMINATED",
+        "result_state": "SUCCESS",
+        "state_message": "",
+        "user_cancelled_or_timedout": false
+      }
+    }
+  ],
+  "finance_csv": {
+    "status": "PASS",
+    "check": "Exact comparison to golden/finance_export/finance_monthly.csv ignoring CRLF line endings",
+    "rows": 12,
+    "header": true,
+    "ordered_by": "month",
+    "sha256": "0789b037bf310ad5f74fd14c193864fad776ba017b900044d860f34b951cfa44",
+    "path": "/Volumes/mig_redshift_dev/gold/finance_export/monthly"
+  },
+  "post_run_validation": {
+    "units": 20,
+    "outputs": 48,
+    "row_level": "PASS",
+    "aggregates": "PASS"
+  }
+}

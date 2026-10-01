@@ -22,12 +22,11 @@ resources:
       tasks:
         - task_key: load_core
           max_retries: 1
-          sql_task:
-            file:
-              path: ../job/load_core.sql
-              source: WORKSPACE
+          notebook_task:
+            notebook_path: ../job/load_core.sql
+            source: WORKSPACE
             warehouse_id: ${var.warehouse_id}
-            parameters:
+            base_parameters:
               catalog: ${var.catalog}
         - task_key: daily_revenue
           depends_on:

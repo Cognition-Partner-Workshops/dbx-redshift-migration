@@ -1,9 +1,8 @@
--- Job task file for the Lakeflow nightly_mart_refresh job.
--- GENERATED: `USE CATALOG IDENTIFIER(:catalog)` prefix plus the full body of
--- databricks/foundation/etl.sql — keep this file in sync with that source.
--- The job binds :catalog via the sql_task parameters map; IDENTIFIER() keeps
--- the catalog substitution safe (no string interpolation into SQL).
+-- Databricks notebook source
+-- GENERATED from databricks/foundation/etl.sql by tools/sync_job_sql.py.
 USE CATALOG IDENTIFIER(:catalog);
+
+-- COMMAND ----------
 
 BEGIN
 DECLARE csv_sql STRING;
@@ -18,7 +17,7 @@ DECLARE shipments_csv STRING DEFAULT concat('/Volumes/', current_catalog(), '/br
 DECLARE web_events_csv STRING DEFAULT concat('/Volumes/', current_catalog(), '/bronze/raw/web_events.csv');
 DECLARE campaign_touches_csv STRING DEFAULT concat('/Volumes/', current_catalog(), '/bronze/raw/campaign_touches.csv');
 
-SELECT assert_true(current_catalog() = 'mig_redshift_dev', 'Foundation requires mig_redshift_dev');
+SELECT assert_true(current_catalog() IN ('mig_redshift_dev', 'mig_redshift'), 'Foundation requires an allowed migration catalog');
 
 CREATE OR REPLACE TABLE bronze.customers (
     customer_id BIGINT NOT NULL,

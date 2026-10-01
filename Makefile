@@ -1,7 +1,7 @@
 .PHONY: check seed db-setup db-reset validate validate-all legacy-all capture-golden
 
 check:
-	ruff check . && pytest && python tools/check_manifest.py
+	ruff check . && pytest && python tools/check_manifest.py && python tools/sync_job_sql.py --check
 
 seed:
 	python data/seed/generate_seed.py

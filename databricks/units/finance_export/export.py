@@ -10,14 +10,14 @@
 # parameters). Example export_path:
 #   /Volumes/mig_redshift_dev/gold/finance_export/monthly
 
+import sys
+
 from pyspark.sql import SparkSession
 
 try:
     catalog = dbutils.widgets.get("catalog")
     export_path = dbutils.widgets.get("export_path")
 except NameError:
-    import sys
-
     catalog, export_path = sys.argv[1], sys.argv[2]
 
 if not catalog or not export_path:
