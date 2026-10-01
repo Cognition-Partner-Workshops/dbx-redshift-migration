@@ -1,0 +1,16 @@
+{
+  "step": "serverless_storage",
+  "status": "COMPLETE",
+  "error": null,
+  "columns": [
+    "set_name",
+    "rs_managed_storage_gb"
+  ],
+  "row_count": 1,
+  "rows": [
+    [
+      "rs_managed_storage_gb",
+      24.22
+    ]
+  ]
+}

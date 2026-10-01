@@ -1,0 +1,85 @@
+# SELECT-only replacement for Lakebridge's shipped redshift pipeline_config.yml.
+# The shipped pipeline starts with two source_ddl steps (DROP VIEW / CREATE VIEW
+# query_view) that write to the source warehouse; this pipeline has no source_ddl
+# or ddl steps. tools/redshift_discovery.py refuses any step that is not type sql
+# or whose text is not a single SELECT / WITH statement.
+name: redshift_select_only_discovery
+version: "1.0"
+steps:
+  - name: session_identity
+    type: sql
+    extract_source: tools/redshift_discovery/sql/01_session_identity.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: information_schema_tables
+    type: sql
+    extract_source: tools/redshift_discovery/sql/02_information_schema_tables.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: pg_class_relations
+    type: sql
+    extract_source: tools/redshift_discovery/sql/03_pg_class_relations.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: columns_dist_sort
+    type: sql
+    extract_source: tools/redshift_discovery/sql/04_columns_dist_sort.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: routines
+    type: sql
+    extract_source: tools/redshift_discovery/sql/05_routines.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: svv_table_info
+    type: sql
+    extract_source: tools/redshift_discovery/sql/06_svv_table_info.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: core_counts
+    type: sql
+    extract_source: tools/redshift_discovery/sql/07_core_counts.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: mart_counts
+    type: sql
+    extract_source: tools/redshift_discovery/sql/08_mart_counts.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: exec_summary
+    type: sql
+    extract_source: tools/redshift_discovery/sql/09_exec_summary.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: false
+  - name: serverless_storage
+    type: sql
+    extract_source: tools/redshift_discovery/sql/10_serverless_storage.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: true
+  - name: serverless_capacity
+    type: sql
+    extract_source: tools/redshift_discovery/sql/11_serverless_capacity.sql
+    mode: overwrite
+    frequency: once
+    flag: active
+    optional: true

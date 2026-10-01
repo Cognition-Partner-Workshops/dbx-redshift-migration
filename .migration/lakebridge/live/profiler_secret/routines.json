@@ -1,0 +1,48 @@
+{
+  "step": "routines",
+  "status": "COMPLETE",
+  "error": null,
+  "columns": [
+    "schema_name",
+    "routine_name",
+    "prokind",
+    "pronargs",
+    "language",
+    "body"
+  ],
+  "row_count": 4,
+  "rows": [
+    [
+      "public",
+      "f_clean_phone",
+      "f",
+      1,
+      "sql",
+      "\n    SELECT REGEXP_REPLACE($1, '[^0-9]', '')\n"
+    ],
+    [
+      "public",
+      "f_fiscal_qtr",
+      "f",
+      1,
+      "sql",
+      "\n    SELECT 'Q' || ((((EXTRACT(MONTH FROM $1)::INT + 9) % 12) / 3) + 1)::VARCHAR\n"
+    ],
+    [
+      "public",
+      "sp_build_churn_flags",
+      "p",
+      0,
+      "plpgsql",
+      "\nDECLARE\n    rec RECORD;\nBEGIN\n    CREATE TEMP TABLE tmp_last_orders (\n        customer_id     BIGINT,\n        last_order_date DATE\n    );\n\n    INSERT INTO tmp_last_orders\n    SELECT c.customer_id,\n           MAX(o.order_ts)::DATE\n    FROM   core.customers c\n    LEFT JOIN core.orders o ON o.customer_id = c.customer_id\n    GROUP  BY c.customer_id;\n\n    FOR rec IN\n        SELECT customer_id, last_order_date FROM tmp_last_orders ORDER BY customer_id\n    LOOP\n        INSERT INTO mart.churn_flags\n        VALUES (\n            rec.customer_id,\n            rec.last_order_date,\n            CASE WHEN rec.last_order_date IS NULL\n                 THEN NULL\n                 ELSE '2025-12-31'::DATE - rec.last_order_date END,\n            CASE\n                WHEN rec.last_order_date IS NULL                        THEN 'never_ordered'\n                WHEN '2025-12-31'::DATE - rec.last_order_date > 180     THEN 'churned'\n                WHEN '2025-12-31'::DATE - rec.last_order_date > 90      THEN 'at_risk'\n                ELSE 'active'\n            END\n        );\n    END LOOP;\n\n    DROP TABLE tmp_last_orders;\nEND;\n"
+    ],
+    [
+      "public",
+      "sp_upsert_inventory",
+      "p",
+      1,
+      "plpgsql",
+      "\nBEGIN\n    CREATE TEMP TABLE stg_inventory (\n        product_id  INT,\n        units_sold  BIGINT\n    );\n\n    INSERT INTO stg_inventory\n    SELECT product_id, SUM(quantity)::BIGINT\n    FROM   core.order_items\n    GROUP  BY product_id;\n\n    DELETE FROM mart.inventory_snapshot\n    WHERE  product_id IN (SELECT product_id FROM stg_inventory);\n\n    INSERT INTO mart.inventory_snapshot\n    SELECT p.product_id,\n           p_snapshot,\n           COALESCE(s.units_sold, 0),\n           GREATEST(500 - COALESCE(s.units_sold, 0), 0)::INT\n    FROM   core.products p\n    LEFT JOIN stg_inventory s ON s.product_id = p.product_id;\n\n    DROP TABLE stg_inventory;\nEND;\n"
+    ]
+  ]
+}

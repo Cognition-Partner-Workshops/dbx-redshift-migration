@@ -1,0 +1,8 @@
+{
+  "step": "core_counts",
+  "status": "ERROR",
+  "error": "ERROR: permission denied for schema core",
+  "columns": [],
+  "row_count": 0,
+  "rows": []
+}

@@ -1,0 +1,52 @@
+{
+  "step": "core_counts",
+  "status": "COMPLETE",
+  "error": null,
+  "columns": [
+    "table_name",
+    "row_count"
+  ],
+  "row_count": 10,
+  "rows": [
+    [
+      "core.campaign_touches",
+      8000
+    ],
+    [
+      "core.customers",
+      1500
+    ],
+    [
+      "core.order_items",
+      40938
+    ],
+    [
+      "core.orders",
+      20000
+    ],
+    [
+      "core.payments",
+      20000
+    ],
+    [
+      "core.products",
+      300
+    ],
+    [
+      "core.returns",
+      2518
+    ],
+    [
+      "core.shipments",
+      12817
+    ],
+    [
+      "core.stores",
+      40
+    ],
+    [
+      "core.web_events",
+      25000
+    ]
+  ]
+}

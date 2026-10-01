@@ -1,0 +1,20 @@
+{
+  "step": "serverless_capacity",
+  "status": "COMPLETE",
+  "error": null,
+  "columns": [
+    "set_name",
+    "rs_nodes_type",
+    "rs_number_of_nodes",
+    "compute_seconds"
+  ],
+  "row_count": 1,
+  "rows": [
+    [
+      "rs_nodes",
+      "8 RPUs",
+      0,
+      8893.0
+    ]
+  ]
+}
