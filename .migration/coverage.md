@@ -9,7 +9,7 @@ outcome and the fix that made `make validate` pass.
 | --- | --- | --- | --- | --- |
 | foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | mismatch: CHAR padding and SUPER representation; 10/10 outputs PASS | typed Delta bronze/silver; liquid clustering; explicit RPAD for CHAR(4); parse_json VARIANT in bronze, source JSON text in silver; fiscal UDF uses DIV and source +9 |
 | daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
-| customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
+| customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | mismatch: Lakebridge draft kept core./mart. names, unqualified f_clean_phone, and native AVG (scale 6, rounded) vs Redshift AVG NUMERIC(38,2) truncated; CTAS widens CHAR(4) to VARCHAR; 2/2 outputs PASS | explicit DDL with region CHAR(4); AVG as CAST((SUM*100) DIV NULLIF(COUNT,0) AS DECIMAL(36,0))*0.01 (exact truncation); silver.f_clean_phone; NULLS LAST in report ORDER BY |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
