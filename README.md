@@ -56,6 +56,18 @@ hypothesis for the demo narrative, never a fact; actuals are recorded in
   `databricks bundle deploy --var warehouse_id=<id>` or set env
   `BUNDLE_VAR_warehouse_id`.
 
+Terraform provisioning (`infra/terraform/`) exists alongside `make db-setup`:
+it declares the same catalog (tags `demo_type`/`source_repo`, `account users`
+grant), the `bronze`/`silver`/`gold` schemas, the managed volume `bronze.raw`
+and uploads `data/seed/csv/*.csv` into it via `databricks_file`, so it is
+self-contained. Auth is env-only (`DATABRICKS_HOST` + `DATABRICKS_TOKEN`);
+`var.catalog` defaults to `mig_redshift_dev`. Run `make tf-plan` /
+`make tf-apply` locally, or the `databricks-provision` GitHub workflow (plan on
+PRs touching `infra/terraform/**`, apply only on manual dispatch with
+`apply=true`). State is local by default — configure the commented remote
+backend in `main.tf` before applying from CI. Use one path per catalog: an
+existing catalog created by `make db-setup` must be `terraform import`ed first.
+
 ## Demo flow
 
 1. An orchestrator session runs Lakebridge analyze and per-unit transpile
@@ -112,6 +124,7 @@ See `.env.example` for placeholders.
 | `make check` | `ruff check .` + `pytest` + `python tools/check_manifest.py` |
 | `make seed` | regenerate `data/seed/csv/` deterministically |
 | `make db-setup` / `make db-reset` | create (or fully reset) the dev catalog via `tools/databricks_setup.py` |
+| `make tf-plan` / `make tf-apply` | Terraform plan / apply of the same catalog, schemas, volume and seed files (`infra/terraform/`) |
 | `make validate UNIT=x` | build the unit's converted SQL on Databricks and compare all outputs to goldens |
 | `make validate-all` | validate every unit that has converted `etl.sql` |
 | `make legacy-all` | one-time Redshift setup + build + golden capture (operator only) |

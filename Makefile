@@ -1,4 +1,4 @@
-.PHONY: check seed db-setup db-reset validate validate-all legacy-all capture-golden
+.PHONY: check seed db-setup db-reset tf-plan tf-apply validate validate-all legacy-all capture-golden
 
 check:
 	ruff check . && pytest && python tools/check_manifest.py
@@ -11,6 +11,12 @@ db-setup:
 
 db-reset:
 	python tools/databricks_setup.py --reset
+
+tf-plan:
+	terraform -chdir=infra/terraform init -input=false && terraform -chdir=infra/terraform plan -input=false
+
+tf-apply:
+	terraform -chdir=infra/terraform init -input=false && terraform -chdir=infra/terraform apply -input=false
 
 validate:
 	python -m validation.validate_unit --unit $(UNIT)

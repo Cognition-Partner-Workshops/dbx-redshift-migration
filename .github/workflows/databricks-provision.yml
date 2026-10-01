@@ -1,0 +1,57 @@
+name: databricks-provision
+
+on:
+  pull_request:
+    paths:
+      - "infra/terraform/**"
+      - "data/seed/csv/**"
+      - ".github/workflows/databricks-provision.yml"
+  workflow_dispatch:
+    inputs:
+      catalog:
+        description: "Catalog to provision (mig_redshift_dev or mig_redshift)"
+        required: true
+        default: mig_redshift_dev
+      apply:
+        description: "Run terraform apply after plan"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: databricks-provision-${{ github.event.inputs.catalog || 'mig_redshift_dev' }}
+  cancel-in-progress: false
+
+env:
+  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+  DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+  TF_VAR_catalog: ${{ github.event.inputs.catalog || 'mig_redshift_dev' }}
+  TF_IN_AUTOMATION: "true"
+
+defaults:
+  run:
+    working-directory: infra/terraform
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+      - run: terraform init -input=false
+      - run: terraform validate
+      - run: terraform plan -input=false -lock-timeout=5m
+
+  apply:
+    needs: plan
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.apply == 'true'
+    runs-on: ubuntu-latest
+    environment: databricks-${{ github.event.inputs.catalog }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform init -input=false
+      - run: terraform apply -input=false -auto-approve -lock-timeout=5m
