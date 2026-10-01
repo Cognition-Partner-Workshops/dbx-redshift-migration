@@ -14,7 +14,7 @@ outcome and the fix that made `make validate` pass.
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | mismatch: Lakebridge ARRAY_AGG draft kept CHAR(4) padding ("NE  ") and core/mart names; 2/2 outputs PASS | ARRAY_SORT(COLLECT_LIST(struct(rn, RTRIM(region)))) ordered by the ROW_NUMBER rank (keeps duplicates, skips NULLs, NULL when empty); explicit NULLS FIRST/LAST for Redshift DESC/ASC; ::VARCHAR(64) -> LEFT(...,64); CAST DECIMAL(18,2)/BIGINT; report ORDER BY NULLS LAST |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
-| category_mix | RATIO_TO_REPORT | clean | | |
+| category_mix | RATIO_TO_REPORT | clean | clean (Lakebridge `revenue / SUM(revenue) OVER ()` is DECIMAL; golden is FLOAT8); 2/2 outputs PASS | `CAST(revenue AS DOUBLE) / CAST(SUM(revenue) OVER () AS DOUBLE)`; revenue DECIMAL(38,2), units_sold BIGINT; report keeps Redshift NULL ordering (DESC NULLS FIRST, ASC NULLS LAST) |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
