@@ -20,7 +20,7 @@ outcome and the fix that made `make validate` pass.
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
-| payment_mix | DECODE, NVL, NVL2 | mismatch | | |
+| payment_mix | DECODE, NVL, NVL2 | mismatch | mismatch: Lakebridge draft kept unbounded division scale for amount_share; 2/2 outputs PASS | DECODE/NVL/NVL2 native; group on raw method so NULL becomes one unknown row; amount_share truncated toward zero to scale 4 (FLOOR/CEIL, DECIMAL(38,4)) to match Redshift numeric division; report ORDER BY ASC NULLS LAST |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
