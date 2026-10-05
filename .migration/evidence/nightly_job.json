@@ -1,0 +1,76 @@
+{
+  "job": "nightly_mart_refresh",
+  "target": "dev",
+  "catalog": "mig_redshift_dev",
+  "job_id": 805342536840929,
+  "run_id": 142463298504367,
+  "run_page_url": "https://dbc-c22a0245-3975.cloud.databricks.com/?o=7474652505890469#job/805342536840929/run/142463298504367",
+  "git_commit": "04997262faf5e8c3e2683f7e161affd5f7ff03d9",
+  "state": {
+    "life_cycle_state": "TERMINATED",
+    "result_state": "SUCCESS"
+  },
+  "tasks": [
+    {
+      "task_key": "load_core",
+      "depends_on": [],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "load_core_validation",
+      "depends_on": [
+        "load_core"
+      ],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "customer_ltv",
+      "depends_on": [
+        "load_core_validation"
+      ],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "customer_ltv_validation",
+      "depends_on": [
+        "customer_ltv"
+      ],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "exec_summary",
+      "depends_on": [
+        "customer_ltv_validation"
+      ],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "exec_summary_validation",
+      "depends_on": [
+        "exec_summary"
+      ],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "mart_views",
+      "depends_on": [
+        "exec_summary_validation"
+      ],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "semantic_customer_ltv",
+      "depends_on": [
+        "mart_views"
+      ],
+      "result_state": "SUCCESS"
+    },
+    {
+      "task_key": "semantic_customer_ltv_validation",
+      "depends_on": [
+        "semantic_customer_ltv"
+      ],
+      "result_state": "SUCCESS"
+    }
+  ]
+}
