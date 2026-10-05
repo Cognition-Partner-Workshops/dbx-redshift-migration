@@ -1,0 +1,106 @@
+# Lakeflow job converted from legacy/redshift/99_orchestration/refresh_schedule.yaml
+# for the customer_ltv slice (PRD: customer_ltv Redshift → Databricks):
+#
+#   load_core -> customer_ltv -> customer_ltv_validation
+#     -> exec_summary -> exec_summary_validation -> mart_views
+#     -> semantic_customer_ltv -> semantic_customer_ltv_validation
+#
+# The other wave 1a/1b units join as tasks between load_core and exec_summary
+# as they migrate; until then exec_summary reads their existing gold.* tables.
+# Legacy cron `0 2 * * *` → Quartz `0 0 2 * * ?` (02:00 UTC daily). The dev
+# target pauses the schedule (databricks.yml). Task SQL in ../job/ is generated
+# by tools/sync_job_sql.py from the unit sources.
+resources:
+  jobs:
+    nightly_mart_refresh:
+      name: nightly_mart_refresh
+      max_concurrent_runs: 1
+      schedule:
+        quartz_cron_expression: "0 0 2 * * ?"
+        timezone_id: UTC
+        pause_status: UNPAUSED
+      tags:
+        component: nightly_mart_refresh
+      tasks:
+        - task_key: load_core
+          max_retries: 1
+          notebook_task:
+            notebook_path: ../job/load_core.sql
+            source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              catalog: ${var.catalog}
+        - task_key: customer_ltv
+          depends_on:
+            - task_key: load_core
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/unit_customer_ltv.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: customer_ltv_validation
+          depends_on:
+            - task_key: customer_ltv
+          sql_task:
+            file:
+              path: ../job/validate_customer_ltv.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: exec_summary
+          depends_on:
+            - task_key: customer_ltv_validation
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/exec_summary.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: exec_summary_validation
+          depends_on:
+            - task_key: exec_summary
+          sql_task:
+            file:
+              path: ../job/validate_exec_summary.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: mart_views
+          depends_on:
+            - task_key: exec_summary_validation
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/mart_views.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: semantic_customer_ltv
+          depends_on:
+            - task_key: mart_views
+          max_retries: 1
+          sql_task:
+            file:
+              path: ../job/semantic_customer_ltv.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: semantic_customer_ltv_validation
+          depends_on:
+            - task_key: semantic_customer_ltv
+          sql_task:
+            file:
+              path: ../job/validate_semantic_customer_ltv.sql
+              source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            parameters:
+              catalog: ${var.catalog}
