@@ -17,6 +17,10 @@ targets:
   dev:
     default: true
     mode: development
+    # Per-branch deployment root: concurrent migration runs sharing one dev
+    # user don't overwrite each other's bundle files or resource state.
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}/${bundle.git.branch}
     variables:
       catalog: mig_redshift_dev
     resources:
