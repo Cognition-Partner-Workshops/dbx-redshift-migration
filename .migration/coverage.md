@@ -7,7 +7,7 @@ outcome and the fix that made `make validate` pass.
 
 | unit | construct | expected | observed | fix pattern |
 | --- | --- | --- | --- | --- |
-| foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | | |
+| foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | mismatch: BladeBridge draft not runnable — kept core.* names, emitted ZORDER BY inside CREATE TABLE, left SUPER, mangled UDF bodies ($1 → STRING, Redshift AS $$ syntax, truncated) and no CSV load; seed CSV region is unpadded; 10/10 outputs PASS | bronze = read_files(:path) via EXECUTE IMMEDIATE ... USING on a current_catalog() volume path (RTAS, as-is); silver = explicit typed DDL (VARCHAR(n), CHAR(4), DECIMAL(12,2), TIMESTAMP_NTZ) + INSERT with rpad(region, 4, ' ') (CAST AS CHAR does not pad); CLUSTER BY Redshift dist/sort keys; SUPER → STRING JSON text (VARIANT re-sorts object keys); UDFs as LANGUAGE SQL DETERMINISTIC RETURN, INT `/` → DIV, legacy +9 fiscal formula kept |
 | daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
