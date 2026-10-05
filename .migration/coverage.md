@@ -9,7 +9,7 @@ outcome and the fix that made `make validate` pass.
 | --- | --- | --- | --- | --- |
 | foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | | |
 | daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
-| customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
+| customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | mismatch: Lakebridge (BladeBridge) reported 0 errors, but the draft is not deployable — `ZORDER BY` emitted inside a CTAS (invalid DDL), `core.`/`mart.` schemas kept, unqualified `f_clean_phone`, native `AVG` (Databricks scale 6, CAST rounds half-up vs Redshift NUMERIC(38,2) truncated toward zero); CTAS would also widen CHAR(4) to VARCHAR; 2/2 outputs PASS at default tolerances | explicit DDL `region CHAR(4)`, `ltv`/`aov DECIMAL(38,2)`, `CLUSTER BY (customer_id)` + `INSERT ... SELECT` (no ORDER BY); AVG as `CAST((SUM*100) DIV NULLIF(COUNT,0) AS DECIMAL(36,0)) * 0.01` (exact truncation) in etl and report; `silver.f_clean_phone`; report `ORDER BY region ASC NULLS LAST`; G3 `validation.sql` assert_true gate |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
