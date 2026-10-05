@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 JOB_DIR = ROOT / "databricks/job"
 SOURCES = {
     "load_core": "databricks/foundation/etl.sql",
+    "validate_load_core": "databricks/foundation/validation.sql",
     "unit_customer_ltv": "databricks/units/customer_ltv/etl.sql",
     "validate_customer_ltv": "databricks/units/customer_ltv/validation.sql",
     "exec_summary": "databricks/orchestration/etl.sql",
