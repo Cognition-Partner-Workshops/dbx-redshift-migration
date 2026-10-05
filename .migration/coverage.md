@@ -26,4 +26,4 @@ outcome and the fix that made `make validate` pass.
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
-| orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
+| orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | mismatch (numeric only): draft kept `mart.*` names, `CURRENT_DATE '2025-12-31'` and Databricks AVG/decimal division (scale 6/19, half-up) vs Redshift truncation; exec_summary + report PASS (1/1 rows exact) | `mart.`→`gold.`, literal `DATE '2025-12-31'`, `CREATE OR REPLACE TABLE` (atomic); avg_customer_ltv = `CAST((SUM(ltv)*100) DIV NULLIF(COUNT(ltv),0) AS DECIMAL(36,0))*0.01` (same as customer_ltv); NUMERIC(14,4)/NUMERIC(14,4) via DIV + remainder DIV at scale 15; SUM/SUM avg hours via DIV + remainder at scale 4; Lakeflow job left to orchestrator |
