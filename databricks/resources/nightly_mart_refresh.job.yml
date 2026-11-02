@@ -13,11 +13,11 @@ resources:
       max_concurrent_runs: 1
       tasks:
         - task_key: load_core
-          sql_task:
+          notebook_task:
+            notebook_path: ../job/foundation.sql
+            source: WORKSPACE
             warehouse_id: ${var.warehouse_id}
-            file:
-              path: ../job/foundation.sql
-            parameters:
+            base_parameters:
               catalog: ${var.catalog}
         - task_key: daily_revenue
           depends_on:
