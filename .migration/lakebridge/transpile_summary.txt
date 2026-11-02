@@ -1,0 +1,40 @@
+foundation [{"total_files_processed": 3, "total_queries_processed": 3, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+attribution [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+basket_affinity [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+category_mix [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+churn_flags [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+cohort_retention [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+customer_ltv [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+daily_revenue [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+finance_export [{"total_files_processed": 3, "total_queries_processed": 3, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": "/tmp/lb/err/finance_export.log"}]
+
+geo_rollup [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+inventory_snapshot [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+payment_mix [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+product_perf [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+promo_lift [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+returns_rate [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+rfm_segments [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+sessionization [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+shipping_sla [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+store_weekly [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+
+orchestration [{"total_files_processed": 2, "total_queries_processed": 2, "analysis_error_count": 0, "parsing_error_count": 0, "validation_error_count": 0, "generation_error_count": 0, "error_log_file": null}]
+

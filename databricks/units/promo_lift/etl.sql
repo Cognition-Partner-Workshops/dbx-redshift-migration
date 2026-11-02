@@ -1,0 +1,18 @@
+-- promo_lift: MEDIAN(x) = PERCENTILE_CONT(0.5); both are linear-interpolating
+-- percentile_cont in Databricks. Redshift truncates the result to the input
+-- scale (2); Databricks returns DOUBLE, so round off float noise then floor(x, 2).
+CREATE OR REPLACE TABLE gold.promo_lift AS
+WITH order_totals AS (
+    SELECT o.order_id,
+           o.sales_channel,
+           SUM(oi.quantity * (oi.unit_price - oi.discount)) AS order_total
+    FROM   silver.orders o
+    JOIN   silver.order_items oi ON oi.order_id = o.order_id
+    GROUP  BY o.order_id, o.sales_channel
+)
+SELECT sales_channel,
+       COUNT(*)                                                                         AS order_count,
+       CAST(floor(round(percentile_cont(0.5) WITHIN GROUP (ORDER BY order_total), 6), 2) AS DECIMAL(38,2))  AS median_order_value,
+       CAST(floor(round(percentile_cont(0.9) WITHIN GROUP (ORDER BY order_total), 6), 2) AS DECIMAL(38,2))  AS p90_order_value
+FROM   order_totals
+GROUP  BY sales_channel;

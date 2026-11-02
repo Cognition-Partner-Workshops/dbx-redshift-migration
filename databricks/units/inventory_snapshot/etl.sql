@@ -1,0 +1,27 @@
+-- inventory_snapshot: plpgsql upsert procedure (temp staging table +
+-- DELETE/INSERT + CALL with p_snapshot) -> CTE staging + MERGE INTO.
+-- Legacy drops/recreates the table each run, so CREATE OR REPLACE keeps that.
+CREATE OR REPLACE TABLE gold.inventory_snapshot (
+    product_id    INT,
+    snapshot_date DATE,
+    units_sold    BIGINT,
+    on_hand       INT
+) CLUSTER BY (product_id);
+
+MERGE INTO gold.inventory_snapshot t
+USING (
+    WITH stg_inventory AS (
+        SELECT product_id, CAST(SUM(quantity) AS BIGINT) AS units_sold
+        FROM   silver.order_items
+        GROUP  BY product_id
+    )
+    SELECT p.product_id,
+           DATE '2025-12-31'                                       AS snapshot_date,
+           COALESCE(s.units_sold, 0)                               AS units_sold,
+           CAST(GREATEST(500 - COALESCE(s.units_sold, 0), 0) AS INT) AS on_hand
+    FROM   silver.products p
+    LEFT JOIN stg_inventory s ON s.product_id = p.product_id
+) s
+ON t.product_id = s.product_id
+WHEN MATCHED THEN UPDATE SET *
+WHEN NOT MATCHED THEN INSERT *;

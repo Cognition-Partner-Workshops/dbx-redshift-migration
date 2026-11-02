@@ -1,0 +1,16 @@
+-- attribution: SUPER PartiQL unnesting (FROM t, t.payload.touches tc) ->
+-- VARIANT: parse_json(payload):touches exploded with variant_explode.
+CREATE OR REPLACE TABLE gold.attribution AS
+WITH touches AS (
+    SELECT t.customer_id,
+           CAST(tc.value:campaign_id AS STRING) AS campaign_id,
+           CAST(tc.value:channel AS STRING)     AS touch_channel
+    FROM   silver.campaign_touches t,
+           LATERAL variant_explode(parse_json(t.payload):touches) tc
+)
+SELECT campaign_id,
+       touch_channel,
+       COUNT(*)                     AS touches,
+       COUNT(DISTINCT customer_id)  AS customers_reached
+FROM   touches
+GROUP  BY campaign_id, touch_channel;
