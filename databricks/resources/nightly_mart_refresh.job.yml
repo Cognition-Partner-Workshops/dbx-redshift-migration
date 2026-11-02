@@ -214,7 +214,9 @@ resources:
         - task_key: exec_summary
           depends_on:
             - task_key: wave_1a
+              outcome: "true"
             - task_key: wave_1b
+              outcome: "true"
           sql_task:
             warehouse_id: ${var.warehouse_id}
             file:
@@ -224,6 +226,7 @@ resources:
         - task_key: finance_export_unload
           depends_on:
             - task_key: wave_1b
+              outcome: "true"
           environment_key: default
           spark_python_task:
             python_file: ../units/finance_export/export.py
