@@ -1,0 +1,237 @@
+# Lakeflow job recreated from legacy/redshift/99_orchestration/refresh_schedule.yaml.
+# load_core -> wave_1a and wave_1b in parallel -> exec_summary (after both waves);
+# finance_export (UNLOAD replacement) after wave_1b. The legacy waves are
+# fan-in marker tasks so the DAG reads like the schedule.
+resources:
+  jobs:
+    nightly_mart_refresh:
+      name: nightly_mart_refresh
+      schedule:
+        quartz_cron_expression: "0 0 2 * * ?"
+        timezone_id: UTC
+        pause_status: PAUSED
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: load_core
+          notebook_task:
+            notebook_path: ../job/foundation.sql
+            source: WORKSPACE
+            warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              catalog: ${var.catalog}
+        - task_key: daily_revenue
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/daily_revenue.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: customer_ltv
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/customer_ltv.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: geo_rollup
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/geo_rollup.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: churn_flags
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/churn_flags.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: product_perf
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/product_perf.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: store_weekly
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/store_weekly.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: category_mix
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/category_mix.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: basket_affinity
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/basket_affinity.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: sessionization
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/sessionization.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: shipping_sla
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/shipping_sla.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: rfm_segments
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/rfm_segments.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: promo_lift
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/promo_lift.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: payment_mix
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/payment_mix.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: returns_rate
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/returns_rate.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: attribution
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/attribution.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: inventory_snapshot
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/inventory_snapshot.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: finance_export
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/finance_export.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: cohort_retention
+          depends_on:
+            - task_key: load_core
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/cohort_retention.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: wave_1a
+          depends_on:
+            - task_key: daily_revenue
+            - task_key: customer_ltv
+            - task_key: geo_rollup
+            - task_key: churn_flags
+            - task_key: product_perf
+          condition_task:
+            op: EQUAL_TO
+            left: "1"
+            right: "1"
+        - task_key: wave_1b
+          depends_on:
+            - task_key: store_weekly
+            - task_key: category_mix
+            - task_key: basket_affinity
+            - task_key: sessionization
+            - task_key: shipping_sla
+            - task_key: rfm_segments
+            - task_key: promo_lift
+            - task_key: payment_mix
+            - task_key: returns_rate
+            - task_key: attribution
+            - task_key: inventory_snapshot
+            - task_key: finance_export
+            - task_key: cohort_retention
+          condition_task:
+            op: EQUAL_TO
+            left: "1"
+            right: "1"
+        - task_key: exec_summary
+          depends_on:
+            - task_key: wave_1a
+              outcome: "true"
+            - task_key: wave_1b
+              outcome: "true"
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../job/exec_summary.sql
+            parameters:
+              catalog: ${var.catalog}
+        - task_key: finance_export_unload
+          depends_on:
+            - task_key: wave_1b
+              outcome: "true"
+          environment_key: default
+          spark_python_task:
+            python_file: ../units/finance_export/export.py
+            parameters: ["--catalog", "${var.catalog}"]
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "2"

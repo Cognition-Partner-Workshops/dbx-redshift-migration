@@ -1,0 +1,6 @@
+SELECT campaign_id,
+       SUM(touches)           AS touches,
+       SUM(customers_reached) AS customers_reached
+FROM   gold.attribution
+GROUP  BY campaign_id
+ORDER  BY campaign_id NULLS LAST;

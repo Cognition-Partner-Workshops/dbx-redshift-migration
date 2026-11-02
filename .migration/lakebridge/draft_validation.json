@@ -1,0 +1,531 @@
+{
+  "attribution": {
+    "status": "FAIL",
+    "build": "FAIL",
+    "build_error": "Databricks SQL failed: [TABLE_OR_VIEW_NOT_FOUND] The table or view `t`.`payload`.`touches` cannot be found. Verify the spelling and correctness of the schema and catalog.",
+    "outputs": {}
+  },
+  "basket_affinity": {
+    "status": "PASS",
+    "build": "PASS",
+    "outputs": {
+      "basket_affinity": {
+        "status": "PASS"
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  },
+  "category_mix": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "category_mix": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 6,
+            "mismatches_by_column": {
+              "revenue_share": 6
+            },
+            "sample": {
+              "key": [
+                "Accessories"
+              ],
+              "diffs": {
+                "revenue_share": {
+                  "golden": 0.15411330152688182,
+                  "target": 0.154113
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 6,
+            "mismatches_by_column": {
+              "revenue_share": 6
+            },
+            "sample": {
+              "key": [
+                "Accessories"
+              ],
+              "diffs": {
+                "revenue_share": {
+                  "golden": 0.15411330152688182,
+                  "target": 0.154113
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "churn_flags": {
+    "status": "FAIL",
+    "build": "FAIL",
+    "build_error": "Databricks SQL failed: [DATATYPE_MISMATCH.BINARY_OP_DIFF_TYPES] Cannot resolve \"((CAST(2025-12-31 AS DATE) - variablereference(local.rec.last_order_date=DATE '2025-12-30')) > 180)\" due to data type mismatch: the left and right operands of the binary operator have incompatible types (\"INTERVAL DAY\" a",
+    "outputs": {}
+  },
+  "cohort_retention": {
+    "status": "FAIL",
+    "build": "FAIL",
+    "build_error": "Databricks SQL failed: [TABLE_OR_VIEW_NOT_FOUND] The table or view `tmp_cohorts` cannot be found. Verify the spelling and correctness of the schema and catalog.",
+    "outputs": {}
+  },
+  "customer_ltv": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "customer_ltv": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 1308,
+            "mismatches_by_column": {
+              "aov": 1308
+            },
+            "sample": {
+              "key": [
+                "1"
+              ],
+              "diffs": {
+                "aov": {
+                  "golden": "193.25",
+                  "target": "193.253556"
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 6,
+            "mismatches_by_column": {
+              "avg_ltv": 6
+            },
+            "sample": {
+              "key": [
+                "EAST"
+              ],
+              "diffs": {
+                "avg_ltv": {
+                  "golden": "6935.91",
+                  "target": "6935.910789"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "daily_revenue": {
+    "status": "PASS",
+    "build": "PASS",
+    "outputs": {
+      "daily_revenue": {
+        "status": "PASS"
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  },
+  "finance_export": {
+    "status": "PASS",
+    "build": "PASS",
+    "outputs": {
+      "finance_monthly": {
+        "status": "PASS"
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  },
+  "geo_rollup": {
+    "status": "PASS",
+    "build": "PASS",
+    "outputs": {
+      "geo_rollup": {
+        "status": "PASS"
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  },
+  "inventory_snapshot": {
+    "status": "FAIL",
+    "build": "FAIL",
+    "build_error": "Databricks SQL failed: [TEMP_TABLE_DROP_PERMANENT_NAME_CONFLICT] Cannot drop the permanent table with unqualified name `stg_inventory` because a temporary table with the same name exists. To drop the temporary table, use 'DROP TEMPORARY TABLE `stg_inventory`'. To drop the permanent table, specify th",
+    "outputs": {}
+  },
+  "orchestration": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "exec_summary": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 1,
+            "mismatches_by_column": {
+              "avg_customer_ltv": 1,
+              "avg_ship_hours": 1
+            },
+            "sample": {
+              "key": [
+                "as_of_2025-12-31"
+              ],
+              "diffs": {
+                "avg_customer_ltv": {
+                  "golden": "7029.21",
+                  "target": "7029.216833"
+                },
+                "avg_ship_hours": {
+                  "golden": "71.2551",
+                  "target": "71.891866"
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 1,
+            "mismatches_by_column": {
+              "avg_customer_ltv": 1,
+              "avg_ship_hours": 1
+            },
+            "sample": {
+              "key": [
+                "as_of_2025-12-31"
+              ],
+              "diffs": {
+                "avg_customer_ltv": {
+                  "golden": "7029.21",
+                  "target": "7029.216833"
+                },
+                "avg_ship_hours": {
+                  "golden": "71.2551",
+                  "target": "71.891866"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "payment_mix": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "payment_mix": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 5,
+            "mismatches_by_column": {
+              "amount_share": 5
+            },
+            "sample": {
+              "key": [
+                "card"
+              ],
+              "diffs": {
+                "amount_share": {
+                  "golden": "0.4276",
+                  "target": "0.4276037769119893"
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  },
+  "product_perf": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "product_perf": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 5,
+            "mismatches_by_column": {
+              "top_stores": 5
+            },
+            "sample": {
+              "key": [
+                "112"
+              ],
+              "diffs": {
+                "top_stores": {
+                  "golden": "EAST,NRTH,NE",
+                  "target": "EAST,NRTH,NE  "
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  },
+  "promo_lift": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "promo_lift": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 4,
+            "mismatches_by_column": {
+              "median_order_value": 2,
+              "p90_order_value": 4
+            },
+            "sample": {
+              "key": [
+                "mobile"
+              ],
+              "diffs": {
+                "median_order_value": {
+                  "golden": "390.21",
+                  "target": "390.21500000000003"
+                },
+                "p90_order_value": {
+                  "golden": "1093.96",
+                  "target": "1093.965"
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 4,
+            "mismatches_by_column": {
+              "median_order_value": 2,
+              "p90_order_value": 4
+            },
+            "sample": {
+              "key": [
+                "mobile"
+              ],
+              "diffs": {
+                "median_order_value": {
+                  "golden": "390.21",
+                  "target": "390.21500000000003"
+                },
+                "p90_order_value": {
+                  "golden": "1093.96",
+                  "target": "1093.965"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "returns_rate": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "returns_rate": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 6,
+            "mismatches_by_column": {
+              "return_rate_int": 6
+            },
+            "sample": {
+              "key": [
+                "Accessories"
+              ],
+              "diffs": {
+                "return_rate_int": {
+                  "golden": "0",
+                  "target": "0.05116959064327485"
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 6,
+            "mismatches_by_column": {
+              "return_rate_int": 6
+            },
+            "sample": {
+              "key": [
+                "Accessories"
+              ],
+              "diffs": {
+                "return_rate_int": {
+                  "golden": "0",
+                  "target": "0.05116959064327485"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "rfm_segments": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "rfm_segments": {
+        "status": "PASS"
+      },
+      "report": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 83,
+            "mismatches_by_column": {
+              "avg_frequency": 83
+            },
+            "sample": {
+              "key": [
+                "111"
+              ],
+              "diffs": {
+                "avg_frequency": {
+                  "golden": "21",
+                  "target": "21.29824561403509"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sessionization": {
+    "status": "PASS",
+    "build": "PASS",
+    "outputs": {
+      "web_sessions": {
+        "status": "PASS"
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  },
+  "shipping_sla": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "shipping_sla": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 4,
+            "mismatches_by_column": {
+              "avg_hours_to_deliver": 4
+            },
+            "sample": {
+              "key": [
+                "dhl"
+              ],
+              "diffs": {
+                "avg_hours_to_deliver": {
+                  "golden": "71.00",
+                  "target": "72.00"
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 4,
+            "mismatches_by_column": {
+              "avg_hours_to_deliver": 4
+            },
+            "sample": {
+              "key": [
+                "dhl"
+              ],
+              "diffs": {
+                "avg_hours_to_deliver": {
+                  "golden": "71.00",
+                  "target": "72.00"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "store_weekly": {
+    "status": "FAIL",
+    "build": "PASS",
+    "outputs": {
+      "store_weekly": {
+        "status": "FAIL",
+        "fails": {
+          "row_values": {
+            "mismatched_rows": 2080,
+            "mismatches_by_column": {
+              "week_number": 2080
+            },
+            "sample": {
+              "key": [
+                "1",
+                "2025-01-06"
+              ],
+              "diffs": {
+                "week_number": {
+                  "golden": "1",
+                  "target": "0"
+                }
+              }
+            }
+          }
+        }
+      },
+      "report": {
+        "status": "PASS"
+      }
+    }
+  }
+}
