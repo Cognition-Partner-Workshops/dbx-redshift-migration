@@ -22,7 +22,7 @@ outcome and the fix that made `make validate` pass.
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
-| attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
+| attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | rejected (partial): run-2 draft failed transpile validation (EXPLAIN PARSE_SYNTAX_ERROR on the multi-statement file, written in an Exception block); its SQL maps the `::VARCHAR(16)` casts to `CAST(... AS STRING)` but leaves the PartiQL unnest as `CROSS JOIN t.payload.touches AS tc`, which is not valid Databricks SQL, and keeps `core.`/`mart.` names | payload is STRING JSON text: `LATERAL VIEW explode(from_json(t.payload:touches, 'ARRAY<STRUCT<campaign_id: STRING, channel: STRING>>')) AS tc` (inner unnest like PartiQL); CREATE OR REPLACE TABLE gold.x instead of DROP+CREATE; drop CTAS ORDER BY |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
