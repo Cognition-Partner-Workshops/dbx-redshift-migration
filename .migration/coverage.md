@@ -18,7 +18,7 @@ outcome and the fix that made `make validate` pass.
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
-| rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
+| rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | clean (semantics): run-2 draft emits Redshift NULL ordering explicitly (ASC NULLS LAST, DESC NULLS FIRST) and keeps DATEDIFF(day, ...); draft sits in an Exception block only because EXPLAIN of the multi-statement file (DROP; CREATE) fails to parse; still references core.*/mart.*; report AVG(frequency) not truncated | single CREATE OR REPLACE TABLE gold.x AS, core/mart -> silver/gold, keep explicit NULLS LAST/FIRST in NTILE ORDER BY, DATEDIFF(end, start), CAST(AVG(int) AS BIGINT) in report |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
