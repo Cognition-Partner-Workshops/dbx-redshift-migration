@@ -13,7 +13,7 @@ outcome and the fix that made `make validate` pass.
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
-| store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
+| store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | mismatch: run-2 etl draft failed transpile validation (EXPLAIN on multi-statement file, inside Exception block); draft kept `DATE_ADD(day, 6, ts)` and `DATEDIFF(week, ...)`, which in Databricks counts whole 7-day spans, not Redshift's Monday week boundaries crossed (week_number/active_weeks would be off); report draft clean apart from core/mart names | `DATE_ADD(CAST(DATE_TRUNC('WEEK', ts) AS DATE), 6)`; week diff = `DATEDIFF(DATE_TRUNC('WEEK', b), DATE_TRUNC('WEEK', a)) DIV 7` cast BIGINT; CTAS CREATE OR REPLACE, CLUSTER BY former sort key; PASS on attempt 1 |
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
