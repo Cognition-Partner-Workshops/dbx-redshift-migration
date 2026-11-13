@@ -25,5 +25,5 @@ outcome and the fix that made `make validate` pass.
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
-| cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
+| cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | as expected (rejected): run-2 draft converted every statement (TEMP TABLE -> TEMPORARY TABLE, DATEDIFF(month,...) kept, ::DATE -> CAST) but the whole multi-statement etl.sql failed transpile validation (PARSE_SYNTAX_ERROR on the 2nd statement) and was written in an Exception block, still on core.*/mart.*; report.sql draft clean apart from mart.* | single CREATE OR REPLACE TABLE gold.cohort_retention (CLUSTER BY former sort key) + INSERT ... WITH CTEs replacing the temp tables; DATEDIFF(MONTH, start, end) cast to INT on month-start dates; report unchanged except gold.* |
 | orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
