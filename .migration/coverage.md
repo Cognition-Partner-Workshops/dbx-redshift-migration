@@ -12,7 +12,7 @@ outcome and the fix that made `make validate` pass.
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
-| product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
+| product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | mismatch: run-2 draft failed transpile validation (EXPLAIN on the multi-statement DROP+CREATE file, so it sits in an Exception block) and still references core.*/mart.*; LISTAGG -> ARRAY_JOIN(TRANSFORM(ARRAY_SORT(ARRAY_AGG(NAMED_STRUCT)))) and ::casts -> CAST are correct, but it concatenates the CHAR(4) region as-is, so padded codes ('NE  ', 'SW  ') would leak into top_stores where Redshift drops CHAR trailing blanks | single CREATE OR REPLACE TABLE gold.x AS (drop DISTKEY/SORTKEY/ORDER BY); RTRIM(region) before ROW_NUMBER/LISTAGG; keep ARRAY_SORT comparator on (units DESC, region) for LISTAGG order; silver.*/gold.* refs; validate PASS on attempt 1 |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
