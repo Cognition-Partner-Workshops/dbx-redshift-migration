@@ -20,7 +20,7 @@ outcome and the fix that made `make validate` pass.
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
-| payment_mix | DECODE, NVL, NVL2 | mismatch | | |
+| payment_mix | DECODE, NVL, NVL2 | mismatch | parse failure: draft emitted inside Exception block (EXPLAIN over multi-statement DROP+CREATE); converted SQL itself kept DECODE/NVL2, NVL->IFNULL, but `amount_share` would mismatch (Databricks decimal division keeps more scale) | split DROP/CREATE; `core`/`mart`->`silver`/`gold`; Redshift NUMERIC division = scale 4 truncated toward zero -> `CAST(FLOOR/CEIL(x,4) AS DECIMAL(38,4))`; drop ORDER BY in CTAS |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
