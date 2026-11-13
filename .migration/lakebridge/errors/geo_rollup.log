@@ -1,0 +1,27 @@
+TranspileError(code=VALIDATION_ERROR, kind=VALIDATION, severity=WARNING, path='/home/ubuntu/mig_run2/per_unit/geo_rollup/units__geo_rollup__etl.sql', message='
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CREATE': extra input 'CREATE'. SQLSTATE: 42601 (line 5, pos 0)
+
+== SQL ==
+EXPLAIN -- geo_rollup: GROUPING SETS over region / store state. grouping_id keeps the
+-- key unique across NULL grouping columns (1 = region, 2 = state, 3 = total).
+DROP TABLE IF EXISTS mart.geo_rollup;
+
+CREATE
+^^^
+    TABLE mart.geo_rollup AS
+    SELECT
+        CASE
+            WHEN GROUPING(s.region) = 0 AND GROUPING(s.state) = 1 THEN 1
+            WHEN GROUPING(s.region) = 1 AND GROUPING(s.state) = 0 THEN 2
+            ELSE 3
+        END AS grouping_id,
+        s.region,
+        s.state,
+        COUNT(DISTINCT o.order_id) AS order_count,
+        COALESCE(SUM(oi.quantity * (oi.unit_price - oi.discount)), 0) AS revenue
+    FROM
+        core.stores AS s LEFT JOIN core.orders AS o ON o.store_id = s.store_id LEFT JOIN core.order_items AS oi
+        ON oi.order_id = o.order_id
+        GROUP BY GROUPING SETS ((s.region), (s.state), ())
+    ORDER BY grouping_id NULLS LAST, s.region NULLS LAST, s.state NULLS LAST;
+')

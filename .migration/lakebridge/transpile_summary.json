@@ -1,0 +1,162 @@
+{
+ "foundation": {
+  "files": 3,
+  "queries": 3,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 3,
+  "generation_errors": 0
+ },
+ "daily_revenue": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "customer_ltv": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "geo_rollup": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "churn_flags": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "product_perf": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "store_weekly": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 2,
+  "generation_errors": 0
+ },
+ "category_mix": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "basket_affinity": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 2,
+  "generation_errors": 0
+ },
+ "sessionization": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "shipping_sla": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "rfm_segments": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "promo_lift": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "payment_mix": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "returns_rate": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "attribution": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "inventory_snapshot": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "finance_export": {
+  "files": 3,
+  "queries": 3,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 2,
+  "generation_errors": 0
+ },
+ "cohort_retention": {
+  "files": 2,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ },
+ "orchestration": {
+  "files": 3,
+  "queries": 2,
+  "analysis_errors": 0,
+  "parsing_errors": 0,
+  "validation_errors": 1,
+  "generation_errors": 0
+ }
+}

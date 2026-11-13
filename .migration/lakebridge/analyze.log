@@ -1,0 +1,171 @@
+[90m18:49:24[0m [1m[32m    INFO[0m [1m[databricks.sdk] loading DEFAULT profile from ~/.databrickscfg: host, auth_type, client_id, audience, oidc_token_filepath, databricks_id_token_filepath[0m
+Databricks Code Analyzer
+Copyright (c) 2026 Databricks. All rights reserved.
+Version 5.6.6 Build 20251204
+
+CodeAnalyzer [806]: 2026-11-13 18:49:24 Start time: 20261113_184924
+CodeAnalyzer [807]: 2026-11-13 18:49:24 OS Process ID: 11115
+ANLZ_CC [694]: 2026-11-13 18:49:24 PROGRESS:	Reading config file 
+ANLZ_CC [694]: 2026-11-13 18:49:24 PROGRESS:	Done reading config file 
+CodeAnalyzer [922]: 2026-11-13 18:49:24 Stats folder: /home/ubuntu/repos/dbx-redshift-migration/.migration/lakebridge
+CodeAnalyzer [967]: 2026-11-13 18:49:25 Applying job type filter: 
+CodeAnalyzer [1003]: 2026-11-13 18:49:25 Verbose Mode: 
+CodeAnalyzer [5165]: 2026-11-13 18:49:25 Traversing folder /home/ubuntu/mig_run2/staging
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__promo_lift__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__finance_export__export.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__store_weekly__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__attribution__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__returns_rate__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__churn_flags__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__daily_revenue__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/00_foundation__01_schemas.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__category_mix__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__product_perf__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__returns_rate__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__product_perf__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__customer_ltv__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__inventory_snapshot__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__daily_revenue__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__cohort_retention__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__customer_ltv__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__rfm_segments__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__payment_mix__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/00_foundation__02_core_tables.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__inventory_snapshot__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__promo_lift__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/99_orchestration__exec_summary__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/99_orchestration__refresh_schedule.yaml - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__category_mix__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__rfm_segments__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__churn_flags__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__finance_export__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__sessionization__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/99_orchestration__exec_summary__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__finance_export__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__geo_rollup__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__basket_affinity__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/00_foundation__03_udfs.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__attribution__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__store_weekly__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__shipping_sla__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__payment_mix__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__basket_affinity__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__geo_rollup__etl.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__sessionization__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__cohort_retention__report.sql - 20261113_184918
+CodeAnalyzer [5309]: 2026-11-13 18:49:25 File /home/ubuntu/mig_run2/staging/units__shipping_sla__etl.sql - 20261113_184918
+CodeAnalyzer [1171]: 2026-11-13 18:49:25 Total files found: 43
+CodeAnalyzer [1183]: 2026-11-13 18:49:25 Total size of all files (28131) < limit of 10000000000000; processing files in a single run
+CodeAnalyzer [1195]: 2026-11-13 18:49:25 Files per thread: 43
+THREAD 1 [4697]: 2026-11-13 18:49:25 Started thread # 1 with file count 43
+/home/ubuntu/mig_run2/staging/units__promo_lift__report.sql
+/home/ubuntu/mig_run2/staging/units__finance_export__export.sql
+/home/ubuntu/mig_run2/staging/units__store_weekly__etl.sql
+/home/ubuntu/mig_run2/staging/units__attribution__report.sql
+/home/ubuntu/mig_run2/staging/units__returns_rate__report.sql
+/home/ubuntu/mig_run2/staging/units__churn_flags__etl.sql
+/home/ubuntu/mig_run2/staging/units__daily_revenue__etl.sql
+/home/ubuntu/mig_run2/staging/00_foundation__01_schemas.sql
+/home/ubuntu/mig_run2/staging/units__category_mix__report.sql
+/home/ubuntu/mig_run2/staging/units__product_perf__report.sql
+/home/ubuntu/mig_run2/staging/units__returns_rate__etl.sql
+/home/ubuntu/mig_run2/staging/units__product_perf__etl.sql
+/home/ubuntu/mig_run2/staging/units__customer_ltv__report.sql
+/home/ubuntu/mig_run2/staging/units__inventory_snapshot__report.sql
+/home/ubuntu/mig_run2/staging/units__daily_revenue__report.sql
+/home/ubuntu/mig_run2/staging/units__cohort_retention__etl.sql
+/home/ubuntu/mig_run2/staging/units__customer_ltv__etl.sql
+/home/ubuntu/mig_run2/staging/units__rfm_segments__report.sql
+/home/ubuntu/mig_run2/staging/units__payment_mix__report.sql
+/home/ubuntu/mig_run2/staging/00_foundation__02_core_tables.sql
+/home/ubuntu/mig_run2/staging/units__inventory_snapshot__etl.sql
+/home/ubuntu/mig_run2/staging/units__promo_lift__etl.sql
+/home/ubuntu/mig_run2/staging/99_orchestration__exec_summary__etl.sql
+/home/ubuntu/mig_run2/staging/99_orchestration__refresh_schedule.yaml
+/home/ubuntu/mig_run2/staging/units__category_mix__etl.sql
+/home/ubuntu/mig_run2/staging/units__rfm_segments__etl.sql
+/home/ubuntu/mig_run2/staging/units__churn_flags__report.sql
+/home/ubuntu/mig_run2/staging/units__finance_export__report.sql
+/home/ubuntu/mig_run2/staging/units__sessionization__etl.sql
+/home/ubuntu/mig_run2/staging/99_orchestration__exec_summary__report.sql
+/home/ubuntu/mig_run2/staging/units__finance_export__etl.sql
+/home/ubuntu/mig_run2/staging/units__geo_rollup__report.sql
+/home/ubuntu/mig_run2/staging/units__basket_affinity__etl.sql
+/home/ubuntu/mig_run2/staging/00_foundation__03_udfs.sql
+/home/ubuntu/mig_run2/staging/units__attribution__etl.sql
+/home/ubuntu/mig_run2/staging/units__store_weekly__report.sql
+/home/ubuntu/mig_run2/staging/units__shipping_sla__report.sql
+/home/ubuntu/mig_run2/staging/units__payment_mix__etl.sql
+/home/ubuntu/mig_run2/staging/units__basket_affinity__report.sql
+/home/ubuntu/mig_run2/staging/units__geo_rollup__etl.sql
+/home/ubuntu/mig_run2/staging/units__sessionization__report.sql
+/home/ubuntu/mig_run2/staging/units__cohort_retention__report.sql
+/home/ubuntu/mig_run2/staging/units__shipping_sla__etl.sql
+THREAD 1 [4724]: 2026-11-13 18:49:25 Processing all files in a single pass
+ANLZ_CC [694]: 2026-11-13 18:49:25 PROGRESS:	Analyzing /home/ubuntu/mig_run2/staging/units__promo_lift__report.sql
+DBCatalog::SQLParser [593]: 2026-11-13 18:49:25 ********** PARSER VERBOSE FLAG:  **********
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__promo_lift__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__finance_export__export.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__store_weekly__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__attribution__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__returns_rate__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__churn_flags__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__daily_revenue__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/00_foundation__01_schemas.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__category_mix__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__product_perf__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__returns_rate__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__product_perf__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__customer_ltv__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__inventory_snapshot__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__daily_revenue__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__cohort_retention__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__customer_ltv__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__rfm_segments__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__payment_mix__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/00_foundation__02_core_tables.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__inventory_snapshot__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__promo_lift__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/99_orchestration__exec_summary__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/99_orchestration__refresh_schedule.yaml
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__category_mix__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__rfm_segments__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__churn_flags__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__finance_export__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__sessionization__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/99_orchestration__exec_summary__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__finance_export__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__geo_rollup__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__basket_affinity__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/00_foundation__03_udfs.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__attribution__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__store_weekly__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__shipping_sla__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__payment_mix__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__basket_affinity__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__geo_rollup__etl.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__sessionization__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__cohort_retention__report.sql
+DBCatalog::SQLParser [1276]: 2026-11-13 18:49:25 analyze_file: Analyzing file /home/ubuntu/mig_run2/staging/units__shipping_sla__etl.sql
+THREAD 1 [4974]: 2026-11-13 18:49:25 Exiting thread # 1
+ANLZ_CC [694]: 2026-11-13 18:49:25 PROGRESS:	Thread 1 - done analyzing data
+CodeAnalyzer [1244]: 2026-11-13 18:49:25 
+
+******************* Analyzed all files, consolidating data. -t option is SQL *******************
+
+
+ANLZ_CC [694]: 2026-11-13 18:49:25 PROGRESS:	Consolidating data
+CodeAnalyzer [6264]: 2026-11-13 18:49:25 Starting read_log_files. -t option is SQL. glob_pattern: .  opt I: . DEBUG_FLAG: 
+CodeAnalyzer [6277]: 2026-11-13 18:49:25 Traversing for log files: /home/ubuntu/repos/dbx-redshift-migration/.migration/lakebridge/*20261113_184924.tmp
+ANLZ_CC [694]: 2026-11-13 18:49:25 PROGRESS:	Reading meta file for SQL /home/ubuntu/repos/dbx-redshift-migration/.migration/lakebridge/analyze.xlsx.1.1.20261113_184924.tmp
+ANLZ_CC [694]: 2026-11-13 18:49:25 PROGRESS:	Creating stats file
+CodeAnalyzer [1392]: 2026-11-13 18:49:25 Creating stats file for SQL. embedded_sql_flag: 
+CodeAnalyzer [1456]: 2026-11-13 18:49:25 localtime sql(2026,11,13,18,49,25,2026,11,13,18,49,25)
+Analyzer::ModelBuilder [404]: 2026-11-13 18:49:25 Built object_lineage with 36 unique targets
+ANLZ_CC [694]: 2026-11-13 18:49:25 PROGRESS:	Done creating stats file
+CodeAnalyzer [1299]: 2026-11-13 18:49:25 Removing temp files...
+CodeAnalyzer [1309]: 2026-11-13 18:49:25 Analyzer run completed. for -t SQL, -r /home/ubuntu/repos/dbx-redshift-migration/.migration/lakebridge/analyze.xlsx
+ANLZ_CC [694]: 2026-11-13 18:49:25 PROGRESS:	Analyzer run completed.
+ANLZ_CC [702]: 2026-11-13 18:49:25 INFO:    	DONE!
+[90m18:49:25[0m [1m[32m    INFO[0m [1m[d.l.bladespector.analyzer] Analyzer JSON output validated successfully against analyzer-sql-schema.json: /home/ubuntu/repos/dbx-redshift-migration/.migration/lakebridge/analyze.json[0m
+[90m18:49:25[0m [1m[32m    INFO[0m [1m[d.l.l.analyzer.lakebridge_analyzer] Analyzed Redshift files in /home/ubuntu/mig_run2/staging; report saved to: /home/ubuntu/repos/dbx-redshift-migration/.migration/lakebridge/analyze.xlsx[0m

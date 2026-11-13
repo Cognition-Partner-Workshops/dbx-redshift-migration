@@ -1,0 +1,20 @@
+TranspileError(code=VALIDATION_ERROR, kind=VALIDATION, severity=WARNING, path='/home/ubuntu/mig_run2/per_unit/attribution/units__attribution__etl.sql', message='
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CREATE': extra input 'CREATE'. SQLSTATE: 42601 (line 4, pos 0)
+
+== SQL ==
+EXPLAIN -- attribution: SUPER/PartiQL navigation over campaign_touches payloads.
+DROP TABLE IF EXISTS mart.attribution;
+
+CREATE
+^^^
+    TABLE mart.attribution AS
+    SELECT
+        CAST(tc.campaign_id AS STRING) AS campaign_id,
+        CAST(tc.channel AS STRING) AS touch_channel,
+        COUNT(*) AS touches,
+        COUNT(DISTINCT t.customer_id) AS customers_reached
+    FROM
+        core.campaign_touches AS t CROSS JOIN t.payload.touches AS tc
+        GROUP BY CAST(tc.campaign_id AS STRING), CAST(tc.channel AS STRING)
+    ORDER BY campaign_id NULLS LAST, touch_channel NULLS LAST;
+')

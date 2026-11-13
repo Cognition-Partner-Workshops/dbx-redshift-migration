@@ -1,0 +1,308 @@
+{
+ "staging_dir": "~/mig_run2/staging (outside repo)",
+ "staged_files": 43,
+ "analyze_inventory_entries": 43,
+ "files": [
+  {
+   "unit": "foundation",
+   "source": "legacy/redshift/00_foundation/01_schemas.sql",
+   "staged_name": "00_foundation__01_schemas.sql",
+   "sha256": "193f84793a54a361976d1a96759ceb577e4e9fcf44b0cd4fa30d3ac669aa05ad",
+   "draft": ".migration/lakebridge/transpiled/foundation/01_schemas.sql"
+  },
+  {
+   "unit": "foundation",
+   "source": "legacy/redshift/00_foundation/02_core_tables.sql",
+   "staged_name": "00_foundation__02_core_tables.sql",
+   "sha256": "68ddc1918d127e6bcac4c3fb6de7c82ff73e2578ead4c36218e4669669bd5394",
+   "draft": ".migration/lakebridge/transpiled/foundation/02_core_tables.sql"
+  },
+  {
+   "unit": "foundation",
+   "source": "legacy/redshift/00_foundation/03_udfs.sql",
+   "staged_name": "00_foundation__03_udfs.sql",
+   "sha256": "5aa33e6c8bd8e0a774f38c5be11b9c84fd634cad41b41479c76d5d31580f2a35",
+   "draft": ".migration/lakebridge/transpiled/foundation/03_udfs.sql"
+  },
+  {
+   "unit": "daily_revenue",
+   "source": "legacy/redshift/units/daily_revenue/etl.sql",
+   "staged_name": "units__daily_revenue__etl.sql",
+   "sha256": "aafbe9cd21c2d1b6f2ca6dc9c2f77425521b4590d2cff684f72e69a8c9d318fb",
+   "draft": ".migration/lakebridge/transpiled/daily_revenue/etl.sql"
+  },
+  {
+   "unit": "daily_revenue",
+   "source": "legacy/redshift/units/daily_revenue/report.sql",
+   "staged_name": "units__daily_revenue__report.sql",
+   "sha256": "2693ba30d4bda714f21bf13377edc4f01746ee3e226fe2b52f068584806085db",
+   "draft": ".migration/lakebridge/transpiled/daily_revenue/report.sql"
+  },
+  {
+   "unit": "customer_ltv",
+   "source": "legacy/redshift/units/customer_ltv/etl.sql",
+   "staged_name": "units__customer_ltv__etl.sql",
+   "sha256": "a16e001290eb87dc1114dcf36f9e02088e1ddb4e49ded6c106da162c6964f518",
+   "draft": ".migration/lakebridge/transpiled/customer_ltv/etl.sql"
+  },
+  {
+   "unit": "customer_ltv",
+   "source": "legacy/redshift/units/customer_ltv/report.sql",
+   "staged_name": "units__customer_ltv__report.sql",
+   "sha256": "4d248888d49a9896f4cc4855d135cc4285c809ea00ee170fd4105e4e9d018ed2",
+   "draft": ".migration/lakebridge/transpiled/customer_ltv/report.sql"
+  },
+  {
+   "unit": "geo_rollup",
+   "source": "legacy/redshift/units/geo_rollup/etl.sql",
+   "staged_name": "units__geo_rollup__etl.sql",
+   "sha256": "cdbbc0cb2e16ecc37ab3294907faab7ec9ab178511b77f8395fd5aac3bea9ab6",
+   "draft": ".migration/lakebridge/transpiled/geo_rollup/etl.sql"
+  },
+  {
+   "unit": "geo_rollup",
+   "source": "legacy/redshift/units/geo_rollup/report.sql",
+   "staged_name": "units__geo_rollup__report.sql",
+   "sha256": "ac0a6cb480c69757ad61f4c9955f366b7b4839f8400b0601084a7c226193c109",
+   "draft": ".migration/lakebridge/transpiled/geo_rollup/report.sql"
+  },
+  {
+   "unit": "churn_flags",
+   "source": "legacy/redshift/units/churn_flags/etl.sql",
+   "staged_name": "units__churn_flags__etl.sql",
+   "sha256": "c2264bd6253bc041adef3ba8c374bd6e352847e911041d223318c17241b4445d",
+   "draft": ".migration/lakebridge/transpiled/churn_flags/etl.sql"
+  },
+  {
+   "unit": "churn_flags",
+   "source": "legacy/redshift/units/churn_flags/report.sql",
+   "staged_name": "units__churn_flags__report.sql",
+   "sha256": "6cce3da438bbf059134d30a260f792ebaba4718d97bd3245634e37672bf8b4b6",
+   "draft": ".migration/lakebridge/transpiled/churn_flags/report.sql"
+  },
+  {
+   "unit": "product_perf",
+   "source": "legacy/redshift/units/product_perf/etl.sql",
+   "staged_name": "units__product_perf__etl.sql",
+   "sha256": "1ed1a5409e2359aed6a11c97b554f213c9fc7b2002f42eaf04bd7788cb761a06",
+   "draft": ".migration/lakebridge/transpiled/product_perf/etl.sql"
+  },
+  {
+   "unit": "product_perf",
+   "source": "legacy/redshift/units/product_perf/report.sql",
+   "staged_name": "units__product_perf__report.sql",
+   "sha256": "ee34baefbebe4a21b983df7705f57c95f2fed2394f3182f173ee4ca757d46815",
+   "draft": ".migration/lakebridge/transpiled/product_perf/report.sql"
+  },
+  {
+   "unit": "store_weekly",
+   "source": "legacy/redshift/units/store_weekly/etl.sql",
+   "staged_name": "units__store_weekly__etl.sql",
+   "sha256": "437fbe6a31b9a8d7d3717e8a97f31bead41f58dc16ba73619da84b6f8c38b019",
+   "draft": ".migration/lakebridge/transpiled/store_weekly/etl.sql"
+  },
+  {
+   "unit": "store_weekly",
+   "source": "legacy/redshift/units/store_weekly/report.sql",
+   "staged_name": "units__store_weekly__report.sql",
+   "sha256": "fdd6e8a8d3c243662072bcfe4f4326a9c45320ace8fa6e2bbef79d16d6ac44cf",
+   "draft": ".migration/lakebridge/transpiled/store_weekly/report.sql"
+  },
+  {
+   "unit": "category_mix",
+   "source": "legacy/redshift/units/category_mix/etl.sql",
+   "staged_name": "units__category_mix__etl.sql",
+   "sha256": "ecbc34208b3205846956d43dcccafe456f97092188eb642aac62457e3d9c8ae5",
+   "draft": ".migration/lakebridge/transpiled/category_mix/etl.sql"
+  },
+  {
+   "unit": "category_mix",
+   "source": "legacy/redshift/units/category_mix/report.sql",
+   "staged_name": "units__category_mix__report.sql",
+   "sha256": "b77f5f1a8278a86f7956b0bbd18661c5d80378a3efb5394e05657dcae20ffc4a",
+   "draft": ".migration/lakebridge/transpiled/category_mix/report.sql"
+  },
+  {
+   "unit": "basket_affinity",
+   "source": "legacy/redshift/units/basket_affinity/etl.sql",
+   "staged_name": "units__basket_affinity__etl.sql",
+   "sha256": "e4feec01cd9fa91dcf6938f76d60caf3b9921dfabbc04c39a9bfd615f64a45b6",
+   "draft": ".migration/lakebridge/transpiled/basket_affinity/etl.sql"
+  },
+  {
+   "unit": "basket_affinity",
+   "source": "legacy/redshift/units/basket_affinity/report.sql",
+   "staged_name": "units__basket_affinity__report.sql",
+   "sha256": "d0187b89a21014f5a8d0c3aa33893e46a5321951771c0cd3adc309814cd841d2",
+   "draft": ".migration/lakebridge/transpiled/basket_affinity/report.sql"
+  },
+  {
+   "unit": "sessionization",
+   "source": "legacy/redshift/units/sessionization/etl.sql",
+   "staged_name": "units__sessionization__etl.sql",
+   "sha256": "f5766aca8358774c51d6db8a655a651cbd2293dbd3e2beb99907d2b16569b718",
+   "draft": ".migration/lakebridge/transpiled/sessionization/etl.sql"
+  },
+  {
+   "unit": "sessionization",
+   "source": "legacy/redshift/units/sessionization/report.sql",
+   "staged_name": "units__sessionization__report.sql",
+   "sha256": "f2f5bfbf4291828bfb7ca2e04075242b47ee00d337adf1e26483d6ba462e5703",
+   "draft": ".migration/lakebridge/transpiled/sessionization/report.sql"
+  },
+  {
+   "unit": "shipping_sla",
+   "source": "legacy/redshift/units/shipping_sla/etl.sql",
+   "staged_name": "units__shipping_sla__etl.sql",
+   "sha256": "6a54699a1749607bfc1219d944772ccbfffa0111e2079d7fd2dff418490473d5",
+   "draft": ".migration/lakebridge/transpiled/shipping_sla/etl.sql"
+  },
+  {
+   "unit": "shipping_sla",
+   "source": "legacy/redshift/units/shipping_sla/report.sql",
+   "staged_name": "units__shipping_sla__report.sql",
+   "sha256": "3fe2b9c97460fb81c30354042bacf7b6ebc0042c4f8576bb78dfb1870f280b22",
+   "draft": ".migration/lakebridge/transpiled/shipping_sla/report.sql"
+  },
+  {
+   "unit": "rfm_segments",
+   "source": "legacy/redshift/units/rfm_segments/etl.sql",
+   "staged_name": "units__rfm_segments__etl.sql",
+   "sha256": "f45735bda11eec80c715b24d97772be21ac40ebd7ac99a8a352efb1b0f4c6c9f",
+   "draft": ".migration/lakebridge/transpiled/rfm_segments/etl.sql"
+  },
+  {
+   "unit": "rfm_segments",
+   "source": "legacy/redshift/units/rfm_segments/report.sql",
+   "staged_name": "units__rfm_segments__report.sql",
+   "sha256": "973880a67fd68a7f465f410771f971a1ca61324c9066404f424c3da3d090c4eb",
+   "draft": ".migration/lakebridge/transpiled/rfm_segments/report.sql"
+  },
+  {
+   "unit": "promo_lift",
+   "source": "legacy/redshift/units/promo_lift/etl.sql",
+   "staged_name": "units__promo_lift__etl.sql",
+   "sha256": "f93eec6fb755c95c5069704f2e6ef7703a6c0b63f48d10bdd55579079cfc1b80",
+   "draft": ".migration/lakebridge/transpiled/promo_lift/etl.sql"
+  },
+  {
+   "unit": "promo_lift",
+   "source": "legacy/redshift/units/promo_lift/report.sql",
+   "staged_name": "units__promo_lift__report.sql",
+   "sha256": "da604b9ede060e6d8e5a7d969ecbd54d1273a45375264bee042556a8023c6b67",
+   "draft": ".migration/lakebridge/transpiled/promo_lift/report.sql"
+  },
+  {
+   "unit": "payment_mix",
+   "source": "legacy/redshift/units/payment_mix/etl.sql",
+   "staged_name": "units__payment_mix__etl.sql",
+   "sha256": "cd2041d304e8640bb1fbd3e06ba283ba127f2c4d202aaf455258f47fe959cf94",
+   "draft": ".migration/lakebridge/transpiled/payment_mix/etl.sql"
+  },
+  {
+   "unit": "payment_mix",
+   "source": "legacy/redshift/units/payment_mix/report.sql",
+   "staged_name": "units__payment_mix__report.sql",
+   "sha256": "35a1b5ba109446454f58e73997b28efbebe56200b3223e38e376a30fdbf2b85d",
+   "draft": ".migration/lakebridge/transpiled/payment_mix/report.sql"
+  },
+  {
+   "unit": "returns_rate",
+   "source": "legacy/redshift/units/returns_rate/etl.sql",
+   "staged_name": "units__returns_rate__etl.sql",
+   "sha256": "b6bccd75e250811f0d0cdabe03c646e08368de7455b083a6ffdde788d1b79e46",
+   "draft": ".migration/lakebridge/transpiled/returns_rate/etl.sql"
+  },
+  {
+   "unit": "returns_rate",
+   "source": "legacy/redshift/units/returns_rate/report.sql",
+   "staged_name": "units__returns_rate__report.sql",
+   "sha256": "39d3474a65feb3fceb3fd351522e09dfa75b888897ae0b194db8b58d5243d235",
+   "draft": ".migration/lakebridge/transpiled/returns_rate/report.sql"
+  },
+  {
+   "unit": "attribution",
+   "source": "legacy/redshift/units/attribution/etl.sql",
+   "staged_name": "units__attribution__etl.sql",
+   "sha256": "3edd3a9e0c8d28458138918c163f75c00604e88cfa5d01d079b5d11074307db4",
+   "draft": ".migration/lakebridge/transpiled/attribution/etl.sql"
+  },
+  {
+   "unit": "attribution",
+   "source": "legacy/redshift/units/attribution/report.sql",
+   "staged_name": "units__attribution__report.sql",
+   "sha256": "7015ba01d9467cbcd564e36938bfc2decb1c02b5c80564af1fa22aa9951748bd",
+   "draft": ".migration/lakebridge/transpiled/attribution/report.sql"
+  },
+  {
+   "unit": "inventory_snapshot",
+   "source": "legacy/redshift/units/inventory_snapshot/etl.sql",
+   "staged_name": "units__inventory_snapshot__etl.sql",
+   "sha256": "45f645a4d5c02ee84c1c6bc7fc41408f2f1249cf564ac9b574cf128e8b31395d",
+   "draft": ".migration/lakebridge/transpiled/inventory_snapshot/etl.sql"
+  },
+  {
+   "unit": "inventory_snapshot",
+   "source": "legacy/redshift/units/inventory_snapshot/report.sql",
+   "staged_name": "units__inventory_snapshot__report.sql",
+   "sha256": "ba99820570e25749eb5b98ceff4702803daf2dbd23baa4f2247662898800fc2d",
+   "draft": ".migration/lakebridge/transpiled/inventory_snapshot/report.sql"
+  },
+  {
+   "unit": "finance_export",
+   "source": "legacy/redshift/units/finance_export/etl.sql",
+   "staged_name": "units__finance_export__etl.sql",
+   "sha256": "58ca7bd6934adbcc4f1346c7c6cb2bd2441d3269acadc6c21d97af9df3fc391a",
+   "draft": ".migration/lakebridge/transpiled/finance_export/etl.sql"
+  },
+  {
+   "unit": "finance_export",
+   "source": "legacy/redshift/units/finance_export/report.sql",
+   "staged_name": "units__finance_export__report.sql",
+   "sha256": "484efed45891a4e099d7d5d50c7a0d5fce4b337398b8b80da8f3333c0a84752b",
+   "draft": ".migration/lakebridge/transpiled/finance_export/report.sql"
+  },
+  {
+   "unit": "finance_export",
+   "source": "legacy/redshift/units/finance_export/export.sql",
+   "staged_name": "units__finance_export__export.sql",
+   "sha256": "1005e292f35fafcf30f05c086163c4745feaea1e976c8de49d998c2764f634b8",
+   "draft": ".migration/lakebridge/transpiled/finance_export/export.sql"
+  },
+  {
+   "unit": "cohort_retention",
+   "source": "legacy/redshift/units/cohort_retention/etl.sql",
+   "staged_name": "units__cohort_retention__etl.sql",
+   "sha256": "479028c33d38d106e3651451f5b6c14e9397afa941b77ffd6de7f9bba529806a",
+   "draft": ".migration/lakebridge/transpiled/cohort_retention/etl.sql"
+  },
+  {
+   "unit": "cohort_retention",
+   "source": "legacy/redshift/units/cohort_retention/report.sql",
+   "staged_name": "units__cohort_retention__report.sql",
+   "sha256": "d2699a301ce6a6897ccc0ac4ab8978501459e471b031ac3b5a6c5f0c059c6ab8",
+   "draft": ".migration/lakebridge/transpiled/cohort_retention/report.sql"
+  },
+  {
+   "unit": "orchestration",
+   "source": "legacy/redshift/99_orchestration/exec_summary/etl.sql",
+   "staged_name": "99_orchestration__exec_summary__etl.sql",
+   "sha256": "8e591b9e5f51aa929df9fcd53f6eba69567aec268fac667205ee287f3559a669",
+   "draft": ".migration/lakebridge/transpiled/orchestration/etl.sql"
+  },
+  {
+   "unit": "orchestration",
+   "source": "legacy/redshift/99_orchestration/exec_summary/report.sql",
+   "staged_name": "99_orchestration__exec_summary__report.sql",
+   "sha256": "503d760bd8761382c421363679e4a8ba985abd1d76b0c46bd8749bf3a9fcd9f3",
+   "draft": ".migration/lakebridge/transpiled/orchestration/report.sql"
+  },
+  {
+   "unit": "orchestration",
+   "source": "legacy/redshift/99_orchestration/refresh_schedule.yaml",
+   "staged_name": "99_orchestration__refresh_schedule.yaml",
+   "sha256": "7fd4c71414c12c65eee58717a1e2192b6136481d15c82dcab3e9155811bf037d",
+   "draft": null
+  }
+ ]
+}

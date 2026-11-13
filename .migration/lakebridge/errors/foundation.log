@@ -1,0 +1,128 @@
+TranspileError(code=VALIDATION_ERROR, kind=VALIDATION, severity=WARNING, path='/home/ubuntu/mig_run2/per_unit/foundation/00_foundation__01_schemas.sql', message='
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CREATE': extra input 'CREATE'. SQLSTATE: 42601 (line 5, pos 0)
+
+== SQL ==
+EXPLAIN -- Foundation: schemas. setup drops/recreates these; kept here so the estate
+-- reads as a complete deployable script.
+CREATE SCHEMA IF NOT EXISTS core;
+
+CREATE SCHEMA IF NOT EXISTS mart;
+^^^
+')
+TranspileError(code=VALIDATION_ERROR, kind=VALIDATION, severity=WARNING, path='/home/ubuntu/mig_run2/per_unit/foundation/00_foundation__02_core_tables.sql', message='
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CREATE': extra input 'CREATE'. SQLSTATE: 42601 (line 17, pos 0)
+
+== SQL ==
+EXPLAIN -- core.* landing tables: append-only raw extract, Redshift-flavored DDL.
+CREATE
+    /* DISTKEY(customer_id) SORTKEY(customer_id) */
+    TABLE core.customers
+    (
+        customer_id BIGINT NOT NULL,
+        email STRING /** ENCODE lzo **/,
+        first_name STRING,
+        last_name STRING,
+        phone STRING,
+        region CHAR(4) /** ENCODE lzo **/,
+        preferred_store_id INT,
+        signup_date DATE,
+        is_business BOOLEAN
+    );
+
+CREATE
+^^^
+    /* DISTSTYLE ALL
+SORTKEY(store_id) */
+    TABLE core.stores
+    (store_id INT NOT NULL, region CHAR(4) /** ENCODE lzo **/, store_name STRING, city STRING, state STRING);
+
+CREATE
+    /* DISTSTYLE ALL
+SORTKEY(product_id) */
+    TABLE core.products
+    (
+        product_id INT NOT NULL,
+        sku STRING,
+        product_name STRING,
+        category STRING /** ENCODE lzo **/,
+        subcategory STRING,
+        unit_price DECIMAL(12, 2),
+        cost DECIMAL(12, 2),
+        active BOOLEAN
+    );
+
+CREATE
+    /* DISTKEY(customer_id) SORTKEY(order_ts) */
+    TABLE core.orders
+    (
+        order_id BIGINT NOT NULL,
+        customer_id BIGINT,
+        store_id INT,
+        order_ts TIMESTAMP /** ENCODE lzo **/,
+        sales_channel STRING /** ENCODE lzo **/,
+        status STRING
+    );
+
+CREATE
+    /* DISTKEY(order_id) SORTKEY(order_id) */
+    TABLE core.order_items
+    (
+        order_item_id BIGINT NOT NULL,
+        order_id BIGINT,
+        product_id INT,
+        quantity INT,
+        unit_price DECIMAL(12, 2),
+        discount DECIMAL(12, 2)
+    );
+
+CREATE
+    /* DISTKEY(order_id) SORTKEY(order_id) */
+    TABLE core.payments
+    (payment_id BIGINT NOT NULL, order_id BIGINT, method STRING, amount DECIMAL(12, 2), paid_ts TIMESTAMP);
+
+CREATE
+    /* DISTKEY(order_item_id) SORTKEY(returned_ts) */
+    TABLE core.returns
+    (return_id BIGINT NOT NULL, order_item_id BIGINT, quantity INT, reason STRING, returned_ts TIMESTAMP);
+
+CREATE
+    /* DISTKEY(order_id) SORTKEY(ship_ts) */
+    TABLE core.shipments
+    (
+        shipment_id BIGINT NOT NULL,
+        order_id BIGINT,
+        carrier STRING /** ENCODE lzo **/,
+        ship_ts TIMESTAMP,
+        delivered_ts TIMESTAMP
+    );
+
+CREATE
+    /* DISTKEY(customer_id) SORTKEY(event_ts) */
+    TABLE core.web_events
+    (
+        event_id BIGINT NOT NULL,
+        customer_id BIGINT,
+        event_ts TIMESTAMP,
+        event_type STRING /** ENCODE lzo **/,
+        page_url STRING
+    );
+
+CREATE
+    /* DISTKEY(customer_id) SORTKEY(touch_id) */
+    TABLE core.campaign_touches (touch_id BIGINT NOT NULL, customer_id BIGINT, payload VARIANT);
+')
+TranspileError(code=VALIDATION_ERROR, kind=VALIDATION, severity=WARNING, path='/home/ubuntu/mig_run2/per_unit/foundation/00_foundation__03_udfs.sql', message='
+[PARSE_SYNTAX_ERROR] Syntax error at or near 'CREATE': extra input 'CREATE'. SQLSTATE: 42601 (line 9, pos 0)
+
+== SQL ==
+EXPLAIN -- SQL UDFs only (Redshift no longer allows Python UDFs).
+-- Fiscal year starts Feb 1: Feb-Apr = Q1, May-Jul = Q2, Aug-Oct = Q3, Nov-Jan = Q4.
+CREATE OR REPLACE
+    FUNCTION f_fiscal_qtr(d DATE)
+    RETURNS STRING
+    RETURN 'Q' || CAST(((((CAST(EXTRACT(month FROM d) AS INT) + 9) % 12) / 3) + 1) AS STRING);
+
+-- Strip a phone string down to its digits.
+CREATE OR REPLACE FUNCTION f_clean_phone(p STRING) RETURNS STRING RETURN REGEXP_REPLACE(p, '[^0-9]', '');
+^^^
+')
