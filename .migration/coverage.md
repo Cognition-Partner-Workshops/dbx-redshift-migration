@@ -23,7 +23,7 @@ outcome and the fix that made `make validate` pass.
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
-| inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
+| inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | rejected: whole file wrapped in Exception block (PARSE_SYNTAX_ERROR on multi-statement EXPLAIN); body was translated to a Databricks SQL-scripting PROCEDURE + CALL but kept core./mart. refs | collapse procedure (temp staging + DELETE/INSERT into freshly recreated table) into CREATE OR REPLACE TABLE + INSERT ... WITH stg CTE; literal DATE'2025-12-31' for p_snapshot; core->silver, mart->gold |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
 | orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
