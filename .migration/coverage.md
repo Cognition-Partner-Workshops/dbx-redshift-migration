@@ -17,7 +17,7 @@ outcome and the fix that made `make validate` pass.
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
-| shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
+| shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | mismatch: draft failed transpile validation (EXPLAIN wrapper around DROP+CREATE); SQL as written also mismatches — Databricks DATEDIFF(hour) counts elapsed hours not boundaries, and AVG not integer-truncated (avg_hours e.g. 71.53 vs golden 71.00) | TIMESTAMPDIFF(HOUR, DATE_TRUNC('HOUR', start), DATE_TRUNC('HOUR', end)) for boundary counts; CAST(CAST(AVG(int) AS BIGINT) AS DECIMAL(10,2)); mart→gold, core→silver, CREATE OR REPLACE |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
