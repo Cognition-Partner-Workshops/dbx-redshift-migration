@@ -16,7 +16,7 @@ outcome and the fix that made `make validate` pass.
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
-| sessionization | LAG, 30-min gap, running SUM session id | clean | | |
+| sessionization | LAG, 30-min gap, running SUM session id | clean | clean (conversion): run-2 report.sql draft clean; etl.sql draft logic correct (LAG/DATEDIFF(second)/running SUM kept, ORDER BY given NULLS LAST, DISTKEY/SORTKEY dropped) but transpile validation flagged it as an EXPLAIN PARSE_SYNTAX_ERROR on the multi-statement file; still references core.*/mart.* | take draft SQL from `== SQL ==`, core.web_events -> silver.web_events, mart -> gold, DROP+CREATE -> CREATE OR REPLACE TABLE ... CLUSTER BY (customer_id, session_id), DATEDIFF(SECOND, ...) and window NULLS LAST as drafted; PASS on attempt 1 |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
