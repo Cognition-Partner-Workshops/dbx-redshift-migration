@@ -24,6 +24,6 @@ outcome and the fix that made `make validate` pass.
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
-| finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
+| finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | rejected (as expected): all 3 run-2 drafts landed in `Exception Start` blocks — etl.sql failed EXPLAIN on the multi-statement DROP+CTAS (converted SQL itself was usable), export.sql is a FIXME with no UNLOAD equivalent; report.sql draft was clean | etl from the draft's `== SQL ==` text: single `CREATE OR REPLACE TABLE gold.finance_monthly`, `core.`->`silver.`, `f_fiscal_qtr`->`silver.f_fiscal_qtr` (integer DIV UDF), drop CTAS ORDER BY; UNLOAD export left unmigrated (capture_skip, no golden); report unchanged with `mart.`->`gold.` |
 | cohort_retention | TEMP TABLE steps, DATEDIFF(month) matrix | rejected | | |
 | orchestration | cross-mart joins, refresh_schedule.yaml → Lakeflow job | clean | | |
