@@ -21,7 +21,7 @@ outcome and the fix that made `make validate` pass.
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
 | promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
-| returns_rate | integer division on INTs, :: casts | mismatch | | |
+| returns_rate | integer division on INTs, :: casts | mismatch | mismatch: run-2 draft converts `::` casts to CAST correctly but keeps INT/INT `/` for return_rate_int (Databricks `/` returns DOUBLE ~0.05 instead of Redshift integer 0), still references core.*/mart.*, and the multi-statement etl.sql failed transpile validation (PARSE_SYNTAX_ERROR at CREATE, inside Exception block) | `a DIV b` for Redshift INT/INT division (BIGINT); keep CAST(... AS DECIMAL(14,4)) division for return_pct (Databricks scale 19 vs Redshift 15, within 1e-6); core/mart -> silver/gold; drop ORDER BY from CTAS |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
 | inventory_snapshot | plpgsql upsert: staging + DELETE/INSERT | rejected | | |
 | finance_export | UNLOAD TO s3 IAM_ROLE (export skipped at capture) | rejected | | |
