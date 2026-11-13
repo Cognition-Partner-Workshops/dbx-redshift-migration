@@ -17,3 +17,5 @@ Drafts only; `make validate` is the merge gate.
 - Validation errors are EXPLAIN failures on multi-statement files / not-yet-existing objects; the drafts still
   reference Redshift `core.*`/`mart.*` and must be rewritten to `silver.*`/`gold.*`.
 - `refresh_schedule.yaml` is not SQL and produced no draft.
+- With `--skip-validation false`, a statement that fails validation is written inside an `Exception Start` comment block;
+  the converted SQL is the text after `== SQL ==` (minus the leading `EXPLAIN`).
