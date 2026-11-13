@@ -14,7 +14,7 @@ outcome and the fix that made `make validate` pass.
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
-| category_mix | RATIO_TO_REPORT | clean | | |
+| category_mix | RATIO_TO_REPORT | clean | mismatch: run-2 etl draft sits in an `Exception Start` block (EXPLAIN PARSE_SYNTAX_ERROR on the multi-statement file) and still references `core.*`/`mart.*`; RATIO_TO_REPORT is rewritten correctly as `revenue / SUM(revenue) OVER ()`, but on DECIMAL revenue that yields DECIMAL while the golden revenue_share is float8; report.sql draft clean apart from `mart.` | `CAST(revenue AS DOUBLE) / SUM(CAST(revenue AS DOUBLE)) OVER ()`; `core.`/`mart.` -> `silver.`/`gold.`; PASS on 1st validate |
 | basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
