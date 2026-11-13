@@ -19,7 +19,7 @@ outcome and the fix that made `make validate` pass.
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
-| promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | | |
+| promo_lift | MEDIAN, PERCENTILE_CONT WITHIN GROUP | mismatch | mismatch: run-2 draft keeps MEDIAN/PERCENTILE_CONT syntax unchanged (still `mart.*`/`core.*`), whole etl.sql inside an Exception block (EXPLAIN PARSE_SYNTAX_ERROR on multi-statement file); Databricks returns DOUBLE with interpolated 3rd decimal (390.215, 1093.965) while Redshift returns NUMERIC scale 2 truncated toward zero (390.21, 1093.96) | CREATE OR REPLACE TABLE gold.x AS; PERCENTILE_CONT(p) WITHIN GROUP -> CAST(... AS DECIMAL(38,6)) to drop float noise, then `CAST(CASE WHEN x<0 THEN CEIL(x,2) ELSE FLOOR(x,2) END AS DECIMAL(38,2))` |
 | payment_mix | DECODE, NVL, NVL2 | mismatch | | |
 | returns_rate | integer division on INTs, :: casts | mismatch | | |
 | attribution | SUPER / PartiQL unnesting (t, t.payload.touches tc) | rejected | | |
