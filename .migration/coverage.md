@@ -11,7 +11,7 @@ outcome and the fix that made `make validate` pass.
 | daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
-| churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
+| churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | match (rejected): run-2 etl.sql draft written entirely inside an `Exception Start` block (PARSE_SYNTAX_ERROR from EXPLAIN on the multi-statement file); the SQL inside is a Databricks SQL-scripting PROCEDURE with `FOR rec AS ... DO ... END FOR`, TEMPORARY TABLE and CALL, still on core/mart and using `DATE - DATE`; report.sql transpiled clean (adds NULLS LAST) | drop procedure/FOR loop/temp table/CALL for one set-based `CREATE OR REPLACE TABLE gold.churn_flags AS` (CTE of MAX(order_ts)::DATE per customer); `DATE - DATE` -> DATEDIFF; report `AVG(days_since_order)` -> `CAST(AVG(...) AS BIGINT)` to match Redshift integer AVG truncation |
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
