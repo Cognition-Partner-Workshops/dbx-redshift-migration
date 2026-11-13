@@ -8,7 +8,7 @@ outcome and the fix that made `make validate` pass.
 | unit | construct | expected | observed | fix pattern |
 | --- | --- | --- | --- | --- |
 | foundation | DISTKEY/SORTKEY/DISTSTYLE/ENCODE, IDENTITY, SUPER | clean | mismatch: run-2 draft comments out DISTKEY/SORTKEY/ENCODE and keeps CHAR(4), but maps SUPER -> VARIANT (re-serializes JSON with sorted keys, so payload text no longer matches) and ports f_fiscal_qtr with `/` (DOUBLE, e.g. 'Q4.33'); transpile validation reported 3 EXPLAIN errors on the multi-statement files | bronze = read_files of /Volumes/<catalog>/bronze/raw as STRING; silver typed CTAS with NULLIF('\\N'), CHAR(4)+RPAD, TIMESTAMP_NTZ, SUPER -> STRING JSON text, CLUSTER BY former sort key; UDFs in silver with integer `DIV` |
-| daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | | |
+| daily_revenue | DATE_TRUNC/TRUNC, SUM GROUP BY | clean | mostly clean: run-2 report.sql draft converted cleanly (only mart -> gold rename needed); etl.sql draft landed in an Exception block (EXPLAIN PARSE_SYNTAX_ERROR on the multi-statement DROP+CREATE), but the converted SQL inside was correct (TRUNC(ts)::DATE -> CAST(CAST(ts AS DATE) AS DATE), DISTSTYLE/SORTKEY dropped) | take SQL after `== SQL ==` minus EXPLAIN; DROP+CREATE -> CREATE OR REPLACE TABLE gold.x CLUSTER BY former sort key; core/mart -> silver/gold; drop redundant double CAST and CTAS ORDER BY; PASS on first executed validate |
 | customer_ltv | CHAR(4) padding carried into output, AVG on NUMERIC(12,2) scale | mismatch | | |
 | geo_rollup | GROUPING SETS, GROUPING() id column | clean | | |
 | churn_flags | plpgsql procedure, FOR loop, temp table, CALL | rejected | | |
