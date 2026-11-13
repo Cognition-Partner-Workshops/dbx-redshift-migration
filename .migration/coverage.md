@@ -15,7 +15,7 @@ outcome and the fix that made `make validate` pass.
 | product_perf | LISTAGG(...) WITHIN GROUP (ORDER BY ...), ::casts | mismatch | | |
 | store_weekly | DATE_TRUNC('week'), DATEADD, DATEDIFF(week) | clean | | |
 | category_mix | RATIO_TO_REPORT | clean | | |
-| basket_affinity | self-join pairs, HAVING support >= threshold | clean | | |
+| basket_affinity | self-join pairs, HAVING support >= threshold | clean | clean SQL: run-2 draft only renames needed (core.->silver., mart.->gold.); transpile validation reported a PARSE_SYNTAX_ERROR on the multi-statement etl.sql (EXPLAIN over DROP+CREATE), so the draft sits in an Exception block; report.sql transpiled clean | DROP+CREATE -> CREATE OR REPLACE TABLE gold.basket_affinity; schema renames only; self-join, COUNT DISTINCT, HAVING and `\|\|` concat unchanged; PASS on first validate |
 | sessionization | LAG, 30-min gap, running SUM session id | clean | | |
 | shipping_sla | DATEDIFF(hour) boundary counting, CONVERT_TIMEZONE | mismatch | | |
 | rfm_segments | NTILE(5), NULL ordering on NULL metrics | mismatch | | |
